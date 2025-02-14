@@ -16,7 +16,6 @@ const TopNavbar = () => {
         </div>
         <div className="flex w-full md:w-fit flex-grow">
           <span className="wavey-typewriter">
-            {" "}
             <Typewriter
               words={[
                 "Real Madrid close in on Vinicius contract extension amid Saudi interest",
