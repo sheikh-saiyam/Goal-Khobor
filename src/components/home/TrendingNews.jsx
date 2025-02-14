@@ -88,7 +88,7 @@ const TrendingNews = async () => {
                     alt={news?.publisher}
                     width={100}
                     height={100}
-                    className="rounded-full w-12 h-12 border border-black"
+                    className="rounded-full object-cover w-10 h-10 border border-black"
                   />
                 </div>
               </div>
