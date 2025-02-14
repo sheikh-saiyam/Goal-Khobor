@@ -1,5 +1,5 @@
-import AllPublisher from "@/components/home/AllPublisher";
-import TrendingNews from "@/components/home/TrendingNews";
+import AllPublisher from "@/components/home/AllPublisher.jsx";
+import TrendingNews from "@/components/home/TrendingNews.jsx";
 
 export default function Home() {
   return (

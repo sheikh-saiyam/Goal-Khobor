@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Header from "../shared/Section/Header";
+import Header from "../shared/Section/Header.jsx";
 import Link from "next/link";
 
 const TrendingNews = async () => {
