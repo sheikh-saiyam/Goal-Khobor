@@ -48,6 +48,7 @@ const Footer = () => {
   return (
     <footer className="w-11/12 md:w-10/12 mx-auto max-w-screen-2xl p-6 md:p-9">
       <div className="border-t border-gray-200 pt-8 flex justify-between gap-[20px] flex-wrap w-full">
+        
         {/* Top Viewed News */}
         <div>
           <h3 className="text-[1.2rem] font-semibold text-[#424242] mb-2">
@@ -66,6 +67,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
         {/* Popular Tags */}
         <div className="w-full md:w-4/12">
           <h3 className="md:text-center text-[1.2rem] font-semibold text-[#424242] mb-2">
@@ -81,6 +83,7 @@ const Footer = () => {
             })}
           </div>
         </div>
+
         {/* Join Newsletter & Download App */}
         <div className="flex flex-col gap-6">
           {/* Join Newsletter */}
@@ -135,6 +138,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
       {/* Footer End */}
       <div className="border-t border-gray-200 pt-[20px] mt-[40px] flex items-center justify-between w-full flex-wrap gap-[20px]">
         <Link href={"/"} className="hover:scale-105">
