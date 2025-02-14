@@ -1,7 +1,7 @@
 "use client";
 import moment from "moment";
 import { Typewriter } from "react-simple-typewriter";
-import { FaFacebook, FaInstagramSquare, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagramSquare } from "react-icons/fa";
 import { BsLinkedin } from "react-icons/bs";
 
 const TopNavbar = () => {

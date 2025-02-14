@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Real Madrid's Stunning Comeback in Champions League",
+    "image": "https://example.com/sports/football/news1.jpg",
+    "description": "Real Madrid secures a historic victory with two last-minute goals against Bayern Munich.",
+    "publisher": "Taza Khobor",
+    "publisher_image": "https://i.ibb.co.com/nsjkGYrN/Leonardo-Phoenix-10-Create-a-minimalistic-blackandwhite-logo-f-2-1-removebg-preview-Copy.png",
+    "tags": ["football", "Champions League", "Real Madrid"],
+    "views": 3000,
+    "category": "Sports",
+    "likes": 450,
+    "published_date": "2025-02-14"
+  },
+  {
+    "title": "Lionel Messi's Record-Breaking Performance",
+    "image": "https://example.com/sports/football/news2.jpg",
+    "description": "Lionel Messi continues to amaze with his extraordinary skills on the field.",
+    "publisher": "Taza Khobor",
+    "publisher_image": "https://i.ibb.co.com/nsjkGYrN/Leonardo-Phoenix-10-Create-a-minimalistic-blackandwhite-logo-f-2-1-removebg-preview-Copy.png",
+    "tags": ["football", "Messi", "records"],
+    "views": 2800,
+    "category": "Sports",
+    "likes": 500,
+    "published_date": "2025-02-15"
+  },
+  {
+    "title": "Premier League Title Race Heats Up",
+    "image": "https://example.com/sports/football/news3.jpg",
+    "description": "The Premier League title race is tighter than ever as teams battle for the top spot.",
+    "publisher": "Taza Khobor",
+    "publisher_image": "https://i.ibb.co.com/nsjkGYrN/Leonardo-Phoenix-10-Create-a-minimalistic-blackandwhite-logo-f-2-1-removebg-preview-Copy.png",
+    "tags": ["football", "Premier League", "title race"],
+    "views": 3500,
+    "category": "Sports",
+    "likes": 600,
+    "published_date": "2025-02-16"
+  }
+]

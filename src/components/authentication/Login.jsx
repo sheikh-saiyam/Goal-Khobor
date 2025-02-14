@@ -8,13 +8,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { IoIosLogIn } from "react-icons/io";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 
 const login = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Login</Button>
+        <Button className="flex items-center">
+          <IoIosLogIn size={30} />
+          Login
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

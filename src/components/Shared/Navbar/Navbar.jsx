@@ -1,7 +1,7 @@
 import Image from "next/image";
 import TopNavbar from "./TopNavbar";
 import Link from "next/link";
-import Login from "./../../authentication/Login";
+import Login from "../../authentication/Login";
 
 const Navbar = () => {
   return (
@@ -9,7 +9,7 @@ const Navbar = () => {
       {/* 1st Navbar */}
       <TopNavbar />
       {/* 2st Navbar */}
-      <div className="py-4 flex items-center justify-between">
+      <div className="py-4 flex items-center justify-between border-b-2 border-black">
         <Link href={"/"} className="hover:scale-105">
           <Image
             src={"./logo.svg"}
@@ -20,14 +20,23 @@ const Navbar = () => {
         </Link>
         {/* NavLinks */}
         <div className="flex gap-6 items-center font-semibold tracking-widest text-black">
-          <Link href={"/"} className="hover:underline underline-offset-2">
+          <Link
+            href={"/"}
+            prefetch={true}
+            className="hover:underline underline-offset-2"
+          >
             Home
           </Link>
-          <Link href={"/news"} className="hover:underline underline-offset-2">
+          <Link
+            href={"/news"}
+            prefetch={true}
+            className="hover:underline underline-offset-2"
+          >
             All News
           </Link>
           <Link
             href={"/e-paper"}
+            prefetch={true}
             className="hover:underline underline-offset-2"
           >
             E-paper
