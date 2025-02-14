@@ -59,7 +59,7 @@ const TrendingNews = async () => {
       {/* Section Header */}
       <Header heading={"Trending News"} />
       {/* Trending News */}
-      <div className="mt-6 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {trending_news?.map((news) => (
           <div
             key={news?.id}
