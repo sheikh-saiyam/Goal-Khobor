@@ -11,33 +11,47 @@ import {
 } from "@/components/ui/dialog";
 import { IoIosLogIn } from "react-icons/io";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import Register from "./Register";
-
-const login = () => {
+import Login from "./Login";
+import { SpaceIcon } from "lucide-react";
+const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log({ email, password });
+    console.log({ name, email, password });
   };
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button className="flex items-center">
           <IoIosLogIn size={30} />
-          Login
+          Register
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Login To Start!</DialogTitle>
+          <DialogTitle>Register To Start!</DialogTitle>
           <DialogDescription>
-            Stay Updated, Stay Informed! Login To <strong>Taza Khobor</strong>{" "}
-            For Real-Time News.
+            Stay Updated, Stay Informed! Register To{" "}
+            <strong>Taza Khobor</strong> For Real-Time News.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="name" className="font-semibold text-black text-sm">
+              Name
+            </label>
+            <input
+              id="name"
+              name="text"
+              type="name"
+              required
+              placeholder="Enter Name"
+              className="border rounded-lg border-gray-300 outline-gray-500 py-2 px-3 placeholder-gray-500 text-gray-500"
+            />
+          </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="email" className="font-semibold text-black text-sm">
               Email
@@ -69,7 +83,7 @@ const login = () => {
           </div>
           <DialogFooter>
             <Button type="submit" className="mt-1 text-center mx-auto w-full">
-              Login
+              Register
             </Button>
           </DialogFooter>
         </form>
@@ -94,9 +108,9 @@ const login = () => {
         </div>
         <div className="mt-2 text-center">
           <DialogDescription className="flex gap-2 items-center justify-center">
-            Don't have an account?{" "}
+            Already have an account?{" "}
             <span>
-              <Register />
+              <Login />
             </span>
           </DialogDescription>
         </div>
@@ -105,4 +119,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Register;
