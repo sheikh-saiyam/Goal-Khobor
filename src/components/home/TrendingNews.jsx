@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Header from "../shared/Section/Header.jsx";
+import { GrView } from "react-icons/gr";
 import Link from "next/link";
 
 const TrendingNews = async () => {
-  const response = await fetch("http://localhost:3000/api/news");
-  const news = await response.json();
-  const trending_news = news.slice(3);
+  const response = await fetch("http://localhost:3000/api/trending-news");
+  const trending_news = await response.json();
   return (
     <div>
       {/* Section Header */}
@@ -28,20 +28,19 @@ const TrendingNews = async () => {
                 />
               </div>
               <div className="p-4">
-                <h1 className="text-black tracking-wider text-lg font-semibold">
+                <h3>{news.published_date}</h3>
+                <h1 className="mt-1 text-black tracking-wider text-lg font-semibold">
                   {news?.title}
                 </h1>
-                <div className="flex items-center gap-4 justify-end">
-                  <h1 className="text-black tracking-wider text-sm font-medium">
+                <div className="mt-2 flex items-center gap-4 justify-end">
+                  <h1 className="text-black mt-[2px] tracking-wider text-sm font-medium">
                     {news?.publisher}
                   </h1>
-                  <Image
-                    src={news?.publisher_image}
-                    alt={news?.publisher}
-                    width={100}
-                    height={100}
-                    className="rounded-full object-cover w-10 h-10 border border-black"
-                  />
+                  <strong>||</strong>
+                  <h1 className="flex items-center gap-2 font-medium">
+                    <GrView size={20} />
+                    <span className="mt-[1px]">{news?.views}</span>
+                  </h1>
                 </div>
               </div>
             </Link>

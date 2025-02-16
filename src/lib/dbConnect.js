@@ -2,6 +2,7 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 
 // All Collections --->
 export const collections = {
+  adsCollection: "ads",
   newsCollection: "news",
   publishersCollection: "publishers",
 };

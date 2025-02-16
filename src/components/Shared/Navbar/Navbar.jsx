@@ -12,7 +12,9 @@ const Navbar = () => {
       <div className="py-4 flex items-center justify-between border-b-2 border-black">
         <Link href={"/"} className="hover:scale-105">
           <Image
-            src={"./logo.svg"}
+            src={
+              "https://i.ibb.co.com/nsjkGYrN/Leonardo-Phoenix-10-Create-a-minimalistic-blackandwhite-logo-f-2-1-removebg-preview-Copy.png"
+            }
             alt="Taza Khobor"
             width={100}
             height={100}

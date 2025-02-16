@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/dialog";
 import { IoIosLogIn } from "react-icons/io";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import Register from "./Register";
+import Link from "next/link";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 const login = () => {
   const handleSubmit = (e) => {
@@ -95,9 +96,16 @@ const login = () => {
         <div className="mt-2 text-center">
           <DialogDescription className="flex gap-2 items-center justify-center">
             Don't have an account?{" "}
-            <span>
-              <Register />
-            </span>
+            <DialogClose asChild>
+              <Link href={"/register"} prefetch={true}>
+                <Button
+                  variant="outline"
+                  className="underline text-black underline-offset-2"
+                >
+                  Register
+                </Button>
+              </Link>
+            </DialogClose>
           </DialogDescription>
         </div>
       </DialogContent>
