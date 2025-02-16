@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Header from "../shared/Section/Header.jsx";
+import Header from "../shared/Section/Header";
 import { GrView } from "react-icons/gr";
 import Link from "next/link";
 
