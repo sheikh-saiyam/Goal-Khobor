@@ -1,5 +1,6 @@
 import AllPublisher from "@/components/home/AllPublisher.jsx";
 import Banner from "@/components/home/Banner.jsx";
+import Features from "@/components/home/Features";
 import PowerRankings from "@/components/home/PowerRankings";
 import TransferNews from "@/components/home/TransferNews";
 import TrendingNews from "@/components/home/TrendingNews.jsx";
@@ -20,6 +21,9 @@ export default function Home() {
         <div className="w-full md:w-5/12 lg:w-3/12">
           <PowerRankings />
         </div>
+      </div>
+      <div className="mt-6 mb-12">
+        <Features />
       </div>
       <div className="mt-6 mb-12">
         <AllPublisher />
