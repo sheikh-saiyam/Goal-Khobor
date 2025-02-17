@@ -12,7 +12,7 @@ const AllPublisher = async () => {
       <div className="flex flex-col gap-6">
         {/* Marquee moving from right to left */}
         <Marquee direction="right" speed={50}>
-          {publishers.slice(0, 6).map((publisher, index) => (
+          {publishers.slice(0, 7).map((publisher, index) => (
             <div key={index} className="flex items-center mx-4">
               <Image
                 src={publisher.image}
@@ -26,7 +26,7 @@ const AllPublisher = async () => {
         </Marquee>
         {/* Marquee moving from left to right */}
         <Marquee direction="left" speed={50}>
-          {publishers.slice(6).map((publisher, index) => (
+          {publishers.slice(5).map((publisher, index) => (
             <div key={index} className="flex items-center mx-4">
               <Image
                 src={publisher.image}

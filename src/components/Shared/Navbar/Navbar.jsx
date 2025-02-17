@@ -43,6 +43,13 @@ const Navbar = () => {
           >
             Transfer News
           </Link>
+          <Link
+            href={"/power-rankings"}
+            prefetch={true}
+            className="hover:underline underline-offset-2"
+          >
+            Power Rankings
+          </Link>
           <div>
             <Login />
           </div>
