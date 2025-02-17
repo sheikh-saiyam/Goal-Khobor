@@ -2,6 +2,7 @@ import Image from "next/image";
 import TopNavbar from "./TopNavbar";
 import Link from "next/link";
 import Login from "../../authentication/Login";
+import MobileNavbar from "./MobileNavbar";
 
 const Navbar = () => {
   return (
@@ -21,7 +22,7 @@ const Navbar = () => {
           />
         </Link>
         {/* NavLinks */}
-        <div className="flex gap-6 items-center font-semibold tracking-widest text-black">
+        <div className="hidden lg:flex gap-6 items-center font-semibold tracking-widest text-black">
           <Link
             href={"/"}
             prefetch={true}
@@ -53,6 +54,11 @@ const Navbar = () => {
           <div>
             <Login />
           </div>
+        </div>
+        {/* Mobile Navbar */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <MobileNavbar />
+          <Login />
         </div>
       </div>
       {/* 3st Navbar */}
