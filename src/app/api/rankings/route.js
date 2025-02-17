@@ -1,11 +1,9 @@
-import React from 'react';
+"use server";
+import dbConnect, { collections } from "@/lib/dbConnect";
+import { NextResponse } from "next/server";
 
-const route = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+export const GET = async (req) => {
+  const rankingsCollection = await dbConnect(collections.rankingsCollection);
+  const result = await rankingsCollection.find().toArray();
+  return NextResponse.json(result);
 };
-
-export default route;

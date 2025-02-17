@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const TransferNews = async () => {
-  // Get all transfers --->
+  // Get All Transfers --->
   const response = await fetch("http://localhost:3000/api/transfers");
   const transfers = await response.json();
   return (
@@ -27,7 +27,7 @@ const TransferNews = async () => {
               {/* Text Container */}
               <div className="w-full p-4">
                 <div>
-                  <h3 className="text-lg">{news.published_date}</h3>
+                  <h3 className="text-lg font-medium text-[#444]">{news.published_date}</h3>
                   <h1 className="mt-2 text-2xl md:text-3xl font-medium tracking-wider">
                     {news.title}
                   </h1>
@@ -42,7 +42,7 @@ const TransferNews = async () => {
                   />
                 </div>
               </div>
-            </div>{" "}
+            </div>
           </Link>
         ))}
       </div>
