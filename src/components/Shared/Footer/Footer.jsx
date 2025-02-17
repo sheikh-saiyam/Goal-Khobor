@@ -7,20 +7,19 @@ import { Button } from "@/components/ui/button";
 const Footer = () => {
   const tags = [
     "News",
-    "Politics",
-    "Business",
-    "Technology",
-    "Sports",
-    "Health",
-    "Science",
+    "Football",
+    "Transfer News",
+    "Latest News",
+    "Breaking News",
+    "Trending News",
+    "Science ...",
     "Entertainment",
     "World",
-    "Economy",
+    "Economsssy",
     "Climate",
     "Elections",
     "Website",
     "Travel",
-    "Culture",
     "Football",
     "Real Madrid",
     "Barcelona",
@@ -46,18 +45,17 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="w-11/12 md:w-10/12 mx-auto max-w-screen-2xl p-6 md:p-9">
+    <footer className="w-11/12 md:w-10/12 mx-auto max-w-screen-2xl py-6 md:py-9">
       <div className="border-t border-gray-200 pt-8 flex justify-between gap-[20px] flex-wrap w-full">
-        
         {/* Top Viewed News */}
-        <div>
+        <div className="w-fit">
           <h3 className="text-[1.2rem] font-semibold text-[#424242] mb-2">
             Top Viewed News
           </h3>
           <div className="">
             <div className="relative border-l pl-2 border-gray-300 w-full">
               {topViewedNews?.map((news, index) => (
-                <div key={index} className="mb-8">
+                <div key={index} className="mb-5">
                   <h1 className="font-semibold">● {news.date}</h1>
                   <h3 className="ml-4 hover:underline whitespace-pre-line">
                     {news.title}
@@ -66,6 +64,25 @@ const Footer = () => {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Quick Links */}
+        <div className="w-full md:w-fit">
+          <h3 className="text-[1.2rem] font-semibold text-[#424242] mb-2">
+            Quick Links
+          </h3>
+          <ul className="list-none space-y-2">
+            <li className="text-medium hover:underline">About Us</li>
+            <li className="text-medium hover:underline">Contact Us</li>
+            <li className="text-medium hover:underline">Terms & Conditions</li>
+            <li className="text-medium hover:underline">
+              Accessibility Information
+            </li>
+            <li className="text-medium hover:underline">Privacy Policy</li>
+            <li className="text-medium hover:underline">Cookie Policy</li>
+            <li className="text-medium hover:underline">Cookie Preferences</li>
+            <li className="text-medium hover:underline">Accessibility Help</li>
+          </ul>
         </div>
 
         {/* Popular Tags */}

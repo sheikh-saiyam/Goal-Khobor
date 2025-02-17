@@ -37,11 +37,11 @@ const Navbar = () => {
             All News
           </Link>
           <Link
-            href={"/e-paper"}
+            href={"/transfer-news"}
             prefetch={true}
             className="hover:underline underline-offset-2"
           >
-            E-paper
+            Transfer News
           </Link>
           <div>
             <Login />

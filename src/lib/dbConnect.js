@@ -4,6 +4,7 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 export const collections = {
   adsCollection: "ads",
   newsCollection: "news",
+  transfersCollection: "transfers",
   publishersCollection: "publishers",
 };
 

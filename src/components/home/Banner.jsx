@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { GrView } from "react-icons/gr";
 
 const Banner = async () => {
   const response = await fetch("http://localhost:3000/api/news");
@@ -24,18 +25,16 @@ const Banner = async () => {
                 <h1 className="text-black tracking-wider text-lg font-semibold">
                   {news?.title}
                 </h1>
-                <div className="flex items-center gap-4 justify-end">
-                  <h1 className="text-black tracking-wider text-sm font-medium">
-                    {news?.publisher}
-                  </h1>
-                  <Image
-                    src={news?.publisher_image}
-                    alt={news?.publisher}
-                    width={100}
-                    height={100}
-                    className="rounded-full object-cover w-10 h-10 border border-black"
-                  />
-                </div>
+                            <div className="mt-2 flex items-center gap-4 justify-end">
+                                  <h1 className="text-black mt-[2px] tracking-wider text-sm font-medium">
+                                    {news?.publisher}
+                                  </h1>
+                                  <strong>||</strong>
+                                  <h1 className="flex items-center gap-2 font-medium">
+                                    <GrView size={20} />
+                                    <span className="mt-[1px]">{news?.views}</span>
+                                  </h1>
+                                </div>
               </div>
             </Link>
           </div>
