@@ -4,7 +4,7 @@ import { Typewriter } from "react-simple-typewriter";
 import { FaFacebook, FaInstagramSquare } from "react-icons/fa";
 import { BsLinkedin } from "react-icons/bs";
 
-const TopNavbar = async () => {
+const TopNavbar = () => {
   return (
     <div className="py-3 flex items-center flex-wrap gap-4 border-b-2 border-black">
       {/* Date Time Div */}

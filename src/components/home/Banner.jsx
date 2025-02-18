@@ -12,7 +12,7 @@ const Banner = async () => {
         {latest_news.slice(0, 1).map((news) => (
           <div
             key={news?._id}
-            className="border hover:border-black cursor-pointer duration-300"
+            className="border hover:border-black hover:border-2 cursor-pointer duration-300"
           >
             <Link href={`/news/${news?._id}`} prefetch={true}>
               <div>
@@ -47,7 +47,7 @@ const Banner = async () => {
         {latest_news.slice(1).map((news) => (
           <div
             key={news?._id}
-            className="border hover:border-black cursor-pointer duration-300"
+            className="border hover:border-black hover:border-2 cursor-pointer duration-300"
           >
             <Link href={`/news/${news?._id}`}>
               <div>

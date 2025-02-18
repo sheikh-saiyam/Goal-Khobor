@@ -94,7 +94,7 @@ const NewsDetails = async ({ params }) => {
                     alt={news_details.publisher}
                     width={100}
                     height={100}
-                    className="w-14 h-14 rounded-full border border-black"
+                    className="w-24 p-1 h-14 rounded border border-black"
                   />
                 </div>
                 <div>
