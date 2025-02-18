@@ -22,7 +22,7 @@ const Features = async () => {
                     layout="responsive"
                     width={700}
                     height={900}
-                    className="object-cover group-hover:scale-110 transition-transform duration-300 min-h-full"
+                    className="object-cover group-hover:scale-110 transition-transform duration-300 min-h-[400px]"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
                     <h2 className="text-white text-xl font-semibold">
@@ -80,7 +80,7 @@ const Features = async () => {
                     layout="responsive"
                     width={700}
                     height={900}
-                    className="object-cover group-hover:scale-110 transition-transform duration-300 min-h-full"
+                    className="object-cover group-hover:scale-110 transition-transform duration-300 min-h-[400px]"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
                     <h2 className="text-white text-xl font-semibold">
