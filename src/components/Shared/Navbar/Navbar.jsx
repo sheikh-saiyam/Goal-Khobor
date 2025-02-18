@@ -51,6 +51,13 @@ const Navbar = () => {
           >
             Power Rankings
           </Link>
+          <Link
+            href={"/features-news"}
+            prefetch={true}
+            className="hover:underline underline-offset-2"
+          >
+            Features News
+          </Link>
           <div>
             <Login />
           </div>

@@ -10,7 +10,10 @@ const Banner = async () => {
     <div className="w-full flex flex-col md:flex-row items-center gap-6">
       <div className="w-full md:w-7/12 lg:w-9/12">
         {latest_news.slice(0, 1).map((news) => (
-          <div key={news?._id} className="border cursor-pointer duration-300">
+          <div
+            key={news?._id}
+            className="border hover:border-black cursor-pointer duration-300"
+          >
             <Link href={`/news/${news?._id}`} prefetch={true}>
               <div>
                 <Image
@@ -25,16 +28,16 @@ const Banner = async () => {
                 <h1 className="text-black tracking-wider text-lg font-semibold">
                   {news?.title}
                 </h1>
-                            <div className="mt-2 flex items-center gap-4 justify-end">
-                                  <h1 className="text-black mt-[2px] tracking-wider text-sm font-medium">
-                                    {news?.publisher}
-                                  </h1>
-                                  <strong>||</strong>
-                                  <h1 className="flex items-center gap-2 font-medium">
-                                    <GrView size={20} />
-                                    <span className="mt-[1px]">{news?.views}</span>
-                                  </h1>
-                                </div>
+                <div className="mt-2 flex items-center gap-4 justify-end">
+                  <h1 className="text-black mt-[2px] tracking-wider text-sm font-medium">
+                    {news?.publisher}
+                  </h1>
+                  <strong>||</strong>
+                  <h1 className="flex items-center gap-2 font-medium">
+                    <GrView size={20} />
+                    <span className="mt-[1px]">{news?.views}</span>
+                  </h1>
+                </div>
               </div>
             </Link>
           </div>
@@ -42,7 +45,10 @@ const Banner = async () => {
       </div>
       <div className="hidden w-full md:w-5/12 lg:w-3/12 md:flex lg:flex gap-6 flex-col">
         {latest_news.slice(1).map((news) => (
-          <div key={news?._id} className="border cursor-pointer duration-300">
+          <div
+            key={news?._id}
+            className="border hover:border-black cursor-pointer duration-300"
+          >
             <Link href={`/news/${news?._id}`}>
               <div>
                 <Image
