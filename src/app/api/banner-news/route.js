@@ -1,5 +1,4 @@
 "use server";
-
 import dbConnect, { collections } from "@/lib/dbConnect";
 import { NextResponse } from "next/server";
 
