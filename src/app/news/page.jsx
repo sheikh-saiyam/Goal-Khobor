@@ -100,7 +100,36 @@ const AllNews = async () => {
             </div>
           ))}
         </div>
-        
+        {/* 3rd news container */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
+          {all_news.slice(12).map((news) => (
+            <Link href={`/news/${news._id}`} key={news._id}>
+              <div className="flex flex-col lg:flex-row items-stretch gap-x-4 border-2 hover:border-black duration-300">
+                {/* Image Container */}
+                <div className="lg:w-8/12">
+                  <Image
+                    src={news.image}
+                    alt={news.title}
+                    width={1000}
+                    height={200}
+                    className="min-h-[240px] max-h-full w-full"
+                  />
+                </div>
+                {/* Text Container */}
+                <div className="w-full p-4">
+                  <div>
+                    <h3 className="text-lg font-medium text-[#444]">
+                      {news.published_date}
+                    </h3>
+                    <h1 className="mt-2 text-xl font-semibold tracking-wider">
+                      {news.title}
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
       {/* News Container */}
     </div>
