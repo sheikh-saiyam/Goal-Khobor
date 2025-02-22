@@ -73,7 +73,34 @@ const AllNews = async () => {
             ))}
           </div>
         </div>
-      
+        {/* 2nd news container */}
+        <div className="mt-12 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {all_news.slice(3, 12).map((news) => (
+            <div
+              key={news?._id}
+              className="border hover:scale-105 cursor-pointer duration-300"
+            >
+              <Link href={`/news/${news?._id}`}>
+                <div>
+                  <Image
+                    className="w-full h-[200px]"
+                    src={news?.image}
+                    alt={news?.title}
+                    width={1000}
+                    height={150}
+                  />
+                </div>
+                <div className="p-4">
+                  <h3>{news.published_date.split("T")[0]}</h3>
+                  <h1 className="mt-1 text-black tracking-wider text-lg font-semibold">
+                    {news?.title}
+                  </h1>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+        
       </div>
       {/* News Container */}
     </div>
