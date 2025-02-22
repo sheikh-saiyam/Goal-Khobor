@@ -259,6 +259,7 @@ const AddNewsForm = () => {
   // Get Form Data --->
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const form = e.target;
     const title = form.title.value;
     const image = form.image.value;
@@ -267,6 +268,7 @@ const AddNewsForm = () => {
     const publisher_image = selectedPublisher.publisher_image;
     const published_date = new Date();
     const category = selectedCategory;
+
     // Form Validation -->
     if (!publisher || !publisher_image) {
       return Swal.fire({
@@ -298,6 +300,7 @@ const AddNewsForm = () => {
       likes: 0,
       published_date,
     };
+
     // Post data in db --->
     fetch("http://localhost:3000/api/add-news", {
       method: "POST",
@@ -321,7 +324,6 @@ const AddNewsForm = () => {
           title: err.message,
         });
       });
-    console.table(news);
   };
 
   return (
