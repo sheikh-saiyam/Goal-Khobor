@@ -161,13 +161,13 @@ const Footer = () => {
         <Link href={"/"} className="hover:scale-105">
           <Image
             src={"./logo.svg"}
-            alt="Taza Khobor"
+            alt="Goal Khobor"
             width={100}
             height={100}
           />
         </Link>
         <p className="text-[0.9rem] text-gray-600">
-          © 2025 Taza Khobor. All Rights Reserved.{" "}
+          © 2025 Goal Khobor. All Rights Reserved.{" "}
         </p>
         <div className="flex items-center gap-[10px] text-[#424242]">
           <a className="text-[1.3rem] p-1.5 cursor-pointer rounded-full hover:text-white hover:bg-[#000] transition-all duration-300">

@@ -34,7 +34,7 @@ const login = () => {
         <DialogHeader>
           <DialogTitle>Login To Start!</DialogTitle>
           <DialogDescription>
-            Stay Updated, Stay Informed! Login To <strong>Taza Khobor</strong>{" "}
+            Stay Updated, Stay Informed! Login To <strong>Goal Khobor</strong>{" "}
             For Real-Time News.
           </DialogDescription>
         </DialogHeader>

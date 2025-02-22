@@ -3,7 +3,7 @@ import Link from "next/link";
 import { GrView } from "react-icons/gr";
 
 const Banner = async () => {
-  const response = await fetch("http://localhost:3000/api/news");
+  const response = await fetch("http://localhost:3000/api/banner-news");
   const news = await response.json();
   const latest_news = news.slice(0, 3);
   return (

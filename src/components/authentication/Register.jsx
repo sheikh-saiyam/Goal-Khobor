@@ -35,7 +35,7 @@ const Register = () => {
           <DialogTitle>Register To Start!</DialogTitle>
           <DialogDescription>
             Stay Updated, Stay Informed! Register To{" "}
-            <strong>Taza Khobor</strong> For Real-Time News.
+            <strong>Goal Khobor</strong> For Real-Time News.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

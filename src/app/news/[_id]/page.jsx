@@ -39,7 +39,7 @@ const NewsDetails = async ({ params }) => {
             <h1 className="text-black tracking-wider text-2xl md:text-3xl lg:text-4xl font-semibold">
               {news_details.title}
             </h1>
-            <h3 className="mt-4 text-[#444] tracking-wider text-xl">
+            <h3 className="mt-4 text-[#444] tracking-wider text-xl whitespace-pre-line">
               {news_details.description}
             </h3>
             {/* Tags */}
@@ -102,7 +102,7 @@ const NewsDetails = async ({ params }) => {
                     {news_details.publisher}
                   </h1>
                   <h2 className="mt-[2px] text-sm font-medium tracking-wide text-[#444]">
-                    {news_details.published_date}
+                    {news_details.published_date.split("T")[0]}
                   </h2>
                 </div>
               </div>

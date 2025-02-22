@@ -16,7 +16,7 @@ const Navbar = () => {
             src={
               "https://i.ibb.co.com/nsjkGYrN/Leonardo-Phoenix-10-Create-a-minimalistic-blackandwhite-logo-f-2-1-removebg-preview-Copy.png"
             }
-            alt="Taza Khobor"
+            alt="Goal Khobor"
             width={100}
             height={100}
           />

@@ -28,7 +28,7 @@ const TrendingNews = async () => {
                 />
               </div>
               <div className="p-4">
-                <h3>{news.published_date}</h3>
+                <h3>{news.published_date.split("T")[0]}</h3>
                 <h1 className="mt-1 text-black tracking-wider text-lg font-semibold">
                   {news?.title}
                 </h1>
