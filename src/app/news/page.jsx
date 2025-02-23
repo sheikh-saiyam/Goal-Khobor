@@ -73,6 +73,7 @@ const AllNews = async () => {
             ))}
           </div>
         </div>
+
         {/* 2nd news container */}
         <div className="mt-12 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {all_news.slice(3, 12).map((news) => (
@@ -100,6 +101,7 @@ const AllNews = async () => {
             </div>
           ))}
         </div>
+        
         {/* 3rd news container */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
           {all_news.slice(12).map((news) => (
