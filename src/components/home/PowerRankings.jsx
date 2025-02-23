@@ -12,7 +12,7 @@ const PowerRankings = async () => {
       {/* Rankings Container */}
       <div className="flex flex-col gap-y-4">
         {rankings.map((ranking) => (
-          <Link href={`/ranking/${ranking._id}`} key={ranking._id}>
+          <Link href={`/rankings/${ranking._id}`} key={ranking._id}>
             <div className="border-2 hover:border-black duration-300">
               {/* Image Container */}
               <div>
