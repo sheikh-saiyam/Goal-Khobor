@@ -4,7 +4,7 @@ import { AiOutlineLike } from "react-icons/ai";
 import Image from "next/image";
 import Link from "next/link";
 import MainContainer from "./../../../components/container/MainContainer";
-import AdvertisementsCard from "@/components/cards/AdvertisementsCard";
+import AdvertisementsCard from "./../../../components/cards/AdvertisementsCard";
 
 const PowerRankingsDetails = async ({ params }) => {
   // Get Ranking_Details --->
@@ -109,9 +109,8 @@ const PowerRankingsDetails = async ({ params }) => {
             </div>
           </div>
           {/* Ads */}
-          <AdvertisementsCard/>
+          <AdvertisementsCard />
         </div>
- 
       </div>
     </MainContainer>
   );
