@@ -1,4 +1,4 @@
-import AddNewsForm from "@/components/forms/AddNewsForm";
+import AddNewsForm from "../../../components/forms/AddNewsForm";
 
 const AddNews = () => {
   return (

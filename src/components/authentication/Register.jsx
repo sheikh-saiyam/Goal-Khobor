@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +12,7 @@ import {
 import { IoIosLogIn } from "react-icons/io";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import Login from "./Login";
-import { SpaceIcon } from "lucide-react";
+
 const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
