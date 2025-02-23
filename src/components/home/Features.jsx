@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Header from "../shared/Section/Header";
+
 import Link from "next/link";
+import Header from "../shared/Section/Header";
 
 const Features = async () => {
   // Get All Transfers --->
