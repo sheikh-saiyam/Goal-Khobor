@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -9,9 +8,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "../../ui/dropdown-menu";
 import { IoMdMenu } from "react-icons/io";
 import Link from "next/link";
+import { Button } from "../../ui/button";
 
 const MobileNavbar = () => {
   const [showStatusBar, setShowStatusBar] = useState(true);

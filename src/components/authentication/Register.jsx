@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "../ui/dialog";
 import { IoIosLogIn } from "react-icons/io";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import Login from "./Login";

@@ -2,7 +2,7 @@ import { CgFacebook } from "react-icons/cg";
 import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../ui/button";
 
 const Footer = () => {
   const tags = [
