@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -8,11 +7,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "../ui/dialog";
 import { IoIosLogIn } from "react-icons/io";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { Button } from "../ui/button";
 
 const login = () => {
   const handleSubmit = (e) => {

@@ -1,9 +1,9 @@
-import MainContainer from "@/components/container/MainContainer";
-import { Button } from "@/components/ui/button";
 import { AiOutlineDislike } from "react-icons/ai";
 import { AiOutlineLike } from "react-icons/ai";
 import Image from "next/image";
 import Link from "next/link";
+import MainContainer from "./../../../components/container/MainContainer";
+import { Button } from "../../../components/ui/button";
 
 const NewsDetails = async ({ params }) => {
   // Get Latest News --->
