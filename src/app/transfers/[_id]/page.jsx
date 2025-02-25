@@ -1,11 +1,20 @@
 import AdvertisementsCard from "@/components/cards/AdvertisementsCard";
 import MainContainer from "@/components/container/MainContainer";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
+import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 
 const TransferDetails = async ({ params }) => {
-      // Get Ranking_Details --->
+  // Get Ranking_Details --->
   const { _id } = await params;
   const response = await fetch(`http://localhost:3000/api/transfers/${_id}`);
   const transfer_details = await response.json();
+
+  // Get Latest News --->
+  const transfers_response = await fetch("http://localhost:3000/api/transfers");
+  const transfers = await transfers_response.json();
+
   return (
     <MainContainer>
       <div className="flex flex-col md:flex-row gap-6">
@@ -13,8 +22,8 @@ const TransferDetails = async ({ params }) => {
         <div className="w-full md:7/12 lg:w-9/12">
           <div>
             <Image
-              src={news_details.image}
-              alt={news_details.title}
+              src={transfer_details.image}
+              alt={transfer_details.title}
               width={1000}
               height={400}
               className="max-h-[400px] w-full"
@@ -23,17 +32,17 @@ const TransferDetails = async ({ params }) => {
           <div className="mt-6">
             {/* Title & Description */}
             <h1 className="text-black tracking-wider text-2xl md:text-3xl lg:text-4xl font-semibold">
-              {news_details.title}
+              {transfer_details.title}
             </h1>
             <h3 className="mt-4 text-[#444] tracking-wider text-xl whitespace-pre-line">
-              {news_details.description}
+              {transfer_details.description}
             </h3>
             {/* Tags */}
             <div className="mt-4 flex flex-wrap items-center gap-4">
               <h3 className="text-[#444] tracking-wider font-semibold text-xl">
                 Tags:
               </h3>
-              {news_details.tags.map((tag, idx) => (
+              {transfer_details.tags.map((tag, idx) => (
                 <Button
                   key={idx}
                   variant="outline"
@@ -56,7 +65,7 @@ const TransferDetails = async ({ params }) => {
                     />
                   </button>
                   <h1 className="font-bold text-[#444] tracking-wide mt-1">
-                    {news_details.likes}
+                    {transfer_details.likes}
                   </h1>
                 </div>
                 <div className="flex items-center gap-3">
@@ -76,8 +85,8 @@ const TransferDetails = async ({ params }) => {
               <div className="mt-4 flex items-center gap-2">
                 <div>
                   <Image
-                    src={news_details.publisher_image}
-                    alt={news_details.publisher}
+                    src={transfer_details.publisher_image}
+                    alt={transfer_details.publisher}
                     width={100}
                     height={100}
                     className="w-24 p-1 h-14 rounded border border-black"
@@ -85,10 +94,10 @@ const TransferDetails = async ({ params }) => {
                 </div>
                 <div>
                   <h1 className="font-bold text-[#444] tracking-wide">
-                    {news_details.publisher}
+                    {transfer_details.publisher}
                   </h1>
                   <h2 className="mt-[2px] text-sm font-medium tracking-wide text-[#444]">
-                    {news_details.published_date.split("T")[0]}
+                    {transfer_details.published_date.split("T")[0]}
                   </h2>
                 </div>
               </div>
@@ -100,13 +109,13 @@ const TransferDetails = async ({ params }) => {
           {/* Latest News */}
           <div className="border rounded px-4">
             <h1 className="text-black tracking-wider text-2xl mt-3 font-bold">
-              LATEST NEWS
+              TRANSFERS
             </h1>
             <div className="relative mt-3 w-full">
-              {latest_news?.map((news, index) => (
+              {transfers?.map((news, index) => (
                 <div key={index} className="pb-3 mb-4 border-b">
                   <Link
-                    href={`/news/${news._id}`}
+                    href={`/transfers/${news._id}`}
                     className="whitespace-pre-line hover:underline duration-300 cursor-pointer underline-offset-2"
                   >
                     {news.title}
