@@ -12,14 +12,17 @@ const PowerRankingsDetails = async ({ params }) => {
   const ranking_details = await response.json();
 
   // Get Latest News --->
-  const news_response = await fetch("http://localhost:3000/api/rankings");
-  const latest_news = await news_response.json();
+  const power_rankings_response = await fetch(
+    "http://localhost:3000/api/rankings"
+  );
+  const power_rankings = await power_rankings_response.json();
 
   return (
     <MainContainer>
       <div className="flex flex-col md:flex-row gap-6">
         {/* Ranking_Details Container */}
         <div className="w-full md:7/12 lg:w-9/12">
+          {/* Image */}
           <div>
             <Image
               src={ranking_details.image}
@@ -29,14 +32,41 @@ const PowerRankingsDetails = async ({ params }) => {
               className="max-h-[400px] w-full"
             />
           </div>
+          {/* Title & Description */}
           <div className="mt-6">
-            {/* Title & Description */}
             <h1 className="text-black tracking-wider text-2xl md:text-3xl lg:text-4xl font-semibold">
               {ranking_details.title}
             </h1>
             <h3 className="mt-4 text-[#444] tracking-wider text-xl whitespace-pre-line">
               {ranking_details.description}
             </h3>
+          </div>
+          {/* Rankings */}
+          <div className="mt-6">
+            {ranking_details.rankings.map((ranking, idx) => (
+              <div key={idx} className="pb-6">
+                <h1 className="text-2xl font-semibold tracking-wide text-[#3a3a3a]">
+                  <span className="font-extrabold text-black">
+                    {ranking.rank}.
+                  </span>{" "}
+                  {ranking.title}
+                </h1>
+                <div className="mt-4">
+                  <Image
+                    src={ranking.image}
+                    alt={ranking.title}
+                    width={1000}
+                    height={400}
+                    className="max-h-[300px] w-full lg:w-2/3"
+                  />
+                </div>
+                <div className="w-full lg:w-2/3">
+                  <h3 className="mt-4 text-[#444] tracking-wider text-xl whitespace-pre-line">
+                    {ranking.description}
+                  </h3>
+                </div>
+              </div>
+            ))}
           </div>
           {/* Publisher Info And Like & Dislike */}
           <div className="mt-4">
@@ -51,7 +81,7 @@ const PowerRankingsDetails = async ({ params }) => {
                   />
                 </button>
                 <h1 className="font-bold text-[#444] tracking-wide mt-1">
-                  {ranking_details.likes}
+                  238
                 </h1>
               </div>
               <div className="flex items-center gap-3">
@@ -92,10 +122,10 @@ const PowerRankingsDetails = async ({ params }) => {
           {/* Latest News */}
           <div className="border rounded px-4">
             <h1 className="text-black tracking-wider text-2xl mt-3 font-bold">
-              LATEST TRANSFER
+              POWER RANKINGS
             </h1>
             <div className="relative mt-3 w-full">
-              {latest_news?.map((news, index) => (
+              {power_rankings?.map((news, index) => (
                 <div key={index} className="pb-3 mb-4 border-b">
                   <Link
                     href={`/rankings/${news._id}`}
