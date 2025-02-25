@@ -1,6 +1,7 @@
 import Marquee from "react-fast-marquee";
-import Header from "../shared/Section/Header";
+
 import Image from "next/image";
+import Header from './../shared/Section/Header';
 
 const AllPublisher = async () => {
   const response = await fetch("http://localhost:3000/api/publishers");
