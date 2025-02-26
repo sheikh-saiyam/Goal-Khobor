@@ -3,8 +3,7 @@ import Banner from "./../components/home/Banner.jsx";
 import Features from "./../components/home/Features";
 import PowerRankings from "./../components/home/PowerRankings";
 import TransferNews from "./../components/home/TransferNews";
-import TrendingNews from './../components/home/TrendingNews';
-
+import TrendingNews from "./../components/home/TrendingNews";
 
 export default function Home() {
   return (

@@ -1,10 +1,6 @@
 import Image from "next/image";
-
-
 import Link from "next/link";
-import Header from '@/components/Shared/Section/Header';
-
-
+import Header from "@/components/Shared/Section/Header";
 
 const Features = async () => {
   // Get All Transfers --->

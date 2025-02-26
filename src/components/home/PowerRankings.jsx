@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Header from '@/components/Shared/Section/Header';
-
 import Image from "next/image";
 
 const PowerRankings = async () => {
