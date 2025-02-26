@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const AllNews = async () => {
+  // Get all news from db --->
   const newsCollection = await dbConnect(collections.newsCollection);
   const all_news = await newsCollection
     .find({ category: { $nin: ["features", "banner-news"] } })

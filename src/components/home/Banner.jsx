@@ -1,11 +1,17 @@
+import dbConnect, { collections } from "@/lib/dbConnect";
 import Image from "next/image";
 import Link from "next/link";
 import { GrView } from "react-icons/gr";
 
 const Banner = async () => {
-  const response = await fetch(`${process.env.NEXT_API_URL}/api/banner-news`);
-  const news = await response.json();
-  const latest_news = news.slice(0, 3);
+  // Get all banner_news from db --->
+  const newsCollection = await dbConnect(collections.newsCollection);
+  const latest_news = await newsCollection
+  .find({ category: "banner-news" })
+  .sort({ published_date: -1 })
+  .limit(3)
+  .toArray();
+
   return (
     <div className="w-full flex flex-col md:flex-row items-center gap-6">
       <div className="w-full md:w-7/12 lg:w-9/12">

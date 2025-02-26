@@ -1,10 +1,15 @@
 import Marquee from "react-fast-marquee";
 import Image from "next/image";
 import Header from '@/components/Shared/Section/Header';
+import dbConnect, { collections } from "@/lib/dbConnect";
 
 const AllPublisher = async () => {
-  const response = await fetch(`${process.env.NEXT_API_URL}/api/publishers`);
-  const publishers = await response.json();
+  // Get all publishers from db --->
+  const publishersCollection = await dbConnect(
+    collections.publishersCollection
+  );
+  const publishers = await publishersCollection.find().toArray();
+  
   return (
     <div>
       {/* Section Header */}
