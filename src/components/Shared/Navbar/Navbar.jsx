@@ -14,9 +14,10 @@ const Navbar = () => {
         <Link href={"/"} className="hover:scale-105">
           <Image
             src={
-              "https://i.ibb.co.com/nsjkGYrN/Leonardo-Phoenix-10-Create-a-minimalistic-blackandwhite-logo-f-2-1-removebg-preview-Copy.png"
+              "https://i.ibb.co.com/fV684RGm/goal-khobor.png"
             }
             alt="Goal Khobor"
+            className="w-44 h-20"
             width={100}
             height={100}
           />

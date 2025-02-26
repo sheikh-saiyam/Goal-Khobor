@@ -160,8 +160,9 @@ const Footer = () => {
       <div className="border-t border-gray-200 pt-[20px] mt-[40px] flex items-center justify-between w-full flex-wrap gap-[20px]">
         <Link href={"/"} className="hover:scale-105">
           <Image
-            src={"./logo.svg"}
+            src={"https://i.ibb.co.com/fV684RGm/goal-khobor.png"}
             alt="Goal Khobor"
+            className="w-44 h-20"
             width={100}
             height={100}
           />
