@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const PowerRankings = async () => {
   // Get All Rankings --->
-  const response = await fetch("https://taza-khobor.vercel.app/api/rankings");
+  const response = await fetch("http://localhost:3000/api/rankings");
   const rankings = await response.json();
   return (
     <div>

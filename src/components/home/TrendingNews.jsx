@@ -4,7 +4,7 @@ import { GrView } from "react-icons/gr";
 import Link from "next/link";
 
 const TrendingNews = async () => {
-  const response = await fetch("https://taza-khobor.vercel.app/api/trending-news");
+  const response = await fetch("http://localhost:3000/api/trending-news");
   const trending_news = await response.json();
   return (
     <div>

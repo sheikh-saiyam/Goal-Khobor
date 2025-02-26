@@ -8,11 +8,11 @@ import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 const TransferDetails = async ({ params }) => {
   // Get Ranking_Details --->
   const { _id } = await params;
-  const response = await fetch(`https://taza-khobor.vercel.app/api/transfers/${_id}`);
+  const response = await fetch(`http://localhost:3000/api/transfers/${_id}`);
   const transfer_details = await response.json();
 
   // Get Latest News --->
-  const transfers_response = await fetch("https://taza-khobor.vercel.app/api/transfers");
+  const transfers_response = await fetch("http://localhost:3000/api/transfers");
   const transfers = await transfers_response.json();
 
   return (

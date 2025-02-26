@@ -7,17 +7,17 @@ import { Button } from "../../../components/ui/button";
 
 const NewsDetails = async ({ params }) => {
   // Get Latest News --->
-  const news_response = await fetch("https://taza-khobor.vercel.app/api/latest-news");
+  const news_response = await fetch("http://localhost:3000/api/latest-news");
   const latest_news = await news_response.json();
 
   // Get Ads --->
-  const ads_response = await fetch("https://taza-khobor.vercel.app/api/ads");
+  const ads_response = await fetch("http://localhost:3000/api/ads");
   const ads = await ads_response.json();
 
   // Get News_Details --->
   const { _id } = await params;
   const new_details_response = await fetch(
-    `https://taza-khobor.vercel.app/api/news/${_id}`
+    `http://localhost:3000/api/news/${_id}`
   );
   const news_details = await new_details_response.json();
   return (

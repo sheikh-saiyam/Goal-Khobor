@@ -3,7 +3,7 @@ import Image from "next/image";
 import Header from '@/components/Shared/Section/Header';
 
 const AllPublisher = async () => {
-  const response = await fetch("https://taza-khobor.vercel.app/api/publishers");
+  const response = await fetch("http://localhost:3000/api/publishers");
   const publishers = await response.json();
   return (
     <div>

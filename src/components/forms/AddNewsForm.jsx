@@ -34,7 +34,7 @@ const AddNewsForm = () => {
 
   // Get all publishers data -->
   useEffect(() => {
-    fetch("https://taza-khobor.vercel.app/api/publishers")
+    fetch("http://localhost:3000/api/publishers")
       .then((res) => res.json())
       .then((data) => setPublisher(data));
   }, []);
@@ -302,7 +302,7 @@ const AddNewsForm = () => {
     };
 
     // Post data in db --->
-    fetch("https://taza-khobor.vercel.app/api/add-news", {
+    fetch("http://localhost:3000/api/add-news", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(news),

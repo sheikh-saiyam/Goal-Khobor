@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const TransferNews = async () => {
   // Get All Transfers --->
-  const response = await fetch("https://taza-khobor.vercel.app/api/transfers");
+  const response = await fetch("http://localhost:3000/api/transfers");
   const transfers = await response.json();
   return (
     <div>
