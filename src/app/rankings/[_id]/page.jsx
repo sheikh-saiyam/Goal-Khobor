@@ -8,12 +8,12 @@ import AdvertisementsCard from "./../../../components/cards/AdvertisementsCard";
 const PowerRankingsDetails = async ({ params }) => {
   // Get Ranking_Details --->
   const { _id } = await params;
-  const response = await fetch(`http://localhost:3000/api/rankings/${_id}`);
+  const response = await fetch(`https://taza-khobor.vercel.app/api/rankings/${_id}`);
   const ranking_details = await response.json();
 
   // Get Latest News --->
   const power_rankings_response = await fetch(
-    "http://localhost:3000/api/rankings"
+    "https://taza-khobor.vercel.app/api/rankings"
   );
   const power_rankings = await power_rankings_response.json();
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const AllNews = async () => {
-  const response = await fetch("http://localhost:3000/api/news");
+  const response = await fetch("https://taza-khobor.vercel.app/api/news");
   const all_news = await response.json();
   return (
     <div className="w-11/12 md:w-10/12 mx-auto max-w-screen-2xl">
