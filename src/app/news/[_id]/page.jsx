@@ -26,7 +26,7 @@ const NewsDetails = async ({ params }) => {
     <MainContainer>
       <div className="flex flex-col md:flex-row gap-6">
         {/* News Details Container */}
-        <div className="w-full md:7/12 lg:w-9/12">
+        <div className="w-full md:w-8/12 lg:w-9/12">
           <div>
             <Image
               src={news_details.image}
@@ -38,10 +38,10 @@ const NewsDetails = async ({ params }) => {
           </div>
           <div className="mt-6">
             {/* Title & Description */}
-            <h1 className="text-black tracking-wider text-2xl md:text-3xl lg:text-4xl font-semibold">
+            <h1 className="text-black tracking-wider text-2xl md:text-2xl lg:text-4xl font-semibold">
               {news_details.title}
             </h1>
-            <h3 className="mt-4 text-[#444] tracking-wider text-xl whitespace-pre-line">
+            <h3 className="mt-4 text-[#444] tracking-wider text-xl whitespace-pre-line pr-4">
               {news_details.description}
             </h3>
             {/* Tags */}
@@ -112,7 +112,7 @@ const NewsDetails = async ({ params }) => {
           </div>
         </div>
         {/* Ads & Latest News Container */}
-        <div className="w-full md:5/12 lg:w-3/12 h-fit">
+        <div className="w-full md:w-4/12 lg:w-3/12 h-fit">
           {/* Latest News */}
           <div className="border rounded px-4">
             <h1 className="text-black tracking-wider text-2xl mt-3 font-bold">

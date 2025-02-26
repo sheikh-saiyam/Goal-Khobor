@@ -3,9 +3,7 @@ import Link from "next/link";
 import { GrView } from "react-icons/gr";
 
 const Banner = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_API_URL}/api/banner-news`
-  );
+  const response = await fetch(`${process.env.NEXT_API_URL}/api/banner-news`);
   const news = await response.json();
   const latest_news = news.slice(0, 3);
   return (
@@ -62,8 +60,10 @@ const Banner = async () => {
                 />
               </div>
               <div className="p-4">
-                <h1 className="text-black tracking-wider text-lg font-semibold">
-                  {news?.title}
+                <h1 className="text-black tracking-wider text-[16px] font-semibold">
+                  {news?.title?.length > 70
+                    ? news.title.slice(0, 70) + "..."
+                    : news?.title}
                 </h1>
               </div>
             </Link>
