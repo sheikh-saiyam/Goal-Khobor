@@ -10,7 +10,7 @@ export const collections = {
 };
 
 const dbConnect = async (collection) => {
-  const uri = "mongodb://localhost:27017";
+  const uri = process.env.MONGODB_URI || "mongodb://localhost:27017";;
   const client = new MongoClient(uri, {
     serverApi: {
       version: ServerApiVersion.v1,
@@ -18,7 +18,7 @@ const dbConnect = async (collection) => {
       deprecationErrors: true,
     },
   });
-  return client.db("taza_khobor_DB").collection(collection);
+  return client.db("goal_khobor_DB").collection(collection);
 };
 
 export default dbConnect;
