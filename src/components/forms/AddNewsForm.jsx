@@ -34,7 +34,7 @@ const AddNewsForm = () => {
 
   // Get all publishers data -->
   useEffect(() => {
-    fetch(`${process.env.NEXT_API_URL}/api/publishers`)
+    fetch(`http://localhost:3000/api/publishers`)
       .then((res) => res.json())
       .then((data) => setPublisher(data));
   }, []);
@@ -302,7 +302,7 @@ const AddNewsForm = () => {
     };
 
     // Post data in db --->
-    fetch(`${process.env.NEXT_API_URL}/api/add-news`, {
+    fetch(`/api/add-news`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(news),
@@ -310,7 +310,7 @@ const AddNewsForm = () => {
       .then((res) => res.json())
       .then((data) => {
         form.reset();
-        router.push("/");
+        router.push("/news");
         setSelectedPublisher({});
         setSelectedTags([]);
         Swal.fire({
