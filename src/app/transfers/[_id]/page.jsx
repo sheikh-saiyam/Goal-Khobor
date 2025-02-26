@@ -1,23 +1,21 @@
 import AdvertisementsCard from "@/components/cards/AdvertisementsCard";
 import MainContainer from "@/components/container/MainContainer";
 import { Button } from "@/components/ui/button";
+import dbConnect, { collections } from "@/lib/dbConnect";
+import { ObjectId } from "mongodb";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 
 const TransferDetails = async ({ params }) => {
-  // Get Ranking_Details --->
   const { _id } = await params;
-  const response = await fetch(
-    `${process.env.NEXT_API_URL}/api/transfers/${_id}`
-  );
-  const transfer_details = await response.json();
-
-  // Get Latest News --->
-  const transfers_response = await fetch(
-    `${process.env.NEXT_API_URL}/api/transfers`
-  );
-  const transfers = await transfers_response.json();
+  const transfersCollection = await dbConnect(collections.transfersCollection);
+  // Get transfers news from db --->
+  const transfers = await transfersCollection.find().toArray();
+  // Get transfer_details --->
+  const transfer_details = await transfersCollection.findOne({
+    _id: new ObjectId(_id),
+  });
 
   return (
     <MainContainer>

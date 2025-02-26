@@ -1,27 +1,25 @@
-import { AiOutlineDislike } from "react-icons/ai";
-import { AiOutlineLike } from "react-icons/ai";
 import Image from "next/image";
 import Link from "next/link";
+import { AiOutlineDislike } from "react-icons/ai";
+import { AiOutlineLike } from "react-icons/ai";
 import MainContainer from "./../../../components/container/MainContainer";
 import { Button } from "../../../components/ui/button";
+import AdvertisementsCard from "@/components/cards/AdvertisementsCard";
+import dbConnect, { collections } from "@/lib/dbConnect";
+import { ObjectId } from "mongodb";
 
 const NewsDetails = async ({ params }) => {
-  // Get Latest News --->
-  const news_response = await fetch(
-    `${process.env.NEXT_API_URL}/api/latest-news`
-  );
-  const latest_news = await news_response.json();
-
-  // Get Ads --->
-  const ads_response = await fetch(`${process.env.NEXT_API_URL}/api/ads`);
-  const ads = await ads_response.json();
-
-  // Get News_Details --->
+  const newsCollection = await dbConnect(collections.newsCollection);
+  // Get latest-news from db --->
+  const latest_news = await newsCollection
+    .find()
+    .sort({ published_date: 1 })
+    .limit(6)
+    .toArray();
+  // Get news_details from db --->
   const { _id } = await params;
-  const new_details_response = await fetch(
-    `${process.env.NEXT_API_URL}/api/news/${_id}`
-  );
-  const news_details = await new_details_response.json();
+  const news_details = await newsCollection.findOne({ _id: new ObjectId(_id) });
+
   return (
     <MainContainer>
       <div className="flex flex-col md:flex-row gap-6">
@@ -132,19 +130,7 @@ const NewsDetails = async ({ params }) => {
             </div>
           </div>
           {/* Ads */}
-          <div className="mt-4">
-            <h1 className="text-black tracking-wider text-2xl mt-3 font-bold">
-              Advertisements
-            </h1>
-            <a href={ads.link} target="_blank">
-              <Image
-                src={ads.image}
-                width={600}
-                height={250}
-                className="max-h-250 w-full rounded mt-4"
-              />
-            </a>
-          </div>
+          <AdvertisementsCard />
         </div>
       </div>
     </MainContainer>

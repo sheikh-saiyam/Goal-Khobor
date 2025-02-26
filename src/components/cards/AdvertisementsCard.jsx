@@ -1,9 +1,12 @@
+import dbConnect, { collections } from "@/lib/dbConnect";
 import Image from "next/image";
 
 const AdvertisementsCard = async () => {
   // Get Ads --->
-  const ads_response = await fetch(`${process.env.NEXT_API_URL}/api/ads`);
-  const ads = await ads_response.json();
+  const adsCollection = await dbConnect(collections.adsCollection);
+  const [ads] = await adsCollection
+    .aggregate([{ $sample: { size: 1 } }])
+    .toArray();
 
   return (
     <div className="mt-4">

@@ -4,20 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import MainContainer from "./../../../components/container/MainContainer";
 import AdvertisementsCard from "./../../../components/cards/AdvertisementsCard";
+import dbConnect, { collections } from "@/lib/dbConnect";
+import { ObjectId } from "mongodb";
 
 const PowerRankingsDetails = async ({ params }) => {
-  // Get Ranking_Details --->
   const { _id } = await params;
-  const response = await fetch(
-    `${process.env.NEXT_API_URL}/api/rankings/${_id}`
-  );
-  const ranking_details = await response.json();
-
-  // Get Latest News --->
-  const power_rankings_response = await fetch(
-    `${process.env.NEXT_API_URL}/api/rankings`
-  );
-  const power_rankings = await power_rankings_response.json();
+  const rankingsCollection = await dbConnect(collections.rankingsCollection);
+  // Get prower rankings from db --->
+  const power_rankings = await rankingsCollection.find().toArray();
+  // Get ranking_details --->
+  const ranking_details = await rankingsCollection.findOne({
+    _id: new ObjectId(_id),
+  });
 
   return (
     <MainContainer>
