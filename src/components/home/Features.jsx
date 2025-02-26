@@ -2,7 +2,8 @@ import Image from "next/image";
 
 
 import Link from "next/link";
-import Header from './../shared/Section/Header';
+import Header from '@/components/Shared/Section/Header';
+
 
 
 const Features = async () => {

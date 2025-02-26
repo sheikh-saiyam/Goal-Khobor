@@ -85,8 +85,8 @@ const TransferDetails = async ({ params }) => {
               <div className="mt-4 flex items-center gap-2">
                 <div>
                   <Image
-                    src={transfer_details.publisher_image}
-                    alt={transfer_details.publisher}
+                    src={transfer_details.source_image}
+                    alt={transfer_details.source}
                     width={100}
                     height={100}
                     className="w-24 p-1 h-14 rounded border border-black"
@@ -94,7 +94,7 @@ const TransferDetails = async ({ params }) => {
                 </div>
                 <div>
                   <h1 className="font-bold text-[#444] tracking-wide">
-                    {transfer_details.publisher}
+                    {transfer_details.source}
                   </h1>
                   <h2 className="mt-[2px] text-sm font-medium tracking-wide text-[#444]">
                     {transfer_details.published_date.split("T")[0]}
