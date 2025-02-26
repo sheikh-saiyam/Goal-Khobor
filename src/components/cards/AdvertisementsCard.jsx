@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const AdvertisementsCard = async () => {
   // Get Ads --->
-  const ads_response = await fetch("http://localhost:3000/api/ads");
+  const ads_response = await fetch(`${process.env.NEXT_API_URL}/api/ads`);
   const ads = await ads_response.json();
 
   return (

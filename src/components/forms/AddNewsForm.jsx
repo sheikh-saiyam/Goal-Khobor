@@ -34,7 +34,7 @@ const AddNewsForm = () => {
 
   // Get all publishers data -->
   useEffect(() => {
-    fetch("http://localhost:3000/api/publishers")
+    fetch(`${process.env.NEXT_API_URL}/api/publishers`)
       .then((res) => res.json())
       .then((data) => setPublisher(data));
   }, []);
@@ -302,7 +302,7 @@ const AddNewsForm = () => {
     };
 
     // Post data in db --->
-    fetch("http://localhost:3000/api/add-news", {
+    fetch(`${process.env.NEXT_API_URL}/api/add-news`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(news),
@@ -310,9 +310,9 @@ const AddNewsForm = () => {
       .then((res) => res.json())
       .then((data) => {
         form.reset();
-        router.push("/")
-        setSelectedPublisher({})
-        setSelectedTags([])
+        router.push("/");
+        setSelectedPublisher({});
+        setSelectedTags([]);
         Swal.fire({
           icon: "success",
           title: "News Added Successfully",
@@ -523,7 +523,7 @@ const AddNewsForm = () => {
               >
                 {item}
                 <button
-                type="button"
+                  type="button"
                   onClick={() => removeItem(item)}
                   className="ml-2 text-blue-800 text-[1.2rem]"
                 >
