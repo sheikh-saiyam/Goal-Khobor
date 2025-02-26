@@ -1,11 +1,16 @@
 import Header from "@/components/Shared/Section/Header";
 import { Button } from "@/components/ui/button";
+import dbConnect, { collections } from "@/lib/dbConnect";
 import Image from "next/image";
 import Link from "next/link";
 
 const AllNews = async () => {
-  const response = await fetch(`${process.env.NEXT_API_URL}/api/news`);
-  const all_news = await response.json();
+  const newsCollection = await dbConnect(collections.newsCollection);
+  const all_news = await newsCollection
+    .find({ category: { $nin: ["features", "banner-news"] } })
+    .sort({ published_date: -1 })
+    .toArray();
+
   return (
     <div className="w-11/12 md:w-10/12 mx-auto max-w-screen-2xl">
       <Header heading={"Latest Football News"} />

@@ -52,7 +52,7 @@ const Banner = async () => {
             <Link href={`/news/${news?._id}`}>
               <div>
                 <Image
-                  className="w-full h-[110px]"
+                  className="object-cover w-full h-[110px]"
                   src={news?.image}
                   alt={news?.title}
                   width={1000}
