@@ -1,11 +1,13 @@
 import Header from "@/components/Shared/Section/Header";
+import dbConnect, { collections } from "@/lib/dbConnect";
 import Image from "next/image";
 import Link from "next/link";
 
 const TransferNews = async () => {
-  // Get All Transfers --->
-  const response = await fetch(`${process.env.NEXT_API_URL}/api/transfers`);
-  const transfers = await response.json();
+  // Get transfers news from db --->
+  const transfersCollection = await dbConnect(collections.transfersCollection);
+  const transfers = await transfersCollection.find().toArray();
+  
   return (
     <div>
       <Header heading={"Transfers News"} />

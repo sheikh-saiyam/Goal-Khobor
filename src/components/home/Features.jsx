@@ -1,11 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Shared/Section/Header";
+import dbConnect, { collections } from "@/lib/dbConnect";
 
 const Features = async () => {
-  // Get All Transfers --->
-  const response = await fetch(`${process.env.NEXT_API_URL}/api/features`);
-  const features_news = await response.json();
+  // Get features news from db --->
+  const newsCollection = await dbConnect(collections.newsCollection);
+  const features_news = await newsCollection
+    .find({ category: "features" })
+    .limit(6)
+    .toArray();
+
   return (
     <div>
       <Header heading={"Features News"} />

@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Header from "@/components/Shared/Section/Header";
 import Image from "next/image";
+import dbConnect, { collections } from "@/lib/dbConnect";
 
 const PowerRankings = async () => {
-  // Get All Rankings --->
-  const response = await fetch(`${process.env.NEXT_API_URL}/api/rankings`);
-  const rankings = await response.json();
+  // Get power_rankings from db --->
+  const rankingsCollection = await dbConnect(collections.rankingsCollection);
+  const rankings = await rankingsCollection.find().toArray();
+
   return (
     <div>
       <Header heading={"Power Rankings"} />

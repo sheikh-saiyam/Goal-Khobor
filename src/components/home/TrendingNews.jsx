@@ -2,10 +2,17 @@ import Image from "next/image";
 import Header from "../Shared/Section/Header";
 import { GrView } from "react-icons/gr";
 import Link from "next/link";
+import dbConnect, { collections } from "@/lib/dbConnect";
 
 const TrendingNews = async () => {
-  const response = await fetch(`${process.env.NEXT_API_URL}/api/trending-news`);
-  const trending_news = await response.json();
+  // Get all trending_news from db --->
+  const newsCollection = await dbConnect(collections.newsCollection);
+  const trending_news = await newsCollection
+    .find()
+    .sort({ views: -1 })
+    .limit(6)
+    .toArray();
+
   return (
     <div>
       {/* Section Header */}
