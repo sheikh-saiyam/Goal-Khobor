@@ -10,7 +10,7 @@ export const collections = {
 };
 
 const dbConnect = async (collection) => {
-  const uri = process.env.MONGODB_URI || "mongodb://localhost:27017";;
+  const uri = process.env.MONGODB_URI;
   const client = new MongoClient(uri, {
     serverApi: {
       version: ServerApiVersion.v1,
