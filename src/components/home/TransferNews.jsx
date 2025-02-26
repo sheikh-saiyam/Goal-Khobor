@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const TransferNews = async () => {
   // Get All Transfers --->
-  const response = await fetch("http://localhost:3000/api/transfers");
+  const response = await fetch(`${process.env.NEXT_API_URL}/api/transfers`);
   const transfers = await response.json();
   return (
     <div>

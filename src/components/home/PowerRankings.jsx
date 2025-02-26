@@ -1,10 +1,10 @@
 import Link from "next/link";
-import Header from '@/components/Shared/Section/Header';
+import Header from "@/components/Shared/Section/Header";
 import Image from "next/image";
 
 const PowerRankings = async () => {
   // Get All Rankings --->
-  const response = await fetch("http://localhost:3000/api/rankings");
+  const response = await fetch(`${process.env.NEXT_API_URL}/api/rankings`);
   const rankings = await response.json();
   return (
     <div>

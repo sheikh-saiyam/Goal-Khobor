@@ -4,7 +4,7 @@ import Header from "@/components/Shared/Section/Header";
 
 const Features = async () => {
   // Get All Transfers --->
-  const response = await fetch("http://localhost:3000/api/features");
+  const response = await fetch(`${process.env.NEXT_API_URL}/api/features`);
   const features_news = await response.json();
   return (
     <div>
