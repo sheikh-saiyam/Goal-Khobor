@@ -310,6 +310,7 @@ const AddNewsForm = () => {
       .then((res) => res.json())
       .then((data) => {
         form.reset();
+        router.refresh();
         router.push("/news");
         setSelectedPublisher({});
         setSelectedTags([]);

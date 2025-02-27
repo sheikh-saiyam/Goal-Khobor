@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import Header from "@/components/Shared/Section/Header";
 import { Button } from "@/components/ui/button";
 import dbConnect, { collections } from "@/lib/dbConnect";
