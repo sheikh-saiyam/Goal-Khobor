@@ -34,7 +34,7 @@ const AddNewsForm = () => {
 
   // Get all publishers data -->
   useEffect(() => {
-    fetch(`http://localhost:3000/api/publishers`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/publishers`)
       .then((res) => res.json())
       .then((data) => setPublisher(data));
   }, []);
