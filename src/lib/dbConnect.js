@@ -12,11 +12,9 @@ export const collections = {
 const dbConnect = async (collection) => {
   const uri = process.env.MONGODB_URI;
   const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    },
+    tls: true,
+    serverSelectionTimeoutMS: 3000,
+    autoSelectFamily: false,
   });
   return client.db("goal_khobor_DB").collection(collection);
 };

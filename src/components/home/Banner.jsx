@@ -1,79 +1,76 @@
 import dbConnect, { collections } from "@/lib/dbConnect";
 import Image from "next/image";
 import Link from "next/link";
-import { GrView } from "react-icons/gr";
 
 const Banner = async () => {
   // Get all banner_news from db --->
   const newsCollection = await dbConnect(collections.newsCollection);
-  const latest_news = await newsCollection
-  .find({ category: "banner-news" })
-  .sort({ published_date: -1 })
-  .limit(3)
-  .toArray();
+  const banner_news = await newsCollection
+    .find({ category: "banner-news" })
+    .sort({ published_date: -1 })
+    .limit(3)
+    .toArray();
 
   return (
-    <div className="w-full flex flex-col md:flex-row items-center gap-6">
-      <div className="w-full md:w-7/12 lg:w-9/12">
-        {latest_news.slice(0, 1).map((news) => (
-          <div
-            key={news?._id}
-            className="border hover:border-black cursor-pointer duration-300"
-          >
-            <Link href={`/news/${news?._id}`} prefetch={true}>
-              <div>
+    <div className="flex flex-col md:flex-col lg:flex-row items-stretch gap-6">
+      <div className="w-full md:w-full lg:w-7/12">
+        {banner_news.slice(0, 1).map((news) => (
+          <Link href={`/news/${news._id}`} key={news._id} prefetch={true}>
+            <div className="h-full">
+              <div className="relative h-full overflow-hidden shadow-lg group">
                 <Image
-                  className="w-full h-[350px]"
-                  src={news?.image}
-                  alt={news?.title}
-                  width={1000}
-                  height={150}
+                  src={news.image}
+                  alt={news.title}
+                  layout="responsive"
+                  width={700}
+                  height={900}
+                  className="object-cover group-hover:scale-110 transition-transform duration-300 sm:min-h-full min-h-[100px]"
                 />
-              </div>
-              <div className="p-4">
-                <h1 className="text-black tracking-wider text-lg font-semibold">
-                  {news?.title}
-                </h1>
-                <div className="mt-2 flex items-center gap-4 justify-end">
-                  <h1 className="text-black mt-[2px] tracking-wider text-sm font-medium">
-                    {news?.publisher}
-                  </h1>
-                  <strong>||</strong>
-                  <h1 className="flex items-center gap-2 font-medium">
-                    <GrView size={20} />
-                    <span className="mt-[1px]">{news?.views}</span>
-                  </h1>
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all"></div>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                  <h2 className="text-white text-xl font-semibold">
+                    {news.title}
+                  </h2>
+                  <div className="flex justify-between items-center mt-2 text-sm text-gray-300">
+                    <span className="font-bold">
+                      {news.published_date.split("T")[0]}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </Link>
-          </div>
+            </div>
+          </Link>
         ))}
       </div>
-      <div className="hidden w-full md:w-5/12 lg:w-3/12 md:flex lg:flex gap-6 flex-col">
-        {latest_news.slice(1).map((news) => (
-          <div
-            key={news?._id}
-            className="border hover:border-black cursor-pointer duration-300"
-          >
-            <Link href={`/news/${news?._id}`}>
-              <div>
+      <div className="w-full md:w-full lg:w-5/12 flex flex-col md:flex-row lg:flex-col gap-6">
+        {banner_news.slice(1, 3).map((news) => (
+          <Link href={`/news/${news._id}`} key={news._id} prefetch={true}>
+            <div className="h-full">
+              <div className="relative h-full overflow-hidden shadow-lg group">
                 <Image
-                  className="object-cover w-full h-[110px]"
-                  src={news?.image}
-                  alt={news?.title}
-                  width={1000}
-                  height={170}
+                  src={news.image}
+                  alt={news.title}
+                  layout="responsive"
+                  width={700}
+                  height={900}
+                  className="object-cover group-hover:scale-110 transition-transform duration-300 sm:min-h-full lg:max-h-[250px]"
                 />
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all"></div>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                  <h2 className="text-white text-xl sm:text-lg lg:text-xl font-semibold">
+                    {news.title}
+                  </h2>
+                  <div className="flex justify-between items-center mt-2 text-sm text-gray-300">
+                    <span className="font-bold">
+                      {news.published_date.split("T")[0]}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div className="p-4">
-                <h1 className="text-black tracking-wider text-[16px] font-semibold">
-                  {news?.title?.length > 70
-                    ? news.title.slice(0, 70) + "..."
-                    : news?.title}
-                </h1>
-              </div>
-            </Link>
-          </div>
+            </div>
+          </Link>
         ))}
       </div>
     </div>

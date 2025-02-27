@@ -18,7 +18,7 @@ const Features = async () => {
       <div className="flex flex-col md:flex-row items-stretch gap-6">
         <div className="w-full md:w-7/12 lg:w-6/12">
           {features_news.slice(0, 1).map((news) => (
-            <Link href={`/news/${news._id}`} key={news._id}>
+            <Link href={`/news/${news._id}`} key={news._id} prefetch={true}>
               <div className="h-full">
                 <div className="relative h-full overflow-hidden shadow-lg group">
                   <Image
@@ -44,7 +44,7 @@ const Features = async () => {
         </div>
         <div className="w-full md:w-5/12 lg:w-6/12 flex flex-col gap-6">
           {features_news.slice(1, 3).map((news) => (
-            <Link href={`/news/${news._id}`} key={news._id}>
+            <Link href={`/news/${news._id}`} key={news._id} prefetch={true}>
               <div className="flex flex-col lg:flex-row items-center gap-2 border-2 hover:border-black duration-300">
                 {/* Image Container */}
                 <div className="lg:w-6/12">
@@ -76,7 +76,7 @@ const Features = async () => {
       <div className="mt-6 flex flex-col-reverse md:flex-row-reverse items-stretch gap-6">
         <div className="w-full md:w-7/12 lg:w-6/12">
           {features_news.slice(3, 4).map((news) => (
-            <Link href={`/news/${news._id}`} key={news._id}>
+            <Link href={`/news/${news._id}`} key={news._id} prefetch={true}>
               <div className="h-full">
                 <div className="relative h-full overflow-hidden shadow-lg group">
                   <Image
@@ -102,7 +102,7 @@ const Features = async () => {
         </div>
         <div className="w-full md:w-5/12 lg:w-6/12 flex flex-col gap-6">
           {features_news.slice(4).map((news) => (
-            <Link href={`/news/${news._id}`} key={news._id}>
+            <Link href={`/news/${news._id}`} key={news._id} prefetch={true}>
               <div className="flex flex-col lg:flex-row items-center gap-2 border-2 hover:border-black duration-300">
                 {/* Image Container */}
                 <div className="lg:w-6/12">

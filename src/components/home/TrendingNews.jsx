@@ -24,7 +24,7 @@ const TrendingNews = async () => {
             key={news?._id}
             className="border hover:scale-105 cursor-pointer duration-300"
           >
-            <Link href={`/news/${news?._id}`}>
+            <Link href={`/news/${news?._id}`} prefetch={true}>
               <div>
                 <Image
                   className="w-full h-[200px]"

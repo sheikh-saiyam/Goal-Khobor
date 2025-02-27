@@ -7,14 +7,14 @@ const TransferNews = async () => {
   // Get transfers news from db --->
   const transfersCollection = await dbConnect(collections.transfersCollection);
   const transfers = await transfersCollection.find().toArray();
-  
+
   return (
     <div>
       <Header heading={"Transfers News"} />
       {/* Transfers News Container */}
       <div className="flex flex-col gap-4">
         {transfers.map((news) => (
-          <Link href={`/transfers/${news._id}`} key={news._id}>
+          <Link href={`/transfers/${news._id}`} key={news._id} prefetch={true}>
             <div className="flex flex-col lg:flex-row items-center gap-x-4 border-2 hover:border-black duration-300">
               {/* Image Container */}
               <div className="lg:w-6/12">
