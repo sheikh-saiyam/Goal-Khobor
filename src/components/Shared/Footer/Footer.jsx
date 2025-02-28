@@ -49,6 +49,7 @@ const Footer = () => {
   return (
     <footer className="w-11/12 md:w-10/12 mx-auto max-w-screen-2xl py-6 md:py-9">
       <div className="border-t border-gray-200 pt-8 flex justify-between gap-[20px] flex-wrap w-full">
+        
         {/* Top Viewed News */}
         <div className="w-fit">
           <h3 className="text-[1.2rem] font-semibold text-[#424242] mb-2">
@@ -125,6 +126,7 @@ const Footer = () => {
               </button>
             </div>
           </div>
+
           {/* Download Mobile App */}
           <div>
             <h3 className="text-xl text-[#424242] font-bold mb-2">
