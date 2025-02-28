@@ -1,10 +1,10 @@
 import AdvertisementsCard from "@/components/cards/AdvertisementsCard";
+import { TransferTitle } from "@/components/cards/TitleNews";
 import MainContainer from "@/components/container/MainContainer";
 import { Button } from "@/components/ui/button";
 import dbConnect, { collections } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 import Image from "next/image";
-import Link from "next/link";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 
 const TransferDetails = async ({ params }) => {
@@ -106,26 +106,10 @@ const TransferDetails = async ({ params }) => {
             </div>
           </div>
         </div>
-        {/* Ads & Latest News Container */}
+        {/* Ads & Transfer Container */}
         <div className="w-full md:5/12 lg:w-3/12 h-fit">
-          {/* Latest News */}
-          <div className="border rounded px-4">
-            <h1 className="text-black tracking-wider text-2xl mt-3 font-bold">
-              TRANSFERS
-            </h1>
-            <div className="relative mt-3 w-full">
-              {transfers?.map((news, index) => (
-                <div key={index} className="pb-3 mb-4 border-b">
-                  <Link
-                    href={`/transfers/${news._id}`}
-                    className="whitespace-pre-line hover:underline duration-300 cursor-pointer underline-offset-2"
-                  >
-                    {news.title}
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Transfers */}
+          <TransferTitle heading={"TRANSFERS"} item={transfers} />
           {/* Ads */}
           <AdvertisementsCard />
         </div>

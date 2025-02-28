@@ -7,14 +7,14 @@ import { Button } from "../../../components/ui/button";
 import AdvertisementsCard from "@/components/cards/AdvertisementsCard";
 import dbConnect, { collections } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
-import TitleNews from "@/components/cards/TitleNews";
+import { NewsTitle } from "@/components/cards/TitleNews";
 
 const NewsDetails = async ({ params }) => {
   const newsCollection = await dbConnect(collections.newsCollection);
   // Get latest-news from db --->
   const latest_news = await newsCollection
     .find()
-    .sort({ published_date: 1 })
+    .sort({ published_date: -1 })
     .limit(6)
     .toArray();
   // Get news_details from db --->
@@ -113,7 +113,7 @@ const NewsDetails = async ({ params }) => {
         {/* Ads & Latest News Container */}
         <div className="w-full md:w-4/12 lg:w-3/12 h-fit">
           {/* Latest News */}
-          <TitleNews heading={"LATEST NEWS"} item={latest_news} />
+          <NewsTitle heading={"LATEST NEWS"} item={latest_news} />
           {/* Ads */}
           <AdvertisementsCard />
         </div>
