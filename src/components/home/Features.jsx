@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import Header from "@/components/Shared/Section/Header";
 import dbConnect, { collections } from "@/lib/dbConnect";
 import FeaturesNewsCard from "../cards/FeaturesNewsCard";
