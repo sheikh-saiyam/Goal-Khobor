@@ -48,12 +48,12 @@ const AllNews = async () => {
         <div className="mt-12 flex flex-col md:flex-col-reverse lg:flex-row-reverse items-stretch gap-6">
           <div className="w-full md:w-full lg:w-7/12">
             {all_news.slice(12, 13).map((news) => (
-            <LongImageNewsCard key={news._id} news={news} />
+              <LongImageNewsCard key={news._id} news={news} />
             ))}
           </div>
           <div className="w-full md:w-full lg:w-5/12 flex flex-col md:flex-row lg:flex-col gap-6">
             {all_news.slice(13, 15).map((news) => (
-               <ShortImageNewsCard key={news._id} news={news} />
+              <ShortImageNewsCard key={news._id} news={news} />
             ))}
           </div>
         </div>

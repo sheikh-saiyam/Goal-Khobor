@@ -16,7 +16,7 @@ const ShortImageNewsCard = ({ news }) => {
             className="object-cover group-hover:scale-110 transition-transform duration-300 sm:min-h-full lg:max-h-[250px]"
           />
           {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all"></div>
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all"></div>
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
             <h2 className="text-white text-xl sm:text-lg lg:text-xl font-semibold">
               {title}
