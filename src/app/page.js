@@ -5,7 +5,6 @@ import PowerRankings from "./../components/home/PowerRankings";
 import TransferNews from "./../components/home/TransferNews";
 import TrendingNews from './../components/home/TrendingNews';
 
-
 export default function Home() {
   return (
     <div className="w-11/12 md:w-10/12 mx-auto max-w-screen-2xl">
