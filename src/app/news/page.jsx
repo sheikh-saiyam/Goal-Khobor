@@ -5,6 +5,10 @@ import dbConnect, { collections } from "@/lib/dbConnect";
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata = {
+  title: "News - Goal Khobor",
+};
+
 const AllNews = async () => {
   // Get all news from db --->
   const newsCollection = await dbConnect(collections.newsCollection);
