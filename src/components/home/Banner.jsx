@@ -1,7 +1,5 @@
 export const revalidate = 0;
 import dbConnect, { collections } from "@/lib/dbConnect";
-import Image from "next/image";
-import Link from "next/link";
 import LongImageNewsCard from "../cards/ImageNewsCards/LongImageNewsCard";
 import ShortImageNewsCard from "../cards/ImageNewsCards/ShortImageNewsCard";
 
