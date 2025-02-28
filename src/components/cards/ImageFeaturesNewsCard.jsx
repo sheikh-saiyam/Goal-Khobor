@@ -1,0 +1,30 @@
+import Image from "next/image";
+import Link from "next/link";
+
+const ImageFeaturesNewsCard = ({ news }) => {
+  const { _id, image, title, published_date } = news || {};
+  return (
+    <Link href={`/news/${_id}`} prefetch={true}>
+      <div className="h-full">
+        <div className="relative h-full overflow-hidden shadow-lg group">
+          <Image
+            src={image}
+            alt={title}
+            layout="responsive"
+            width={700}
+            height={900}
+            className="object-cover group-hover:scale-110 transition-transform duration-300 sm:min-h-full min-h-[400px]"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+            <h2 className="text-white text-xl font-semibold">{title}</h2>
+            <div className="flex justify-between items-center mt-2 text-sm text-gray-300">
+              <span>{published_date}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default ImageFeaturesNewsCard;
