@@ -32,7 +32,7 @@ const TransferNews = async () => {
                   <h3 className="text-lg font-medium text-[#444]">
                     {news.published_date}
                   </h3>
-                  <h1 className="mt-2 text-2xl md:text-3xl font-medium tracking-wider">
+                  <h1 className="mt-2 text-2xl md:text-2xl font-semibold tracking-wider">
                     {news.title}
                   </h1>
                 </div>
