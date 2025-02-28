@@ -6,27 +6,29 @@ import { Button } from "../../ui/button";
 
 const Footer = () => {
   const tags = [
-    "News",
-    "Football",
-    "Transfer News",
-    "Latest News",
-    "Breaking News",
-    "Trending News",
-    "Science ...",
-    "Entertainment",
-    "World",
-    "Economsssy",
-    "Climate",
-    "Elections",
-    "Website",
-    "Travel",
-    "Football",
+    "Cristiano Ronaldo",
+    "Lionel Messi",
+    "Kylian Mbappe",
+    "Vinicius Junior",
+    "Neymar Junior",
+    "Jude Bellingham",
+    "UEFA Champions League",
     "Real Madrid",
-    "Barcelona",
-    "Liverpool F.c",
-    "Arsenal",
-    "FIFA",
-    "UEFA",
+    "La Liga",
+    "FIFA World Cup",
+    "Premier League",
+    "FC. Barcelona",
+    "Manchester United",
+    "Manchester City",
+    "Liverpool F.C",
+    "Bayern Munich",
+    "Juventus",
+    "AC Milan",
+    "Ballon d'Or",
+    "Golden Boot",
+    "El Clasico",
+    "VAR",
+    "Penalty Shootout",
   ];
 
   const topViewedNews = [
@@ -108,17 +110,17 @@ const Footer = () => {
             <h3 className="text-xl text-[#424242] font-bold mb-2">
               Join Our Newsletter
             </h3>
-            <p className="text-sm text-gray-600 mb-3">
+            <p className="text-sm mb-3">
               Stay updated with the latest news and insights. <br /> Subscribe
               now!
             </p>
             <div className="relative">
               <input
                 type="email"
-                className="w-full py-2 px-4 rounded-md border border-gray-400 outline-none text-black placeholder:text-gray-500"
+                className="w-full py-2 px-4 rounded-md border-2 border-black outline-none text-black placeholder:text-gray-500"
                 placeholder="Enter your email"
               />
-              <button className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black text-white py-1.5 px-4 rounded-md hover:bg-gray-800 transition duration-300">
+              <button className="absolute top-1/2 right-1 transform -translate-y-1/2 bg-black text-white py-1.5 px-4 rounded-md hover:bg-gray-800 transition duration-300">
                 Subscribe
               </button>
             </div>
@@ -128,7 +130,7 @@ const Footer = () => {
             <h3 className="text-xl text-[#424242] font-bold mb-2">
               Download Mobile App
             </h3>
-            <p className="text-sm text-gray-600 mb-3">
+            <p className="text-sm mb-3">
               Get the latest news anytime, anywhere. Stay <br /> informed on the
               go!
             </p>
