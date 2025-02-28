@@ -56,7 +56,7 @@ const Navbar = () => {
                 : "hover:underline underline-offset-2"
             }`}
           >
-            Features News
+            Featured News
           </Link>
           <Link
             href={"/transfer-news"}

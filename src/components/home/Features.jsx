@@ -13,7 +13,7 @@ const Features = async () => {
 
   return (
     <div>
-      <Header heading={"Features News"} />
+      <Header heading={"Featured News"} />
       {/* 1st Features News Container */}
       <div className="flex flex-col md:flex-row items-stretch gap-6">
         <div className="w-full md:w-7/12 lg:w-6/12">

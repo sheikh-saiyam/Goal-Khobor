@@ -1,4 +1,5 @@
 export const revalidate = 0;
+import ListNewsCard from "@/components/cards/ListNewsCard";
 import NewsCard from "@/components/cards/NewsCard";
 import Header from "@/components/Shared/Section/Header";
 import { Button } from "@/components/ui/button";
@@ -158,37 +159,7 @@ const AllNews = async () => {
         {/* 4th news container */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
           {all_news.slice(15).map((news) => (
-            <div
-              key={news._id}
-              className="flex flex-col lg:flex-row items-center gap-x-4 border-2 hover:border-black duration-300"
-            >
-              {/* Image Container */}
-              <div className="w-full lg:w-7/12 h-full">
-                <Image
-                  src={news.image}
-                  alt={news.title}
-                  width={1000}
-                  height={200}
-                  className="min-h-[240px] object-cover h-full w-full"
-                />
-              </div>
-              {/* Text Container */}
-              <div className="w-full lg:w-5/12 p-3">
-                <div>
-                  <h3 className="text-base font-medium text-[#444]">
-                    {news.published_date}
-                  </h3>
-                  <h1 className="mt-1 text-xl lg:text-lg font-semibold tracking-wider">
-                    {news.title}
-                  </h1>
-                  <Link href={`/news/${news._id}`}>
-                    <Button className="mt-3" variant="outline">
-                      Read More
-                    </Button>{" "}
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <ListNewsCard key={news?._id} news={news} />
           ))}
         </div>
       </div>
