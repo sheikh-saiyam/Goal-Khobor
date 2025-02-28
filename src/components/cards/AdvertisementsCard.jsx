@@ -10,7 +10,7 @@ const AdvertisementsCard = async () => {
 
   return (
     <div className="mt-4">
-      <h1 className="text-black tracking-wider text-2xl mt-3 font-bold">
+      <h1 className="text-black tracking-tighter text-2xl mt-3 font-bold">
         ADVERTISEMENTS
       </h1>
       <a href={ads.link} target="_blank">
@@ -19,7 +19,7 @@ const AdvertisementsCard = async () => {
           alt={ads.link}
           width={600}
           height={250}
-          className="max-h-250 w-full rounded mt-4"
+          className="h-full w-full mt-4"
         />
       </a>
     </div>

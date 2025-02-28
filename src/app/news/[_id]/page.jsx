@@ -7,6 +7,7 @@ import { Button } from "../../../components/ui/button";
 import AdvertisementsCard from "@/components/cards/AdvertisementsCard";
 import dbConnect, { collections } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
+import TitleNews from "@/components/cards/TitleNews";
 
 const NewsDetails = async ({ params }) => {
   const newsCollection = await dbConnect(collections.newsCollection);
@@ -112,23 +113,7 @@ const NewsDetails = async ({ params }) => {
         {/* Ads & Latest News Container */}
         <div className="w-full md:w-4/12 lg:w-3/12 h-fit">
           {/* Latest News */}
-          <div className="border rounded px-4">
-            <h1 className="text-black tracking-wider text-2xl mt-3 font-bold">
-              LATEST NEWS
-            </h1>
-            <div className="relative mt-3 w-full">
-              {latest_news?.map((news, index) => (
-                <div key={index} className="pb-3 mb-4 border-b">
-                  <Link
-                    href={`/news/${news._id}`}
-                    className="whitespace-pre-line hover:underline duration-300 cursor-pointer underline-offset-2"
-                  >
-                    {news.title}
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
+          <TitleNews heading={"LATEST NEWS"} item={latest_news} />
           {/* Ads */}
           <AdvertisementsCard />
         </div>
