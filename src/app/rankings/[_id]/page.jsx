@@ -6,11 +6,12 @@ import MainContainer from "./../../../components/container/MainContainer";
 import AdvertisementsCard from "./../../../components/cards/AdvertisementsCard";
 import dbConnect, { collections } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
+import { RankingTitle } from "@/components/cards/TitleNews";
 
 const PowerRankingsDetails = async ({ params }) => {
   const { _id } = await params;
   const rankingsCollection = await dbConnect(collections.rankingsCollection);
-  // Get prower rankings from db --->
+  // Get power rankings from db --->
   const power_rankings = await rankingsCollection.find().toArray();
   // Get ranking_details --->
   const ranking_details = await rankingsCollection.findOne({
@@ -117,26 +118,10 @@ const PowerRankingsDetails = async ({ params }) => {
             </div>
           </div>
         </div>
-        {/* Ads & Latest News Container */}
+        {/* Ads & POWER RANKINGS Container */}
         <div className="w-full md:w-4/12 lg:w-3/12 h-fit">
-          {/* Latest News */}
-          <div className="border rounded px-4">
-            <h1 className="text-black tracking-wider text-2xl mt-3 font-bold">
-              POWER RANKINGS
-            </h1>
-            <div className="relative mt-3 w-full">
-              {power_rankings?.map((news, index) => (
-                <div key={index} className="pb-3 mb-4 border-b">
-                  <Link
-                    href={`/rankings/${news._id}`}
-                    className="whitespace-pre-line hover:underline duration-300 cursor-pointer underline-offset-2"
-                  >
-                    {news.title}
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* POWER RANKINGS */}
+          <RankingTitle heading={"RANKINGS"} item={power_rankings} />
           {/* Ads */}
           <AdvertisementsCard />
         </div>
