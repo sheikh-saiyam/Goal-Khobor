@@ -6,6 +6,7 @@ import Login from "../../authentication/Login";
 import MobileNavbar from "./MobileNavbar";
 import { usePathname } from "next/navigation";
 
+
 const Navbar = () => {
   const path = usePathname();
   return (
