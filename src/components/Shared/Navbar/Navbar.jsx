@@ -5,6 +5,8 @@ import Link from "next/link";
 import Login from "../../authentication/Login";
 import MobileNavbar from "./MobileNavbar";
 import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { IoIosLogIn } from "react-icons/io";
 
 const Navbar = () => {
   const path = usePathname();
@@ -69,9 +71,20 @@ const Navbar = () => {
           >
             Power Rankings
           </Link>
-          <div>
-            <Login />
-          </div>
+          <Link
+            href={"/login"}
+            prefetch={true}
+            className={`${
+              path === "/login"
+                ? "underline underline-offset-2 text-white"
+                : "hover:underline underline-offset-2 text-white"
+            }`}
+          >
+            <Button className="flex items-center">
+              <IoIosLogIn size={30} />
+              Login
+            </Button>
+          </Link>
         </div>
         {/* Mobile Navbar */}
         <div className="flex items-center gap-2 xl:hidden">

@@ -1,6 +1,12 @@
+import RegisterForm from "@/components/authentication/RegisterForm";
+import MainContainer from "@/components/container/MainContainer";
+
 const Register = () => {
   return (
-    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto max-w-screen-2xl"></div>
+    <MainContainer>
+      {/* Register Form */}
+      <RegisterForm />
+    </MainContainer>
   );
 };
 
