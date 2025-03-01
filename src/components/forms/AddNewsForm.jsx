@@ -51,6 +51,11 @@ const AddNewsForm = () => {
     "uefa-champions-league",
     "uefa-europa-league",
     "uefa-europa-conference-league",
+    "fifa-world-cup",
+    "uefa-euros",
+    "copa-america",
+    "youth-football",
+    "women-football",
   ];
 
   const Tags = [

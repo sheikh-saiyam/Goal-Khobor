@@ -46,17 +46,6 @@ const Navbar = () => {
             }`}
           >
             All News
-          </Link>{" "}
-          <Link
-            href={"/features-news"}
-            prefetch={true}
-            className={`${
-              path === "/features-news"
-                ? "underline underline-offset-2"
-                : "hover:underline underline-offset-2"
-            }`}
-          >
-            Featured News
           </Link>
           <Link
             href={"/transfer-news"}
