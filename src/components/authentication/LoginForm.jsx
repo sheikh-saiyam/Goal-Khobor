@@ -19,8 +19,8 @@ const LoginForm = () => {
         Login to start!
       </h2>
       <p className="text-gray-900 text-sm mt-2 mb-4">
-        Stay Updated, Stay Informed! Login To <strong>Goal Khobor</strong>{" "}
-        For Real-Time News.
+        Stay Updated, Stay Informed! Login To <strong>Goal Khobor</strong> For
+        Real-Time News.
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
@@ -57,8 +57,9 @@ const LoginForm = () => {
           Login
         </Button>
       </form>
-          {/* SocialLogin */}
-          <SocialLogin />
+      {/* SocialLogin */}
+      <SocialLogin />
+      {/* Navigate to register */}
       <div className="mt-4 text-center text-sm text-gray-900">
         Don't have an account?{" "}
         <Link href={"/register"} prefetch={true}>
