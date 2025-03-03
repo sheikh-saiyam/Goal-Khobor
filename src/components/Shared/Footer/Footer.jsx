@@ -1,10 +1,17 @@
+"use client";
 import { CgFacebook } from "react-icons/cg";
 import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../../ui/button";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+    const path = usePathname();
+    if(path.includes("/login") || path.includes("/register")) {
+      return <></>
+    }
+
   const tags = [
     "Cristiano Ronaldo",
     "Lionel Messi",

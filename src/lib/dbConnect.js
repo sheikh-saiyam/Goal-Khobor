@@ -14,7 +14,7 @@ const dbConnect = async (collection) => {
   const client = new MongoClient(uri, {
     tls: true,
     serverSelectionTimeoutMS: 3000,
-    autoSelectFamily: false,
+    // autoSelectFamily: false,
   });
   return client.db("goal_khobor_DB").collection(collection);
 };

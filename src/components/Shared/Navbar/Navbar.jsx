@@ -10,6 +10,9 @@ import { IoIosLogIn } from "react-icons/io";
 
 const Navbar = () => {
   const path = usePathname();
+  if(path.includes("/login") || path.includes("/register")) {
+    return <></>
+  }
   return (
     <nav className="w-11/12 md:w-10/12 mx-auto max-w-screen-2xl">
       {/* 1st Navbar */}

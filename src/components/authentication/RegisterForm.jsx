@@ -3,17 +3,40 @@ import Link from "next/link";
 import { IoIosLogIn } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 import SocialLogin from "./SocialLogin";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
+import { registerUser } from "@/app/actions/registerUser";
+import { useState } from "react";
 
 const RegisterForm = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log({ name, email, password });
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  // Function for register user --->
+  const handleSubmit = async (formData) => {
+    setLoading(true);
+    const result = await registerUser(formData);
+    setLoading(false);
+    // Show success modal --->
+    if (result.success) {
+      router.push("/login");
+      Swal.fire({
+        icon: "success",
+        title: result.title,
+        text: result.message,
+        confirmButtonColor: "#000",
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: result.title,
+        text: result.message,
+        confirmButtonColor: "#000",
+      });
+    }
   };
   return (
+    <div className="w-full h-screen flex items-center justify-center bg-base-200 fixed top-0 left-0 z-50">
     <div className="max-w-md mx-auto p-6 bg-white border-2 shadow rounded-lg">
       <h2 className="text-xl font-bold flex items-center gap-2">
         <IoIosLogIn size={30} color="#000" />
@@ -23,7 +46,8 @@ const RegisterForm = () => {
         Stay Updated, Stay Informed! Register To <strong>Goal Khobor</strong>{" "}
         For Real-Time News.
       </p>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form action={handleSubmit} className="flex flex-col gap-4">
+        {/* Name input */}
         <div className="flex flex-col gap-2">
           <label htmlFor="name" className="font-semibold text-black text-sm">
             Name
@@ -37,6 +61,7 @@ const RegisterForm = () => {
             className="border rounded-lg border-gray-300 outline-none py-2 px-3 placeholder-gray-500 text-gray-500 focus:ring-1 focus:ring-[#848484]"
           />
         </div>
+        {/* Email input */}
         <div className="flex flex-col gap-2">
           <label htmlFor="email" className="font-semibold text-black text-sm">
             Email
@@ -50,6 +75,7 @@ const RegisterForm = () => {
             className="border rounded-lg border-gray-300 outline-none py-2 px-3 placeholder-gray-500 text-gray-500 focus:ring-1 focus:ring-[#848484]"
           />
         </div>
+        {/* Password input */}
         <div className="flex flex-col gap-2">
           <label
             htmlFor="password"
@@ -67,8 +93,8 @@ const RegisterForm = () => {
           />
         </div>
         {/* Register Button */}
-        <Button type="submit" className="mt-1">
-          Register
+        <Button disabled={loading} type="submit" className="mt-1">
+          {loading ? "Registering..." : "Register"}
         </Button>
       </form>
       {/* SocialLogin */}
@@ -82,7 +108,7 @@ const RegisterForm = () => {
           </span>
         </Link>
       </div>
-    </div>
+    </div></div>
   );
 };
 
