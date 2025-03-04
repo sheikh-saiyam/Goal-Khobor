@@ -3,13 +3,16 @@ import useFetchUsers from "@/hooks/useFetchUsers";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 
 const AllUserTable = () => {
-  const [ users, isLoading ] = useFetchUsers();
+  const [users, isLoading] = useFetchUsers();
 
   return (
     <tbody>
       {isLoading
         ? Array.from({ length: 6 }).map((_, index) => (
-            <tr key={index} className="border-t border-gray-200 hover:bg-gray-50">
+            <tr
+              key={index}
+              className="border-t border-gray-200 hover:bg-gray-50"
+            >
               <td className="p-4">
                 <div className="h-4 w-24 bg-[#e5eaf2] animate-pulse rounded"></div>
               </td>
@@ -29,7 +32,10 @@ const AllUserTable = () => {
             </tr>
           ))
         : users.map((user) => (
-            <tr key={user.UID} className="border-t border-gray-200 hover:bg-gray-50">
+            <tr
+              key={user.UID}
+              className="border-t border-gray-200 hover:bg-gray-50"
+            >
               <td className="p-4 text-gray-700 font-medium">{user.name}</td>
               <td className="p-4 text-gray-700 font-medium">{user.email}</td>
               <td className="p-4 text-gray-700 font-medium">{user.role}</td>

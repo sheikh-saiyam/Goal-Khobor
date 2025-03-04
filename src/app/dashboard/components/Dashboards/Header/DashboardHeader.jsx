@@ -4,7 +4,7 @@ import { IoNotifications } from "react-icons/io5";
 import { Typewriter } from "react-simple-typewriter";
 
 const DashboardHeader = ({ setIsSidebarOpen, isSidebarOpen }) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const username = session?.user?.name || "";
   return (
     <div className="bg-white shadow py-6 border-b border-t-2 border-r-2 flex justify-between items-center">
@@ -19,16 +19,20 @@ const DashboardHeader = ({ setIsSidebarOpen, isSidebarOpen }) => {
       </div>
       {/* Welcome Div */}
       <div className="hidden lg:flex ml-4">
-        <h1 className="text-2xl font-semibold tracking-wide">
-          Welcome Back!{" "}
-          <Typewriter
-            words={[username]}
-            loop={false}
-            typeSpeed={100}
-            deleteSpeed={100}
-            delaySpeed={1000}
-          />
-        </h1>
+        {status === "loading" ? (
+          <div className="w-[250px] h-10 bg-[#e5eaf2] animate-pulse"></div>
+        ) : (
+          <h1 className="text-2xl font-semibold tracking-wide">
+            Welcome Back!{" "}
+            <Typewriter
+              words={[username]}
+              loop={false}
+              typeSpeed={100}
+              deleteSpeed={100}
+              delaySpeed={1000}
+            />
+          </h1>
+        )}
       </div>
       {/* Main container */}
       <div className="flex justify-end items-center gap-4 pr-4 md:pr-8">

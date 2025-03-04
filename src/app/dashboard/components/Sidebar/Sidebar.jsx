@@ -17,29 +17,50 @@ const Sidebar = () => {
   return (
     <aside className="bg-white boxShadow rounded-md transition-all duration-300 ease relative">
       {/* Logo & Searchbar */}
-      <div className={`mt-5 ${isCollapse1 ? "px-[20px]" : "px-[10px]"} transition-all duration-300 ease-in-out`}>
+      <div
+        className={`mt-5 ${
+          isCollapse1 ? "px-[20px]" : "px-[10px]"
+        } transition-all duration-300 ease-in-out`}
+      >
         {/* Logo */}
         {isCollapse1 ? (
           <div className="flex items-center justify-between">
             <Link href={"/"} prefetch={true}>
-              <Image width={600} height={80} src="https://i.ibb.co.com/fV684RGm/goal-khobor.png" alt="goal khobor logo" className="w-[140px] h-[80px] cursor-pointer" />
+              <Image
+                width={600}
+                height={80}
+                src="https://i.ibb.co.com/fV684RGm/goal-khobor.png"
+                alt="goal khobor logo"
+                className="w-[140px] h-[80px] cursor-pointer"
+              />
             </Link>
             <div className="relative group">
-              <GoSidebarCollapse className="text-[1.5rem] text-black cursor-pointer hidden lg:flex" onClick={() => setIsCollapse1(false)} />
+              <GoSidebarCollapse
+                className="text-[1.5rem] text-black cursor-pointer hidden lg:flex"
+                onClick={() => setIsCollapse1(false)}
+              />
             </div>
           </div>
         ) : (
-          <Link href={"/"} prefetch={true}>
-            <Image width={600} height={100} src="https://i.ibb.co.com/fV684RGm/goal-khobor.png" alt="goal khobor logo" className="w-[50px] mx-auto cursor-pointer" onClick={() => setIsCollapse1(!isCollapse1)} />
-          </Link>
+          <Image
+            width={600}
+            height={100}
+            src="https://i.ibb.co.com/fV684RGm/goal-khobor.png"
+            alt="goal khobor logo"
+            className="w-[50px] mx-auto cursor-pointer"
+            onClick={() => setIsCollapse1(!isCollapse1)}
+          />
         )}
       </div>
 
       {/* NavLinks Skeleton */}
       {status === "loading" ? (
-        <div className="mt-6 space-y-4 px-4">
+        <div className="mt-12 space-y-4 px-4">
           {[...Array(6)].map((_, index) => (
-            <div key={index} className="h-10 w-full px-18 bg-[#e5eaf2] animate-pulse"></div>
+            <div
+              key={index}
+              className="h-11 w-full px-28 bg-[#e5eaf2] animate-pulse"
+            />
           ))}
         </div>
       ) : (
@@ -55,4 +76,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
