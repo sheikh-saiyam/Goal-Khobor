@@ -75,7 +75,7 @@ const Navbar = () => {
             Power Rankings
           </Link>
           {status === "loading" && user ? (
-            <div className="w-8 h-8 animate-spin rounded-full border-dashed border-8 border-[#000] shadow-none"></div>
+            <div className="w-8 h-8 animate-spin rounded-full border-dashed border-8 border-[#000] shadow-none" />
           ) : user ? (
             <>
               <Link
