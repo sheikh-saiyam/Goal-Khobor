@@ -37,8 +37,8 @@ const UserLinks = ({ isCollapse1 }) => {
             </p>
           </Link>
         </div>
-   {/* Add News */}
-   <div
+        {/* Add News */}
+        <div
           className={`${
             isCollapse1 ? "justify-between pr-20" : "justify-center"
           } flex items-center w-full bg-slate-100 border-2 border-slate-500 p-2 cursor-pointer transition-all duration-200 relative group`}
