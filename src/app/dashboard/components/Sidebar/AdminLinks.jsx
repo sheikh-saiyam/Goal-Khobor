@@ -87,7 +87,8 @@ const AdminLinks = ({ isCollapse1 }) => {
               Manage news
             </p>
           </Link>
-        </div>{" "}
+        </div>
+        {/* Approve news */}
         <div
           className={`${
             isCollapse1 ? "justify-between pr-20" : "justify-center"
@@ -111,7 +112,7 @@ const AdminLinks = ({ isCollapse1 }) => {
             </p>
           </Link>
         </div>
-        {/* Transfer News */}
+        {/* Add Transfer News */}
         <div
           className={`${
             isCollapse1 ? "justify-between pr-10" : "justify-center"
@@ -135,6 +136,7 @@ const AdminLinks = ({ isCollapse1 }) => {
             </p>
           </Link>
         </div>
+        {/* Add Power Ranking */}
         <div
           className={`${
             isCollapse1 ? "justify-between pr-10" : "justify-center"
