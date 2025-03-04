@@ -5,7 +5,7 @@ const ManageUsers = () => {
     <div>
       <div className="customTable overflow-y-auto p-8 mb-4 w-full flex items-center flex-col gap-5 justify-center">
         <div className="w-full mx-auto p-6">
-          <div className="customTable w-full rounded-md border overflow-auto border-gray-200">
+          <div className="customTable w-full border overflow-auto border-gray-200">
             <table className="w-full text-sm overflow-auto">
               <thead className="bg-gray-100">
                 <tr>
@@ -26,7 +26,7 @@ const ManageUsers = () => {
                   </th>
                 </tr>
               </thead>
-              <AllUserTable/>
+              <AllUserTable />
             </table>
           </div>
         </div>
