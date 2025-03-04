@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoCheckmark } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import Swal from "sweetalert2";
-import { useRouter } from "next/navigation";
 
 const AddNewsForm = () => {
   const router = useRouter();
@@ -492,7 +492,7 @@ const AddNewsForm = () => {
 
           {/* Dropdown menu */}
           {isOpenDropdown && (
-            <div className="absolute left-0 w-full mt-1 border border-gray-200 rounded-md bg-white shadow-lg z-20">
+            <div className="w-full mt-1 border border-gray-200 rounded-md bg-white shadow-lg z-20">
               <div className="w-full overflow-auto flex gap-4 items-center flex-wrap">
                 {filteredItems.map((item, index) => (
                   <p

@@ -40,7 +40,7 @@ const AllUserTable = () => {
               <td className="p-4 text-gray-700 font-medium">{user.email}</td>
               <td className="p-4 text-gray-700 font-medium">{user.role}</td>
               <td className="p-4 text-gray-700 font-medium">{user.UID}</td>
-              <td className="p-4 flex items-center gap-4">
+              <td className="py-4 flex items-center gap-4">
                 <p className="flex items-center gap-1 text-gray-700 cursor-pointer hover:bg-gray-50 bg-gray-50 p-2 rounded">
                   <MdOutlineEdit size={20} />
                 </p>
