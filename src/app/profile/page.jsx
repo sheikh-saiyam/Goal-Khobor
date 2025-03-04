@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 const Profile = async () => {
   const session = await auth();
   const { email, name, id, role } = session?.user || {};
-  
+
   return (
     <MainContainer>
       <div className="py-12">
