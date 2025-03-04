@@ -13,7 +13,11 @@ const Navbar = () => {
   const { data: session, status } = useSession();
   const user = session?.user;
 
-  if (path.includes("/login") || path.includes("/register")) {
+  if (
+    path.includes("/login") ||
+    path.includes("/register") ||
+    path.includes("/dashboard")
+  ) {
     return <></>;
   }
 
@@ -79,14 +83,14 @@ const Navbar = () => {
           ) : user ? (
             <>
               <Link
-                href={"/profile"}
+                href={"/dashboard"}
                 className={
-                  path === "/profile"
+                  path === "/dashboard"
                     ? "underline underline-offset-2"
                     : "hover:underline underline-offset-2"
                 }
               >
-                Profile
+                Dashboard
               </Link>
               <Button onClick={() => signOut()} className="flex items-center">
                 <IoIosLogOut size={30} /> Logout
