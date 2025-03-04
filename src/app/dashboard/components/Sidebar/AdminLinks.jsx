@@ -84,7 +84,7 @@ const AdminLinks = ({ isCollapse1 }) => {
                 isCollapse1 ? "inline" : "hidden"
               } text-lg tracking-wider font-semibold`}
             >
-              Manage news
+              Manage News
             </p>
           </Link>
         </div>
@@ -180,7 +180,7 @@ const AdminLinks = ({ isCollapse1 }) => {
                 isCollapse1 ? "inline" : "hidden"
               } text-lg tracking-wider font-semibold ml-[5px]`}
             >
-              Manage All Users
+              Manage Users
             </p>
           </Link>
         </div>

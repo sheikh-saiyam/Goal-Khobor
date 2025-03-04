@@ -33,7 +33,7 @@ const DashboardLayout = ({ children }) => {
           isSidebarOpen={isSidebarOpen}
         />
         {/* Dashboard Pages */}
-        {children}
+        <div className="p-10">{children}</div>
       </div>
     </div>
   );

@@ -1,17 +1,34 @@
+import { useSession } from "next-auth/react";
 import { IoMdMenu } from "react-icons/io";
 import { IoNotifications } from "react-icons/io5";
+import { Typewriter } from "react-simple-typewriter";
 
 const DashboardHeader = ({ setIsSidebarOpen, isSidebarOpen }) => {
+  const { data: session } = useSession();
+  const username = session?.user?.name || "";
   return (
     <div className="bg-white shadow py-6 border-b border-t-2 border-r-2 flex justify-between items-center">
       {/* Toggle Button for Mobile */}
-      <div className="w-fit h-fit">
+      <div className="w-fit h-fit lg:hidden">
         <button
-          className="lg:hidden px-4 w-fit text-black"
+          className="lg:hidden mt-3 px-4 w-fit text-black"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
           <IoMdMenu size={30} />
         </button>
+      </div>
+      {/* Welcome Div */}
+      <div className="hidden lg:flex ml-4">
+        <h1 className="text-2xl font-semibold tracking-wide">
+          Welcome Back!{" "}
+          <Typewriter
+            words={[username]}
+            loop={false}
+            typeSpeed={100}
+            deleteSpeed={100}
+            delaySpeed={1000}
+          />
+        </h1>
       </div>
       {/* Main container */}
       <div className="flex justify-end items-center gap-4 pr-4 md:pr-8">
