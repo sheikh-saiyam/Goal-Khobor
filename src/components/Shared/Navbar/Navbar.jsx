@@ -2,22 +2,26 @@
 import Image from "next/image";
 import TopNavbar from "./TopNavbar";
 import Link from "next/link";
-import Login from "../../authentication/Login";
 import MobileNavbar from "./MobileNavbar";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { IoIosLogIn } from "react-icons/io";
+import { IoIosLogIn, IoIosLogOut } from "react-icons/io";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
   const path = usePathname();
-  if(path.includes("/login") || path.includes("/register")) {
-    return <></>
+  const { data: session, status } = useSession();
+  const user = session?.user;
+
+  if (path.includes("/login") || path.includes("/register")) {
+    return <></>;
   }
+
   return (
     <nav className="w-11/12 md:w-10/12 mx-auto max-w-screen-2xl">
       {/* 1st Navbar */}
       <TopNavbar />
-      {/* 2st Navbar */}
+      {/* 2nd Navbar */}
       <div className="py-4 flex items-center justify-between border-b-2 border-black">
         <Link href={"/"} className="hover:scale-105">
           <Image
@@ -32,70 +36,75 @@ const Navbar = () => {
         <div className="hidden xl:flex gap-6 items-center font-semibold tracking-widest text-black">
           <Link
             href={"/"}
-            prefetch={true}
-            className={`${
+            className={
               path === "/"
                 ? "underline underline-offset-2"
                 : "hover:underline underline-offset-2"
-            }`}
+            }
           >
             Home
           </Link>
           <Link
             href={"/news"}
-            prefetch={true}
-            className={`${
+            className={
               path === "/news"
                 ? "underline underline-offset-2"
                 : "hover:underline underline-offset-2"
-            }`}
+            }
           >
             All News
           </Link>
           <Link
             href={"/transfer-news"}
-            prefetch={true}
-            className={`${
+            className={
               path === "/transfer-news"
                 ? "underline underline-offset-2"
                 : "hover:underline underline-offset-2"
-            }`}
+            }
           >
             Transfer News
           </Link>
           <Link
             href={"/power-rankings"}
-            prefetch={true}
-            className={`${
+            className={
               path === "/power-rankings"
                 ? "underline underline-offset-2"
                 : "hover:underline underline-offset-2"
-            }`}
+            }
           >
             Power Rankings
           </Link>
-          <Link
-            href={"/login"}
-            prefetch={true}
-            className={`${
-              path === "/login"
-                ? "underline underline-offset-2 text-white"
-                : "hover:underline underline-offset-2 text-white"
-            }`}
-          >
-            <Button className="flex items-center">
-              <IoIosLogIn size={30} />
-              Login
-            </Button>
-          </Link>
+          {status === "loading" && user ? (
+            <div className="w-8 h-8 animate-spin rounded-full border-dashed border-8 border-[#000] shadow-none"></div>
+          ) : user ? (
+            <>
+              <Link
+                href={"/profile"}
+                className={
+                  path === "/profile"
+                    ? "underline underline-offset-2"
+                    : "hover:underline underline-offset-2"
+                }
+              >
+                Profile
+              </Link>
+              <Button onClick={() => signOut()} className="flex items-center">
+                <IoIosLogOut size={30} /> Logout
+              </Button>
+            </>
+          ) : (
+            <Link href="/login">
+              <Button className="flex items-center">
+                <IoIosLogIn size={30} /> Login
+              </Button>
+            </Link>
+          )}
         </div>
         {/* Mobile Navbar */}
         <div className="flex items-center gap-2 xl:hidden">
           <MobileNavbar />
-          <Login />
         </div>
       </div>
-      {/* 3st Navbar */}
     </nav>
   );
 };

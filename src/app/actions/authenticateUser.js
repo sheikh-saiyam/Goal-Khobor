@@ -12,12 +12,11 @@ export async function authenticateUser(credentials) {
     const data = await res.json();
 
     if (!res.ok) {
-      throw new Error(data.message || "Authentication failed!");
+      throw new Error(data.message || "Authentication failed");
     }
 
-    return data.user; 
-
+    return data.user;
   } catch (error) {
-    throw new Error(error.message || "Something went wrong!");
+    throw new Error(error.message || "Authentication failed");
   }
 }

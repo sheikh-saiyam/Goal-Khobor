@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { CredentialsSignin } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { authenticateUser } from "./app/actions/authenticateUser";
@@ -18,11 +18,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       authorize: async (credentials) => {
         try {
           const user = await authenticateUser(credentials);
-
-          if (!user) {
-            throw new Error("Invalid email or password");
-          }
-
+          if (!user) return null;
           return user;
         } catch (error) {
           throw new Error(error.message || "Authentication failed");

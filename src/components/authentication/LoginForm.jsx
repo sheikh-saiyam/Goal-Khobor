@@ -6,43 +6,40 @@ import SocialLogin from "./SocialLogin";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const router = useRouter();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const userLogin = async (formData) => {
     setError(null);
     setLoading(true);
-
     try {
       const email = formData.get("email")?.trim();
       const password = formData.get("password")?.trim();
-
-      // 🚨 Check if fields are empty
-      if (!email || !password) {
-        throw new Error("Email and password are required!");
-      }
-
+      // send formData to signIn --->
       const result = await signIn("credentials", {
         email,
         password,
-        redirect: false, // Prevent automatic redirect
+        redirect: false,
       });
-
+      // Error message
       if (result?.error) {
-        throw new Error(result.error); // Show backend error
+        // setError(result.error || "Invalid email or password!");
+        setError("Invalid email or password!");
+        return;
       }
-
-      // ✅ Success -> Show modal & redirect
-      Swal.fire({
-        icon: "success",
-        title: "Login Successful",
-        confirmButtonColor: "#000",
-      }).then(() => {
-        redirect("/profile");
-      });
+      // Success modal
+      if (result?.ok) {
+        router.push("/profile");
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful",
+          confirmButtonColor: "#000",
+        });
+      }
     } catch (err) {
       setError(err.message || "Something went wrong while logging in!");
     } finally {

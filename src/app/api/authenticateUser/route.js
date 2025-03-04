@@ -37,7 +37,7 @@ export async function POST(req) {
       statusCode: 200,
       message: "Login successful!",
       user: {
-        id: user._id,
+        id: user._id.toString(),
         role: user.role,
         email: user.email,
         name: user.name,

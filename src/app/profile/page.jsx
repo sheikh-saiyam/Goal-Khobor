@@ -31,7 +31,7 @@ const Profile = async () => {
             <h1 className="text-xl font-semibold tracking-wider pb-1">
               UID: <span className="text-sm sm:text-xl font-medium">{id}</span>
             </h1>
-            <Button>Edit Profile</Button>
+            <Button type="submit">Edit Profile</Button>
           </div>
         </div>
       </div>
