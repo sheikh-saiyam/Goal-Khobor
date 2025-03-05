@@ -5,8 +5,6 @@ import ListNewsCard from "@/components/cards/ListNewsCard";
 import NewsCard from "@/components/cards/NewsCard";
 import Header from "@/components/Shared/Section/Header";
 import dbConnect, { collections } from "@/lib/dbConnect";
-import Image from "next/image";
-import Link from "next/link";
 
 export const metadata = {
   title: "News - Goal Khobor",

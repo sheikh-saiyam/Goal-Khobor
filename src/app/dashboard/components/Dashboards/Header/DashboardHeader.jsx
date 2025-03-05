@@ -20,9 +20,9 @@ const DashboardHeader = ({ setIsSidebarOpen, isSidebarOpen }) => {
       {/* Welcome Div */}
       <div className="hidden lg:flex ml-4">
         {status === "loading" ? (
-          <div className="w-[250px] h-10 bg-[#e5eaf2] animate-pulse"></div>
+          <div className="w-[250px] h-8 bg-[#e5eaf2] animate-pulse"></div>
         ) : (
-          <h1 className="text-2xl font-semibold tracking-wide">
+          <h1 className="text-2xl font-semibold tracking-wide text-gray-700">
             Welcome Back!{" "}
             <Typewriter
               words={[username]}
