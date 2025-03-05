@@ -1,9 +1,9 @@
 import { FaAd } from "react-icons/fa";
-import { FaNewspaper } from "react-icons/fa"; 
-import { FaTrophy } from "react-icons/fa"; 
+import { FaNewspaper } from "react-icons/fa";
+import { FaTrophy } from "react-icons/fa";
 import dbConnect, { collections } from "@/lib/dbConnect";
-import { FaExchangeAlt } from "react-icons/fa"; 
-import { FaUsers } from "react-icons/fa"; 
+import { FaExchangeAlt } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 import { FaPenToSquare } from "react-icons/fa6";
 import { IoPricetags } from "react-icons/io5";
 
