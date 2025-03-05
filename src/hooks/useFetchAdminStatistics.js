@@ -8,7 +8,7 @@ const fetchAdminStatistics = async () => {
 
 const useFetchAdminStatistics = () => {
   const {
-    data = [],
+    data = {},
     isLoading,
     refetch,
   } = useQuery({

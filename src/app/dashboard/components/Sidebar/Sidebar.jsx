@@ -59,7 +59,7 @@ const Sidebar = () => {
           {[...Array(6)].map((_, index) => (
             <div
               key={index}
-              className="h-11 w-full px-28 bg-[#e5eaf2] animate-pulse"
+              className="h-11 w-full px-[146px] bg-[#e5eaf2] animate-pulse"
             />
           ))}
         </div>
