@@ -1,10 +1,16 @@
+"use client";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const ShortImageNewsCard = ({ news }) => {
+  const path = usePathname();
   const { _id, image, title, published_date } = news || {};
   return (
-    <Link href={`/news/${_id}`} prefetch={true}>
+    <Link
+      href={path === "/transfers" ? `/transfers/${_id}` : `/news/${_id}`}
+      prefetch={true}
+    >
       <div className="h-full">
         <div className="relative h-full overflow-hidden shadow-lg group">
           <Image

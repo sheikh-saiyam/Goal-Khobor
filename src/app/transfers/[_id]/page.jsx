@@ -11,7 +11,11 @@ const TransferDetails = async ({ params }) => {
   const { _id } = await params;
   const transfersCollection = await dbConnect(collections.transfersCollection);
   // Get transfers news from db --->
-  const transfers = await transfersCollection.find().toArray();
+  const transfers = await transfersCollection
+    .find()
+    .sort({ published_date: -1 })
+    .limit(6)
+    .toArray();
   // Get transfer_details --->
   const transfer_details = await transfersCollection.findOne({
     _id: new ObjectId(_id),
@@ -109,7 +113,7 @@ const TransferDetails = async ({ params }) => {
         {/* Ads & Transfer Container */}
         <div className="w-full md:5/12 lg:w-3/12 h-fit">
           {/* Transfers */}
-          <TransferTitle heading={"TRANSFERS"} item={transfers} />
+          <TransferTitle heading={"TRANSFERS NEWS"} item={transfers} />
           {/* Ads */}
           <AdvertisementsCard />
         </div>

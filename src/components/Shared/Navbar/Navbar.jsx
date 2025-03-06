@@ -59,9 +59,9 @@ const Navbar = () => {
             All News
           </Link>
           <Link
-            href={"/transfer-news"}
+            href={"/transfers"}
             className={
-              path === "/transfer-news"
+              path === "/transfers"
                 ? "underline underline-offset-2"
                 : "hover:underline underline-offset-2"
             }
@@ -69,9 +69,9 @@ const Navbar = () => {
             Transfer News
           </Link>
           <Link
-            href={"/power-rankings"}
+            href={"/rankings"}
             className={
-              path === "/power-rankings"
+              path === "/rankings"
                 ? "underline underline-offset-2"
                 : "hover:underline underline-offset-2"
             }
