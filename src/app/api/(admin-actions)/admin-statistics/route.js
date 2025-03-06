@@ -13,23 +13,23 @@ export const GET = async () => {
     }
 
     // All Collections
-const usersCollection = await dbConnect("users");
-const adsCollection = await dbConnect(collections.adsCollection);
-const newsCollection = await dbConnect(collections.newsCollection);
-const rankingsCollection = await dbConnect(collections.rankingsCollection);
-const transfersCollection = await dbConnect(
-  collections.transfersCollection
-);
-const publishersCollection = await dbConnect(
-  collections.publishersCollection
-);
-// Total Counts Of Collections
-const adsCount = await adsCollection.countDocuments();
-const newsCount = await newsCollection.countDocuments();
-const usersCount = await usersCollection.countDocuments();
-const rankingsCount = await rankingsCollection.countDocuments();
-const transfersCount = await transfersCollection.countDocuments();
-const publishersCount = await publishersCollection.countDocuments();
+    const usersCollection = await dbConnect("users");
+    const adsCollection = await dbConnect(collections.adsCollection);
+    const newsCollection = await dbConnect(collections.newsCollection);
+    const rankingsCollection = await dbConnect(collections.rankingsCollection);
+    const transfersCollection = await dbConnect(
+      collections.transfersCollection
+    );
+    const publishersCollection = await dbConnect(
+      collections.publishersCollection
+    );
+    // Total Counts Of Collections
+    const adsCount = await adsCollection.countDocuments();
+    const newsCount = await newsCollection.countDocuments();
+    const usersCount = await usersCollection.countDocuments();
+    const rankingsCount = await rankingsCollection.countDocuments();
+    const transfersCount = await transfersCollection.countDocuments();
+    const publishersCount = await publishersCollection.countDocuments();
 
     return NextResponse.json(
       {

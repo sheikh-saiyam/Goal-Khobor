@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import Header from "@/components/Shared/Section/Header";
 import dbConnect, { collections } from "@/lib/dbConnect";
 import Image from "next/image";
@@ -6,7 +7,11 @@ import Link from "next/link";
 const TransferNews = async () => {
   // Get transfers news from db --->
   const transfersCollection = await dbConnect(collections.transfersCollection);
-  const transfers = await transfersCollection.find().toArray();
+  const transfers = await transfersCollection
+    .find()
+    .sort({ published_date: -1 })
+    .limit(3)
+    .toArray();
 
   return (
     <div>
@@ -23,14 +28,14 @@ const TransferNews = async () => {
                   alt={news.title}
                   width={600}
                   height={200}
-                  className="min-h-[240px] max-h-full w-full"
+                  className="min-h-[240px] object-cover max-h-full w-full"
                 />
               </div>
               {/* Text Container */}
               <div className="w-full p-4">
                 <div>
                   <h3 className="text-lg font-medium text-[#444]">
-                    {news.published_date}
+                    {news.published_date.split("T")[0]}
                   </h3>
                   <h1 className="mt-2 text-2xl md:text-2xl font-semibold tracking-wider">
                     {news.title}

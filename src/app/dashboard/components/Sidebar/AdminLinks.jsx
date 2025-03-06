@@ -136,6 +136,30 @@ const AdminLinks = ({ isCollapse1 }) => {
             </p>
           </Link>
         </div>
+        {/* Manage Transfer News */}
+        <div
+          className={`${
+            isCollapse1 ? "justify-between pr-10" : "justify-center"
+          } flex items-center w-full bg-slate-100 border-2 border-slate-500 p-2 cursor-pointer transition-all duration-200 relative group`}
+        >
+          <Link
+            href={"/dashboard/manage-transfer-news"}
+            className={`flex font- items-center gap-[8px] text-slate-700 ${
+              path === "/dashboard/manage-transfer-news"
+                ? "underline underline-offset-2"
+                : "hover:underline underline-offset-2 duration-500"
+            }`}
+          >
+            <BiTransfer size={25} />
+            <p
+              className={`${
+                isCollapse1 ? "inline" : "hidden"
+              } text-lg tracking-wider font-semibold ml-[5px]`}
+            >
+              Manage Transfer News
+            </p>
+          </Link>
+        </div>
         {/* Add Power Ranking */}
         <div
           className={`${
@@ -157,6 +181,30 @@ const AdminLinks = ({ isCollapse1 }) => {
               } text-lg tracking-wider font-semibold ml-[5px]`}
             >
               Add Power Rankings
+            </p>
+          </Link>
+        </div>
+        {/* Manage Power Ranking */}
+        <div
+          className={`${
+            isCollapse1 ? "justify-between pr-10" : "justify-center"
+          } flex items-center w-full bg-slate-100 border-2 border-slate-500 p-2 cursor-pointer transition-all duration-200 relative group`}
+        >
+          <Link
+            href={"/dashboard/manage-power-rankings"}
+            className={`flex font- items-center gap-[8px] text-slate-700 ${
+              path === "/dashboard/manage-power-rankings"
+                ? "underline underline-offset-2"
+                : "hover:underline underline-offset-2 duration-500"
+            }`}
+          >
+            <PiRankingFill size={25} />
+            <p
+              className={`${
+                isCollapse1 ? "inline" : "hidden"
+              } text-lg tracking-wider font-semibold ml-[5px]`}
+            >
+              Manage Power Rankings
             </p>
           </Link>
         </div>

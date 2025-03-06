@@ -7,17 +7,17 @@ import { IoCheckmark } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import Swal from "sweetalert2";
+import axios from "axios";
 
-const AddNewsForm = () => {
+const AddTransferNewsForm = () => {
   const router = useRouter();
   const [publisher, setPublisher] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState("Select Publisher");
-  const [selectedCategory, setSelectedCategory] = useState("Select Category");
-  const [selectedPublisher, setSelectedPublisher] = useState({});
+  const [selectedItem, setSelectedItem] = useState("Select Source");
+  const [selectedSource, setSelectedSource] = useState({});
 
   // Outside click to off the dropdown
   useEffect(() => {
@@ -32,31 +32,12 @@ const AddNewsForm = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Get all publishers data -->
+  // Get all source data -->
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/publishers`)
       .then((res) => res.json())
       .then((data) => setPublisher(data));
   }, []);
-
-  // All Categories --->
-  const categories = [
-    "features",
-    "banner-news",
-    "premier-league",
-    "la-liga",
-    "bundesliga",
-    "serie-A",
-    "ligue-1",
-    "uefa-champions-league",
-    "uefa-europa-league",
-    "uefa-europa-conference-league",
-    "fifa-world-cup",
-    "uefa-euros",
-    "copa-america",
-    "youth-football",
-    "women-football",
-  ];
 
   const Tags = [
     // Clubs
@@ -261,24 +242,22 @@ const AddNewsForm = () => {
     });
   }, [isOpenDropdown]);
 
-  // Get Form Data --->
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const form = e.target;
     const title = form.title.value;
     const image = form.image.value;
     const description = form.description.value;
-    const publisher = selectedPublisher.publisher_name;
-    const publisher_image = selectedPublisher.publisher_image;
+    const source = selectedSource.publisher_name;
+    const source_image = selectedSource.publisher_image;
     const published_date = new Date();
-    const category = selectedCategory;
 
     // Form Validation -->
-    if (!publisher || !publisher_image) {
+    if (!source || !source_image) {
       return Swal.fire({
         icon: "error",
-        title: "Publisher Is Required!",
+        title: "Source Is Required!",
       });
     }
     if (selectedTags.length === 0) {
@@ -293,43 +272,53 @@ const AddNewsForm = () => {
         title: "Tags Must Be Atleast 5",
       });
     }
-    const news = {
+
+    const transfer_news = {
       title,
       image,
       description,
-      publisher,
-      publisher_image,
+      source,
+      source_image,
+      published_date,
       tags: selectedTags,
-      category,
       views: 0,
       likes: 0,
-      published_date,
     };
 
     // Post data in db --->
-    fetch(`/api/add-news`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(news),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        form.reset();
-        router.refresh();
-        router.push("/news");
-        setSelectedPublisher({});
-        setSelectedTags([]);
-        Swal.fire({
-          icon: "success",
-          title: "News Added Successfully",
-        });
-      })
-      .catch((err) => {
+    try {
+      const { data } = await axios.post(
+        `/api/add-transfer-news`,
+        transfer_news
+      );
+      // Show Unauthorized or 500 status --->
+      if (data?.status === 403 || data?.status === 500) {
         Swal.fire({
           icon: "error",
-          title: err.message,
+          title: `${data?.status} ${data?.error}`,
+          text: data?.message,
+          confirmButtonColor: "#d33",
+          confirmButtonText: "Ok, Understood!",
         });
+      }
+      // Show confirmation toast --->
+      if (data.data?.insertedId) {
+        Swal.fire({
+          icon: "success",
+          title: data.message,
+          confirmButtonColor: "#000",
+          confirmButtonText: "Ok, Great!",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message || "Something went wrong!",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Try Again!",
       });
+    }
   };
 
   return (
@@ -340,7 +329,7 @@ const AddNewsForm = () => {
           htmlFor="title"
           className="flex items-center gap-2 text-[18px] text-text text-gray-700 font-[600]"
         >
-          News Title
+          Transfer News Title
         </label>
         <input
           type="text"
@@ -356,7 +345,7 @@ const AddNewsForm = () => {
           htmlFor="image"
           className="flex items-center gap-2 text-[18px] text-text text-gray-700 font-[600]"
         >
-          News Image
+          Transfer News Image
         </label>
         <input
           type="text"
@@ -372,7 +361,7 @@ const AddNewsForm = () => {
           htmlFor="description"
           className="flex items-center gap-2 text-[18px] text-text text-gray-700 font-[600]"
         >
-          News Description
+          Transfer News Description
         </label>
         <textarea
           id="description"
@@ -381,19 +370,18 @@ const AddNewsForm = () => {
           className="border-border border rounded-md outline-none mt-1 px-4 w-full py-3 min-h-[200px] focus:border-[#a6a6a6] transition-colors duration-300"
         />
       </div>
-      {/* Select Publisher & Category */}
-      <div className="grid gap-4 items-center grid-cols-1 md:grid-cols-2">
-        {/* Select Publisher */}
+      {/* Select Source */}
+      <div className="w-full">
         <div className="w-full">
           <label
-            htmlFor="publisher"
+            htmlFor="source"
             className="flex items-center gap-2 text-[18px] text-text text-gray-700 font-[600]"
           >
-            Select Publisher
+            Select Source
           </label>
           <button
             type="button"
-            className="bg-[#fff] border border-[#d1d1d1] rounded-md w-full justify-between px-3 py-2 flex items-center gap-8  relative cursor-pointer dropdown mt-1"
+            className="bg-[#fff] border border-[#d1d1d1] rounded w-full justify-between px-3 py-2 flex items-center gap-8  relative cursor-pointer dropdown mt-1"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
             {selectedItem}
@@ -407,7 +395,7 @@ const AddNewsForm = () => {
                 isDropdownOpen
                   ? "z-[1] opacity-100 scale-[1]"
                   : "z-[-1] opacity-0 scale-[0.8]"
-              } w-full absolute bottom-12 left-0 right-0 z-40 bg-[#fff] rounded-xl flex flex-wrap justify-center gap-4 overflow-hidden transition-all duration-300 ease-in-out`}
+              } w-full absolute bottom-12 left-0 right-0 z-40 bg-[#fff] rounded-md flex flex-wrap justify-center gap-4 overflow-hidden transition-all duration-300 ease-in-out`}
               style={{
                 boxShadow: "0 15px 60px -15px rgba(0, 0, 0, 0.3)",
               }}
@@ -418,7 +406,7 @@ const AddNewsForm = () => {
                   key={index}
                   onClick={() => {
                     setSelectedItem(option.publisher_name);
-                    setSelectedPublisher({
+                    setSelectedSource({
                       publisher_name: option.publisher_name,
                       publisher_image: option.image,
                     });
@@ -431,44 +419,16 @@ const AddNewsForm = () => {
                     height={100}
                     className="w-28 h-12 rounded"
                   />
-                  {/* <h1>{option.publisher_name}</h1> */}
                 </div>
               ))}
             </div>
           </button>
         </div>
-        {/* Select Category */}
-        <div className="w-full">
-          <label
-            htmlFor="publisher"
-            className="flex items-center gap-2 text-[18px] text-text text-gray-700 font-[600]"
-          >
-            Select Category
-          </label>
-          <div className="mt-1 flex items-center flex-col gap-5 justify-center">
-            <div className="relative w-full">
-              <select
-                className="bg-[#fff] border border-[#d1d1d1] rounded-md w-full px-3 py-2 appearance-none cursor-pointer text-gray-800 focus:border-[#a6a6a6] outline-none"
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-              >
-                {categories?.map((option, index) => (
-                  <option key={index} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute top-1/2 right-3 transform -translate-y-1/2 pointer-events-none">
-                <IoChevronDown className="text-[1.2rem] text-gray-600" />
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       {/* Select Tags */}
       <div className="mb-4 flex flex-col gap-1">
         <label
-          htmlFor="publisher"
+          htmlFor="tags"
           className="flex items-center gap-2 text-[18px] text-text text-gray-700 font-[600]"
         >
           Select Tags
@@ -541,15 +501,16 @@ const AddNewsForm = () => {
         </div>
       </div>
       {/* Submit Button */}
-      <div>
-        <button type="submit" className="w-full mt-2">
-          <Button className="w-2/3 mx-auto font-semibold text-[16px]">
-            Post News
-          </Button>
-        </button>
+      <div className="w-full mt-2 mx-auto flex justify-center">
+        <Button
+          type="submit"
+          className="w-2/3 mx-auto font-semibold text-[16px]"
+        >
+          Post Transfer News
+        </Button>
       </div>
     </form>
   );
 };
 
-export default AddNewsForm;
+export default AddTransferNewsForm;

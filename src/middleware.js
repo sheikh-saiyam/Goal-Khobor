@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { auth } from "@/auth";
+import { NextResponse } from "next/server";
 
 export async function middleware(req) {
   const session = await auth();
@@ -9,7 +9,11 @@ export async function middleware(req) {
   // Define role-based routes
   const roleBasedRoutes = {
     user: ["/dashboard/view-news"],
-    admin: ["/dashboard/manage-users"],
+    admin: [
+      "/dashboard/manage-news",
+      "/dashboard/add-transfer-news",
+      "/dashboard/manage-users",
+    ],
   };
 
   // !session, redirect to login
