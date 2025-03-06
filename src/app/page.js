@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import AllPublisher from "./../components/home/AllPublisher.jsx";
 import Banner from "./../components/home/Banner.jsx";
 import Features from "./../components/home/Features";
