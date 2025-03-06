@@ -1,4 +1,4 @@
-export const revalidate = 0;
+export const dynamic = "force-dynamic";
 import Header from "@/components/Shared/Section/Header";
 import dbConnect, { collections } from "@/lib/dbConnect";
 import Image from "next/image";
