@@ -1,5 +1,5 @@
 "use client";
-import { FaAd } from "react-icons/fa";
+import { FaAd, FaChartBar } from "react-icons/fa";
 import { FaNewspaper } from "react-icons/fa";
 import { FaTrophy } from "react-icons/fa";
 import { FaExchangeAlt } from "react-icons/fa";
@@ -133,6 +133,25 @@ const Statistics = () => {
           <div>
             <p className="text-sm font-medium text-gray-500">Tags</p>
             <p className="text-xl font-bold text-gray-700">{389}</p>
+          </div>
+        </div>
+      )}
+
+      {/* Charts */}
+      {isLoading ? (
+        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
+          <div className="w-16 h-16 bg-gray-300 rounded"></div>
+          <div className="flex flex-col gap-2">
+            <div className="w-20 h-4 bg-gray-300 rounded"></div>
+            <div className="w-14 h-6 bg-gray-400 rounded"></div>
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
+          <FaChartBar className="text-6xl text-gray-700 mr-2" />
+          <div>
+            <p className="text-sm font-medium text-gray-500">Charts</p>
+            <p className="text-xl font-bold text-gray-700">{3}</p>
           </div>
         </div>
       )}
