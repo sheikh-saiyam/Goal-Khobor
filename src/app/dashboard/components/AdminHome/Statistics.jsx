@@ -22,10 +22,10 @@ const Statistics = () => {
   } = statistics;
 
   return (
-    <div className="flex items-center justify-center flex-wrap gap-6 py-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-4">
       {/* Ads Count */}
       {isLoading ? (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
           <div className="w-16 h-16 bg-gray-300 rounded"></div>
           <div className="flex flex-col gap-2">
             <div className="w-20 h-4 bg-gray-300 rounded"></div>
@@ -33,7 +33,7 @@ const Statistics = () => {
           </div>
         </div>
       ) : (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
           <FaAd className="text-7xl text-gray-700 mr-2" />
           <div>
             <p className="text-sm font-medium text-gray-500">Ads</p>
@@ -44,7 +44,7 @@ const Statistics = () => {
 
       {/* News Count */}
       {isLoading ? (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
           <div className="w-16 h-16 bg-gray-300 rounded"></div>
           <div className="flex flex-col gap-2">
             <div className="w-20 h-4 bg-gray-300 rounded"></div>
@@ -52,7 +52,7 @@ const Statistics = () => {
           </div>
         </div>
       ) : (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
           <FaNewspaper className="text-7xl text-gray-700 mr-2" />
           <div>
             <p className="text-sm font-medium text-gray-500">News</p>
@@ -63,7 +63,7 @@ const Statistics = () => {
 
       {/* Rankings Count */}
       {isLoading ? (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
           <div className="w-16 h-16 bg-gray-300 rounded"></div>
           <div className="flex flex-col gap-2">
             <div className="w-20 h-4 bg-gray-300 rounded"></div>
@@ -71,7 +71,7 @@ const Statistics = () => {
           </div>
         </div>
       ) : (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
           <FaTrophy className="text-6xl text-gray-700 mr-2" />
           <div>
             <p className="text-sm font-medium text-gray-500">Rankings</p>
@@ -82,7 +82,7 @@ const Statistics = () => {
 
       {/* Transfers Count */}
       {isLoading ? (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
           <div className="w-16 h-16 bg-gray-300 rounded"></div>
           <div className="flex flex-col gap-2">
             <div className="w-20 h-4 bg-gray-300 rounded"></div>
@@ -90,7 +90,7 @@ const Statistics = () => {
           </div>
         </div>
       ) : (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
           <FaExchangeAlt className="text-7xl text-gray-700 mr-2" />
           <div>
             <p className="text-sm font-medium text-gray-500">Transfers</p>
@@ -101,7 +101,7 @@ const Statistics = () => {
 
       {/* Publishers Count */}
       {isLoading ? (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
           <div className="w-16 h-16 bg-gray-300 rounded"></div>
           <div className="flex flex-col gap-2">
             <div className="w-20 h-4 bg-gray-300 rounded"></div>
@@ -109,7 +109,7 @@ const Statistics = () => {
           </div>
         </div>
       ) : (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
           <FaPenToSquare className="text-6xl text-gray-700 mr-2" />
           <div>
             <p className="text-sm font-medium text-gray-500">Publishers</p>
@@ -120,7 +120,7 @@ const Statistics = () => {
 
       {/* Tags Count */}
       {isLoading ? (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
           <div className="w-16 h-16 bg-gray-300 rounded"></div>
           <div className="flex flex-col gap-2">
             <div className="w-20 h-4 bg-gray-300 rounded"></div>
@@ -128,7 +128,7 @@ const Statistics = () => {
           </div>
         </div>
       ) : (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
           <IoPricetags className="text-6xl text-gray-700 mr-2" />
           <div>
             <p className="text-sm font-medium text-gray-500">Tags</p>
@@ -139,7 +139,7 @@ const Statistics = () => {
 
       {/* Charts */}
       {isLoading ? (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
           <div className="w-16 h-16 bg-gray-300 rounded"></div>
           <div className="flex flex-col gap-2">
             <div className="w-20 h-4 bg-gray-300 rounded"></div>
@@ -147,7 +147,7 @@ const Statistics = () => {
           </div>
         </div>
       ) : (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
           <FaChartBar className="text-6xl text-gray-700 mr-2" />
           <div>
             <p className="text-sm font-medium text-gray-500">Charts</p>
@@ -158,7 +158,7 @@ const Statistics = () => {
 
       {/* Users Count */}
       {isLoading ? (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
           <div className="w-16 h-16 bg-gray-300 rounded"></div>
           <div className="flex flex-col gap-2">
             <div className="w-20 h-4 bg-gray-300 rounded"></div>
@@ -166,7 +166,7 @@ const Statistics = () => {
           </div>
         </div>
       ) : (
-        <div className="flex items-center min-w-[250px] min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
+        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
           <FaUsers className="text-6xl text-gray-700 mr-2" />
           <div>
             <p className="text-sm font-medium text-gray-500">Users</p>

@@ -1,14 +1,28 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { GoSidebarCollapse } from "react-icons/go";
 import AdminLinks from "./AdminLinks";
 import UserLinks from "./UserLinks";
 
 const Sidebar = () => {
-  const [isCollapse1, setIsCollapse1] = useState(true);
+  // Load collapse state from localStorage
+  const [isCollapse1, setIsCollapse1] = useState(() => {
+    if (typeof window !== "undefined") {
+      const savedState = localStorage.getItem("isCollapse1");
+      return savedState ? JSON.parse(savedState) : true;
+    }
+    return true;
+  });
+
+  // Update localStorage when state changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("isCollapse1", JSON.stringify(isCollapse1));
+    }
+  }, [isCollapse1]);
 
   // Get user role & session status
   const { data: session, status } = useSession();
@@ -16,13 +30,12 @@ const Sidebar = () => {
 
   return (
     <aside className="bg-white boxShadow rounded-md transition-all duration-300 ease relative">
-      {/* Logo & Searchbar */}
+      {/* Logo & Toggle */}
       <div
         className={`mt-5 ${
           isCollapse1 ? "px-[20px]" : "px-[10px]"
         } transition-all duration-300 ease-in-out`}
       >
-        {/* Logo */}
         {isCollapse1 ? (
           <div className="flex items-center justify-between">
             <Link href={"/"} prefetch={true}>
@@ -34,12 +47,10 @@ const Sidebar = () => {
                 className="w-[140px] h-[80px] cursor-pointer"
               />
             </Link>
-            <div className="relative group">
-              <GoSidebarCollapse
-                className="text-[1.5rem] text-black cursor-pointer hidden lg:flex"
-                onClick={() => setIsCollapse1(false)}
-              />
-            </div>
+            <GoSidebarCollapse
+              className="text-[1.5rem] text-black cursor-pointer hidden lg:flex"
+              onClick={() => setIsCollapse1(false)}
+            />
           </div>
         ) : (
           <Image
@@ -53,21 +64,21 @@ const Sidebar = () => {
         )}
       </div>
 
-      {/* NavLinks Skeleton */}
+      {/* Loading Skeleton */}
       {status === "loading" ? (
         <div className="mt-12 space-y-4 px-4">
           {[...Array(6)].map((_, index) => (
             <div
               key={index}
-              className="h-11 w-full px-[146px] bg-[#e5eaf2] animate-pulse"
+              className={`h-11 bg-[#e5eaf2] animate-pulse 
+        ${isCollapse1 ? "w-full px-[164px]" : "w-10 px-4"}`}
             />
           ))}
         </div>
       ) : (
         <>
-          {/* User NavLinks */}
+          {/* User & Admin Links */}
           {role === "user" && <UserLinks isCollapse1={isCollapse1} />}
-          {/* Admin NavLinks */}
           {role === "admin" && <AdminLinks isCollapse1={isCollapse1} />}
         </>
       )}
