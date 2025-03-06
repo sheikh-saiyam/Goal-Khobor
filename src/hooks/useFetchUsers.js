@@ -7,11 +7,15 @@ const fetchUsers = async () => {
 };
 
 const useFetchUsers = () => {
-  const {data: users = [], isLoading, refetch} =  useQuery({
+  const {
+    data: users = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["users"],
     queryFn: fetchUsers,
   });
-  return [users, isLoading, refetch]
+  return [users, isLoading, refetch];
 };
 
 export default useFetchUsers;

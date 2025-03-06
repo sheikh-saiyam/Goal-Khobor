@@ -305,7 +305,7 @@ const AddTransferNewsForm = () => {
       if (data.data?.insertedId) {
         form.reset();
         router.refresh();
-        router.push("/news");
+        router.push("/");
         Swal.fire({
           icon: "success",
           title: data.message,

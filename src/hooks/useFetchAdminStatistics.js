@@ -2,7 +2,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 const fetchAdminStatistics = async () => {
-  const { data } = await axios.get("/api/admin-statistics");
+  const { data } = await axios.get("/api/admin-stats");
   return data;
 };
 
