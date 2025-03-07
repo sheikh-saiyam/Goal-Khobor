@@ -1,8 +1,10 @@
 "use client";
+import { FaRegEye } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
-import { FaRegEye } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import useFetchPublishers from "@/hooks/useFetchPublishers";
 
 // Fetch function for news
 const fetchNews = async ({ queryKey }) => {
@@ -48,6 +50,9 @@ const ManageNews = () => {
     refetchOnWindowFocus: true,
   });
 
+  // Get all publishers --->
+  const [publishers] = useFetchPublishers();
+  
   useEffect(() => {
     refetch();
   }, [search, category, publisher, sortBy, sortOrder, page, refetch]);
@@ -95,14 +100,16 @@ const ManageNews = () => {
         </select>
 
         <select
-          className="p-2 border rounded"
           value={publisher}
+          className="p-2 border rounded"
           onChange={(e) => setPublisher(e.target.value)}
         >
           <option value="">All Publishers</option>
-          <option value="BBC Sport">BBC Sport</option>
-          <option value="ESPN">ESPN</option>
-          <option value="CNN">CNN</option>
+          {
+            publishers?.map((publisher,idx) => (
+              <option value={publisher?.publisher_name} key={idx}>{publisher?.publisher_name}</option>
+            ))
+          }
         </select>
 
         <select
@@ -140,7 +147,7 @@ const ManageNews = () => {
           </thead>
           <tbody>
             {isLoading ? (
-              Array.from({ length: 6 }).map((_, index) => (
+              Array.from({ length: 8 }).map((_, index) => (
                 <tr
                   key={index}
                   className="border-t border-gray-200 hover:bg-gray-50"
@@ -185,7 +192,8 @@ const ManageNews = () => {
                   </td>
                   <td className="px-4 py-2">{item.views}</td>
                   <td className="px-4 py-2">{item.likes}</td>
-                  <td className="px-4 py-2 flex items-center gap-4">
+                  <td className="px-4 py-2 ">
+                    <div className="flex items-center gap-4">
                     <p className="flex items-center gap-1 text-gray-700 bg-gray-100 border rounded cursor-pointer hover:bg-gray-300 duration-300 p-2">
                       <MdOutlineEdit size={20} />
                     </p>
@@ -194,7 +202,7 @@ const ManageNews = () => {
                     </p>
                     <p className="flex items-center gap-1 text-gray-700 bg-gray-100 border cursor-pointer hover:bg-gray-300 duration-300 p-2 rounded">
                       <FaRegEye size={20} />
-                    </p>
+                    </p></div>
                   </td>
                 </tr>
               ))
@@ -211,24 +219,50 @@ const ManageNews = () => {
 
       {/* Pagination */}
       <div className="mt-4 flex justify-center gap-2">
+  {isLoading ? (
+    // Skeleton Loader for Pagination
+    <>
+      <div className="h-10 w-10 bg-gray-300 animate-pulse rounded"></div>
+      <div className="h-10 w-10 bg-gray-300 animate-pulse rounded"></div>
+      <div className="h-10 w-10 bg-gray-300 animate-pulse rounded"></div>
+      <div className="h-10 w-10 bg-gray-300 animate-pulse rounded"></div>
+      <div className="h-10 w-10 bg-gray-300 animate-pulse rounded"></div>
+    </>
+  ) : (
+    <>
+      {/* Previous Button */}
+      <button
+        className="px-4 py-2 border rounded disabled:opacity-30 flex items-center gap-1"
+        onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+        disabled={page === 1}
+      >
+        <FaChevronLeft />
+      </button>
+
+      {/* Page Numbers */}
+      {Array.from({ length: data.totalPages }, (_, i) => i + 1).map((pageNumber) => (
         <button
-          className="px-4 py-2 border rounded disabled:opacity-50"
-          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-          disabled={page === 1}
+          key={pageNumber}
+          className={`px-4 py-2 border rounded ${
+            page === pageNumber ? "bg-white text-gray-900" : "bg-gray-100"
+          }`}
+          onClick={() => setPage(pageNumber)}
         >
-          Previous
+          {pageNumber}
         </button>
-        <span className="px-4 py-2">
-          {page} / {data.totalPages}
-        </span>
-        <button
-          className="px-4 py-2 border rounded disabled:opacity-50"
-          onClick={() => setPage((prev) => Math.min(prev + 1, data.totalPages))}
-          disabled={page === data.totalPages}
-        >
-          Next
-        </button>
-      </div>
+      ))}
+
+      {/* Next Button */}
+      <button
+        className="px-4 py-2 border rounded disabled:opacity-30 flex items-center gap-1"
+        onClick={() => setPage((prev) => Math.min(prev + 1, data.totalPages))}
+        disabled={page === data.totalPages}
+      >
+        <FaChevronRight />
+      </button>
+    </>
+  )}
+</div>
     </div>
   );
 };
