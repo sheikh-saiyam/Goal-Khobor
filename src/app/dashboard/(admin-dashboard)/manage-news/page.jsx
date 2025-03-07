@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import useFetchPublishers from "@/hooks/useFetchPublishers";
+import { IoNewspaperSharp } from "react-icons/io5";
+import DashboardPageHeader from "../../components/Dashboards/Header/DashboardPageHeader";
 
 // Fetch function for news
 const fetchNews = async ({ queryKey }) => {
@@ -61,7 +63,11 @@ const ManageNews = () => {
 
   return (
     <div className="w-full mx-auto">
-      <h1 className="text-2xl font-bold mb-4">📰 Manage News</h1>
+     <DashboardPageHeader 
+        title="Manage News" 
+        subtitle="Easily view, edit, delete, and organize news articles for your platform."
+        icon={IoNewspaperSharp}
+      />
 
       {/* Search Input */}
       <input
@@ -69,11 +75,11 @@ const ManageNews = () => {
         placeholder="Search by title..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full p-2 border rounded mb-4"
+        className="w-full p-2 border rounded mb-3"
       />
 
       {/* Filters */}
-      <div className="flex gap-4 mb-4">
+      <div className="flex gap-4 mb-5">
         <select
           className="p-2 border rounded"
           value={category}
