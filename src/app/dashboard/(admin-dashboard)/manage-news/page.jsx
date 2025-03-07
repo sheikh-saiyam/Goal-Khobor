@@ -63,8 +63,8 @@ const ManageNews = () => {
 
   return (
     <div className="w-full mx-auto">
-     <DashboardPageHeader 
-        title="Manage News" 
+      <DashboardPageHeader
+        title="Manage News"
         subtitle="Easily view, edit, delete, and organize news articles for your platform."
         icon={IoNewspaperSharp}
       />

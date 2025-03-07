@@ -1,10 +1,17 @@
+import DashboardPageHeader from "../../components/Dashboards/Header/DashboardPageHeader";
 import AllUserTable from "../../components/Tables/AllUserTable";
+import { FaUsers } from "react-icons/fa";
 
 const ManageUsers = () => {
   return (
     <div>
-      <div className="customTable overflow-y-auto p-8 mb-4 w-full flex items-center flex-col gap-5 justify-center">
-        <div className="w-full mx-auto p-6">
+      <DashboardPageHeader
+  title="Manage Users" 
+  subtitle={"View, edit, and manage users with ease. Monitor their activity, roles, and  permissions to keep your platform secure."}
+  icon={FaUsers}
+/>
+      <div className="customTable overflow-y-auto mb-4 w-full flex items-center flex-col gap-5 justify-center">
+        <div className="w-full mx-auto">
           <div className="customTable w-full border overflow-auto border-gray-200">
             <table className="w-full text-sm overflow-auto">
               <thead className="bg-gray-100">

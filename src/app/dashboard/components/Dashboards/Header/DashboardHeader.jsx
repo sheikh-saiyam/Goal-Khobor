@@ -18,7 +18,7 @@ const DashboardHeader = ({ setIsSidebarOpen, isSidebarOpen }) => {
         </button>
       </div>
       {/* Welcome Div */}
-      <div className="hidden lg:flex ml-4">
+      <div className="hidden lg:flex ml-10">
         {status === "loading" ? (
           <div className="w-[250px] h-8 bg-[#e5eaf2] animate-pulse"></div>
         ) : (
