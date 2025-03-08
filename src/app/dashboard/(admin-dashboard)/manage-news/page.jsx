@@ -245,17 +245,20 @@ const ManageNews = () => {
         {isLoading ? (
           // Skeleton Loader for Pagination
           <>
-            <div className="h-10 w-10 bg-gray-300 animate-pulse rounded"></div>
-            <div className="h-10 w-10 bg-gray-300 animate-pulse rounded"></div>
-            <div className="h-10 w-10 bg-gray-300 animate-pulse rounded"></div>
-            <div className="h-10 w-10 bg-gray-300 animate-pulse rounded"></div>
-            <div className="h-10 w-10 bg-gray-300 animate-pulse rounded"></div>
+            {[...Array(5)].map((_, i) => (
+              <div
+                key={i}
+                className="h-10 w-10 bg-gray-300 animate-pulse rounded"
+              ></div>
+            ))}
           </>
         ) : (
           <>
             {/* Previous Button */}
             <button
-              className="px-4 py-2 border rounded disabled:opacity-30 flex items-center gap-1"
+              className="px-4 py-2 border rounded flex items-center gap-1 
+                  bg-gray-100 text-gray-600 hover:bg-gray-200 
+                  disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
               disabled={page === 1}
             >
@@ -267,11 +270,12 @@ const ManageNews = () => {
               (pageNumber) => (
                 <button
                   key={pageNumber}
-                  className={`px-4 py-2 border rounded ${
-                    page === pageNumber
-                      ? "bg-white text-gray-900"
-                      : "bg-gray-100"
-                  }`}
+                  className={`px-4 py-2 border rounded transition duration-200
+                      ${
+                        page === pageNumber
+                          ? "bg-gray-600 text-white font-semibold"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      }`}
                   onClick={() => setPage(pageNumber)}
                 >
                   {pageNumber}
@@ -281,7 +285,9 @@ const ManageNews = () => {
 
             {/* Next Button */}
             <button
-              className="px-4 py-2 border rounded disabled:opacity-30 flex items-center gap-1"
+              className="px-4 py-2 border rounded flex items-center gap-1 
+                  bg-gray-100 text-gray-600 hover:bg-gray-200 
+                  disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() =>
                 setPage((prev) => Math.min(prev + 1, data.totalPages))
               }
