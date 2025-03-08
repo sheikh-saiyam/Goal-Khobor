@@ -556,21 +556,20 @@ const AddNewsForm = () => {
       {/* Submit Button */}
       <div>
         <button type="submit" className="w-full mt-2">
-        <Button
-  className="w-2/3 mx-auto font-semibold text-[16px] flex items-center justify-center gap-2 disabled:opacity-50"
-  onClick={handleSubmit}
-  disabled={loading}
->
-  {loading ? (
-    <>
-      <span className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"/>
-      <span className="mt-[2.5px]">Posting...</span>
-    </>
-  ) : (
-    "Post News"
-  )}
-</Button>
-
+          <Button
+            className="w-2/3 mx-auto font-semibold text-[16px] flex items-center justify-center gap-2 disabled:opacity-50"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <span className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
+                <span className="mt-[2.5px]">Posting...</span>
+              </>
+            ) : (
+              "Post News"
+            )}
+          </Button>
         </button>
       </div>
     </form>
