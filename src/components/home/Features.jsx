@@ -8,6 +8,7 @@ const Features = async () => {
   const newsCollection = await dbConnect(collections.newsCollection);
   const features_news = await newsCollection
     .find({ category: "features" })
+    .sort({ published_date: -1 })
     .limit(6)
     .toArray();
 

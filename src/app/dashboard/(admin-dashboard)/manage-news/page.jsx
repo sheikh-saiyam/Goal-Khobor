@@ -3,13 +3,14 @@ import { FaRegEye } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
+import DashboardPageHeader from "../../components/Dashboards/Header/DashboardPageHeader";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import useFetchPublishers from "@/hooks/useFetchPublishers";
 import { IoNewspaperSharp } from "react-icons/io5";
-import DashboardPageHeader from "../../components/Dashboards/Header/DashboardPageHeader";
+import { Button } from "@/components/ui/button";
 
-// Fetch function for news
-const fetchNews = async ({ queryKey }) => {
+// Fetch Function For Get News
+export const fetchNews = async ({ queryKey }) => {
   const [_, { search, category, publisher, sortBy, sortOrder, page, limit }] =
     queryKey;
   const params = new URLSearchParams({
@@ -48,7 +49,7 @@ const ManageNews = () => {
       { search, category, publisher, sortBy, sortOrder, page, limit },
     ],
     queryFn: fetchNews,
-    refetchInterval: 10000,
+    refetchInterval: 5000,
     refetchOnWindowFocus: true,
   });
 
@@ -59,7 +60,8 @@ const ManageNews = () => {
     refetch();
   }, [search, category, publisher, sortBy, sortOrder, page, refetch]);
 
-  if (isError) return <p>Something went wrong!</p>;
+  if (isError)
+    return <div className="w-full h-full bg-[#e5eaf2] animate-pulse rounded" />;
 
   return (
     <div className="w-full mx-auto">
@@ -72,17 +74,18 @@ const ManageNews = () => {
       {/* Search Input */}
       <input
         type="text"
-        placeholder="Search by title..."
+        placeholder="Search By News Title..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full p-2 border rounded mb-3"
+        className="w-full p-2 border rounded mb-3 focus:outline-none focus:border-gray-400 cursor-pointer focus:border-[1px]"
       />
 
       {/* Filters */}
-      <div className="flex gap-4 mb-5">
+      <div className="flex gap-4 items-center mb-5">
+        {/* Category Filter */}
         <select
-          className="p-2 border rounded"
           value={category}
+          className="py-2 px-3 border rounded focus:outline-none focus:border-gray-400 cursor-pointer focus:border-[1px]"
           onChange={(e) => setCategory(e.target.value)}
         >
           <option value="">All Categories</option>
@@ -104,10 +107,10 @@ const ManageNews = () => {
           <option value="youth-football">Youth Football</option>
           <option value="women-football">Women Football</option>
         </select>
-
+        {/* Publisher Filter */}
         <select
           value={publisher}
-          className="p-2 border rounded"
+          className="py-2 px-3 border rounded focus:outline-none focus:border-gray-400 cursor-pointer focus:border-[1px]"
           onChange={(e) => setPublisher(e.target.value)}
         >
           <option value="">All Publishers</option>
@@ -117,24 +120,37 @@ const ManageNews = () => {
             </option>
           ))}
         </select>
-
+        {/* Sort by */}
         <select
-          className="p-2 border rounded"
+          className="py-2 px-3 border rounded focus:outline-none focus:border-gray-400 cursor-pointer focus:border-[1px]"
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
         >
           <option value="published_date">Sort by Date</option>
           <option value="views">Sort by Views</option>
         </select>
-
+        {/* Sort order */}
         <select
-          className="p-2 border rounded"
+          className="py-2 px-3 border rounded focus:outline-none focus:border-gray-400 cursor-pointer focus:border-[1px]"
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value)}
         >
           <option value="desc">Descending</option>
           <option value="asc">Ascending</option>
         </select>
+        {/* Reset Button */}
+        <Button
+          onClick={() => {
+            setSearch("");
+            setCategory("");
+            setPublisher("");
+            setSortBy("published_date");
+            setSortOrder("desc");
+            setPage(1);
+          }}
+        >
+          Reset Filters
+        </Button>
       </div>
 
       {/* News Table */}

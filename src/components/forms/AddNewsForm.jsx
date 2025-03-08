@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
+import { fetchNews } from "@/app/dashboard/(admin-dashboard)/manage-news/page";
 import { IoCheckmark } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
@@ -10,6 +11,7 @@ import Swal from "sweetalert2";
 
 const AddNewsForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [publisher, setPublisher] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
@@ -264,6 +266,7 @@ const AddNewsForm = () => {
   // Get Form Data --->
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const form = e.target;
     const title = form.title.value;
@@ -276,23 +279,27 @@ const AddNewsForm = () => {
 
     // Form Validation -->
     if (!publisher || !publisher_image) {
+      setLoading(false);
       return Swal.fire({
         icon: "error",
         title: "Publisher Is Required!",
       });
     }
     if (selectedTags.length === 0) {
+      setLoading(false);
       return Swal.fire({
         icon: "error",
         title: "Tags Are Required!",
       });
     }
     if (selectedTags.length < 5) {
+      setLoading(false);
       return Swal.fire({
         icon: "error",
         title: "Tags Must Be Atleast 5",
       });
     }
+
     const news = {
       title,
       image,
@@ -313,15 +320,18 @@ const AddNewsForm = () => {
       body: JSON.stringify(news),
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(() => {
+        fetchNews();
         form.reset();
         router.refresh();
-        router.push("/news");
+        router.push("/dashboard/manage-news");
         setSelectedPublisher({});
         setSelectedTags([]);
         Swal.fire({
           icon: "success",
           title: "News Added Successfully",
+          confirmButtonText: "Great, ok!",
+          confirmButtonColor: "#000",
         });
       })
       .catch((err) => {
@@ -329,6 +339,9 @@ const AddNewsForm = () => {
           icon: "error",
           title: err.message,
         });
+      })
+      .finally(() => {
+        setLoading(false); // Stop loading
       });
   };
 
@@ -543,9 +556,21 @@ const AddNewsForm = () => {
       {/* Submit Button */}
       <div>
         <button type="submit" className="w-full mt-2">
-          <Button className="w-2/3 mx-auto font-semibold text-[16px]">
-            Post News
-          </Button>
+        <Button
+  className="w-2/3 mx-auto font-semibold text-[16px] flex items-center justify-center gap-2 disabled:opacity-50"
+  onClick={handleSubmit}
+  disabled={loading}
+>
+  {loading ? (
+    <>
+      <span className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"/>
+      <span className="mt-[2.5px]">Posting...</span>
+    </>
+  ) : (
+    "Post News"
+  )}
+</Button>
+
         </button>
       </div>
     </form>

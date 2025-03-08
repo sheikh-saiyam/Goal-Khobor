@@ -5,7 +5,7 @@ import DashboardPageHeader from "../../components/Dashboards/Header/DashboardPag
 const AddTransferNews = () => {
   return (
     <div>
-            <DashboardPageHeader
+      <DashboardPageHeader
         title="Add Transfer News"
         subtitle="Quickly add and publish the latest transfer news to keep your platform up to date."
         icon={BiTransfer}
