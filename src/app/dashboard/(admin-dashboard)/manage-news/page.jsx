@@ -8,6 +8,9 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import useFetchPublishers from "@/hooks/useFetchPublishers";
 import { IoNewspaperSharp } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 // Fetch Function For Get News
 export const fetchNews = async ({ queryKey }) => {
@@ -29,6 +32,7 @@ export const fetchNews = async ({ queryKey }) => {
 };
 
 const ManageNews = () => {
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [publisher, setPublisher] = useState("");
@@ -49,7 +53,7 @@ const ManageNews = () => {
       { search, category, publisher, sortBy, sortOrder, page, limit },
     ],
     queryFn: fetchNews,
-    refetchInterval: 5000,
+    refetchInterval: 3000,
     refetchOnWindowFocus: true,
   });
 
@@ -62,6 +66,51 @@ const ManageNews = () => {
 
   if (isError)
     return <div className="w-full h-full bg-[#e5eaf2] animate-pulse rounded" />;
+
+  // Function for delete news
+  const deleteNews = async (id) => {
+    // return console.log(id)
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This action will permanently delete the news item!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it",
+      cancelButtonText: "No, cancel",
+      background: "#ffffff",
+      color: "#000000",
+      confirmButtonColor: "#000000",
+      cancelButtonColor: "#808080",
+    });
+    if (result.isConfirmed) {
+      try {
+        const { data } = await axios.delete(`/api/news/${String(id)}`);
+        if (data.deletedCount) {
+          refetch();
+          router.refresh();
+          Swal.fire({
+            title: "Deleted!",
+            text: "News has been deleted successfully.",
+            icon: "success",
+            background: "#ffffff",
+            color: "#000000",
+            confirmButtonColor: "#000000",
+            confirmButtonText: "Great, ok!"
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          title: "Error!",
+          text:
+            error.message || "Something went wrong while deleting the news.",
+          icon: "error",
+          background: "#ffffff",
+          color: "#000000",
+          confirmButtonColor: "#000000",
+        });
+      }
+    }
+  };
 
   return (
     <div className="w-full mx-auto">
@@ -216,15 +265,18 @@ const ManageNews = () => {
                   <td className="px-4 py-2">{item.likes}</td>
                   <td className="px-4 py-2 ">
                     <div className="flex items-center gap-4">
-                      <p className="flex items-center gap-1 text-gray-700 bg-gray-100 border rounded cursor-pointer hover:bg-gray-300 duration-300 p-2">
-                        <MdOutlineEdit size={20} />
-                      </p>
-                      <p className="flex items-center gap-1 text-gray-700 bg-gray-100 border cursor-pointer hover:bg-gray-300 duration-300 p-2 rounded">
-                        <MdDeleteOutline size={20} />
-                      </p>
-                      <p className="flex items-center gap-1 text-gray-700 bg-gray-100 border cursor-pointer hover:bg-gray-300 duration-300 p-2 rounded">
+                      <button className="flex items-center gap-1 text-gray-700 bg-gray-100 border cursor-pointer hover:bg-gray-300 duration-300 p-2 rounded">
                         <FaRegEye size={20} />
-                      </p>
+                      </button>
+                      <button className="flex items-center gap-1 text-gray-700 bg-gray-100 border rounded cursor-pointer hover:bg-gray-300 duration-300 p-2">
+                        <MdOutlineEdit size={20} />
+                      </button>
+                      <button
+                        onClick={() => deleteNews(item._id)}
+                        className="flex items-center gap-1 text-gray-700 bg-gray-100 border cursor-pointer hover:bg-gray-300 duration-300 p-2 rounded"
+                      >
+                        <MdDeleteOutline size={20} />
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -249,7 +301,7 @@ const ManageNews = () => {
               <div
                 key={i}
                 className="h-10 w-10 bg-gray-300 animate-pulse rounded"
-              ></div>
+              />
             ))}
           </>
         ) : (

@@ -8,20 +8,18 @@ export const GET = async (req) => {
     const { searchParams } = new URL(req.url);
 
     // Extract query parameters
-    const search = searchParams.get("search") || ""; // Search only by title
-    const category = searchParams.get("category") || null; // Filter by category
-    const publisher = searchParams.get("publisher") || null; // Filter by publisher
-    const sortBy = searchParams.get("sortBy") || "published_date"; // Default sorting field
-    const sortOrder = searchParams.get("sortOrder") === "asc" ? 1 : -1; // Sort order (asc/desc)
-    const page = parseInt(searchParams.get("page") || "1", 10); // Pagination page number
-    const limit = parseInt(searchParams.get("limit") || "10", 10); // Limit per page
+    const search = searchParams.get("search") || "";
+    const category = searchParams.get("category") || null;
+    const publisher = searchParams.get("publisher") || null;
+    const sortBy = searchParams.get("sortBy") || "published_date";
+    const sortOrder = searchParams.get("sortOrder") === "asc" ? 1 : -1;
+    const page = parseInt(searchParams.get("page") || "1", 10);
+    const limit = parseInt(searchParams.get("limit") || "10", 10);
 
     const filter = {};
 
-    if (search) {
-      filter.title = { $regex: search, $options: "i" };
-    }
     if (category) filter.category = category;
+    if (search) filter.title = { $regex: search, $options: "i" };
     if (publisher) filter.publisher = publisher;
 
     const totalNews = await newsCollection.countDocuments(filter);
