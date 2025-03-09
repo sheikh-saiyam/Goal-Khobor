@@ -12,6 +12,9 @@ export async function middleware(req) {
     admin: [
       "/dashboard/manage-news",
       "/dashboard/add-transfer-news",
+      "/dashboard/manage-transfer-news",
+      "/dashboard/add-power-rankings",
+      "/dashboard/manage-power-rankings",
       "/dashboard/manage-users",
     ],
   };

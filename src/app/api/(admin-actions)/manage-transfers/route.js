@@ -4,13 +4,14 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
   try {
-    const newsCollection = await dbConnect(collections.newsCollection);
+    const transfersCollection = await dbConnect(
+      collections.transfersCollection
+    );
     const { searchParams } = new URL(req.url);
 
     // Extract query parameters
     const search = searchParams.get("search") || "";
-    const category = searchParams.get("category") || null;
-    const publisher = searchParams.get("publisher") || null;
+    const source = searchParams.get("source") || null;
     const sortBy = searchParams.get("sortBy") || "published_date";
     const sortOrder = searchParams.get("sortOrder") === "asc" ? 1 : -1;
     const page = parseInt(searchParams.get("page") || "1", 10);
@@ -18,13 +19,12 @@ export const GET = async (req) => {
 
     const filter = {};
 
-    if (category) filter.category = category;
     if (search) filter.title = { $regex: search, $options: "i" };
-    if (publisher) filter.publisher = publisher;
+    if (source) filter.source = source;
 
-    const totalNews = await newsCollection.countDocuments(filter);
+    const totalTransfers = await transfersCollection.countDocuments(filter);
 
-    const newsData = await newsCollection
+    const transfersData = await transfersCollection
       .find(filter)
       .sort({ [sortBy]: sortOrder })
       .skip((page - 1) * limit)
@@ -33,9 +33,9 @@ export const GET = async (req) => {
 
     return NextResponse.json({
       page,
-      totalNews,
-      totalPages: Math.ceil(totalNews / limit),
-      news: newsData,
+      totalTransfers,
+      totalPages: Math.ceil(totalTransfers / limit),
+      transfers: transfersData,
     });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

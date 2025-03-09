@@ -150,11 +150,11 @@ const AdminLinks = ({ isCollapse1 }) => {
                 : "hover:underline underline-offset-2 duration-500"
             }`}
           >
-            <BiTransfer size={25} />
+            <MdOutlineManageSearch size={30} className="-mt-[3px]" />
             <p
               className={`${
                 isCollapse1 ? "inline" : "hidden"
-              } text-lg tracking-wider font-semibold ml-[5px]`}
+              } text-lg tracking-wider font-semibold`}
             >
               Manage Transfer News
             </p>
@@ -198,11 +198,11 @@ const AdminLinks = ({ isCollapse1 }) => {
                 : "hover:underline underline-offset-2 duration-500"
             }`}
           >
-            <PiRankingFill size={25} />
+            <MdOutlineManageSearch size={30} className="-mt-[3px]" />
             <p
               className={`${
                 isCollapse1 ? "inline" : "hidden"
-              } text-lg tracking-wider font-semibold ml-[5px]`}
+              } text-lg tracking-wider font-semibold`}
             >
               Manage Power Rankings
             </p>

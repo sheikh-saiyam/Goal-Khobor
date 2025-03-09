@@ -1,58 +1,54 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+import useFetchPublishers from "@/hooks/useFetchPublishers";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import DashboardPageHeader from "../../components/Dashboards/Header/DashboardPageHeader";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import useFetchPublishers from "@/hooks/useFetchPublishers";
-import { IoNewspaperSharp } from "react-icons/io5";
-import { Button } from "@/components/ui/button";
-import NewsDetailsDialog from "./NewsDetailsDialog";
 import { useRouter } from "next/navigation";
-import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import { BiTransfer } from "react-icons/bi";
 import axios from "axios";
+import NewsDetailsDialog from "../manage-news/NewsDetailsDialog";
 
-// Fetch Function For Get News
-export const fetchNews = async ({ queryKey }) => {
-  const [_, { search, category, publisher, sortBy, sortOrder, page, limit }] =
-    queryKey;
-  const params = new URLSearchParams({
-    search,
-    category,
-    publisher,
-    sortBy,
-    sortOrder,
-    page,
-    limit,
-  }).toString();
+// Fetch Function For Get Transfers
+export const fetchTransfers = async ({ queryKey }) => {
+  try {
+    const [_, { search, source, sortBy, sortOrder, page, limit }] = queryKey;
+    const params = new URLSearchParams({
+      search,
+      source,
+      sortBy,
+      sortOrder,
+      page,
+      limit,
+    }).toString();
 
-  const res = await fetch(`/api/news?${params}`);
-  const data = await res.json();
-  return data;
+    const { data } = await axios(`/api/manage-transfers?${params}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const ManageNews = () => {
+const ManageTransferNews = () => {
   const router = useRouter();
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
-  const [publisher, setPublisher] = useState("");
+  const [source, setSource] = useState("");
   const [sortBy, setSortBy] = useState("published_date");
   const [sortOrder, setSortOrder] = useState("desc");
   const [page, setPage] = useState(1);
   const limit = 10;
 
-  // Use TanStack Query to fetch news
+  // Use TanStack Query to fetch transfers
   const {
     data = [],
     isLoading,
     isError,
     refetch,
   } = useQuery({
-    queryKey: [
-      "news",
-      { search, category, publisher, sortBy, sortOrder, page, limit },
-    ],
-    queryFn: fetchNews,
+    queryKey: ["news", { search, source, sortBy, sortOrder, page, limit }],
+    queryFn: fetchTransfers,
     refetchInterval: 3000,
     refetchOnWindowFocus: true,
   });
@@ -62,110 +58,41 @@ const ManageNews = () => {
 
   useEffect(() => {
     refetch();
-  }, [search, category, publisher, sortBy, sortOrder, page, refetch]);
+  }, [search, source, sortBy, sortOrder, page, refetch]);
 
   if (isError)
     return <div className="w-full h-full bg-[#e5eaf2] animate-pulse rounded" />;
 
-  // Function for delete news
-  const deleteNews = async (id) => {
-    // return console.log(id)
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "This action will permanently delete the news item!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it",
-      cancelButtonText: "No, cancel",
-      background: "#ffffff",
-      color: "#000000",
-      confirmButtonColor: "#000000",
-      cancelButtonColor: "#808080",
-    });
-    if (result.isConfirmed) {
-      try {
-        const { data } = await axios.delete(`/api/news/${String(id)}`);
-        if (data.deletedCount) {
-          refetch();
-          router.refresh();
-          Swal.fire({
-            title: "Deleted!",
-            text: "News has been deleted successfully.",
-            icon: "success",
-            background: "#ffffff",
-            color: "#000000",
-            confirmButtonColor: "#000000",
-            confirmButtonText: "Great, ok!",
-          });
-        }
-      } catch (error) {
-        Swal.fire({
-          title: "Error!",
-          text:
-            error.message || "Something went wrong while deleting the news.",
-          icon: "error",
-          background: "#ffffff",
-          color: "#000000",
-          confirmButtonColor: "#000000",
-        });
-      }
-    }
-  };
-
   return (
     <div className="w-full mx-auto">
       <DashboardPageHeader
-        title="Manage News"
-        subtitle="Easily view, edit, delete, and organize news articles for your platform."
-        icon={IoNewspaperSharp}
+        title="Manage Transfers News"
+        subtitle="Easily view, edit, delete, and organize transfers news articles for your platform."
+        icon={BiTransfer}
       />
+      
 
-      {/* Search Input */}
+      {/* Filters */}
+      <div className="flex flex-wrap lg:flex-nowrap gap-4 items-center mb-5">      
+        {/* Search Input */}
       <input
         type="text"
         placeholder="Search By News Title..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full p-2 border rounded mb-3 focus:outline-none focus:border-gray-400 cursor-pointer focus:border-[1px]"
+        className="w-full py-[6px] px-2 border rounded focus:outline-none focus:border-gray-400 cursor-pointer focus:border-[1px]"
       />
 
-      {/* Filters */}
-      <div className="flex gap-4 items-center mb-5">
-        {/* Category Filter */}
+        {/* Source Filter */}
         <select
-          value={category}
+          value={source}
           className="py-2 px-3 border rounded focus:outline-none focus:border-gray-400 cursor-pointer focus:border-[1px]"
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) => setSource(e.target.value)}
         >
-          <option value="">All Categories</option>
-          <option value="features">Features</option>
-          <option value="banner-news">Banner News</option>
-          <option value="premier-league">Premier League</option>
-          <option value="la-liga">La Liga</option>
-          <option value="bundesliga">Bundesliga</option>
-          <option value="serie-a">Serie A</option>
-          <option value="ligue-1">Ligue 1</option>
-          <option value="uefa-champions-league">UEFA Champions League</option>
-          <option value="uefa-europa-league">UEFA Europa League</option>
-          <option value="uefa-europa-conference-league">
-            UEFA Europa Conference League
-          </option>
-          <option value="fifa-world-cup">FIFA World Cup</option>
-          <option value="uefa-euros">UEFA Euros</option>
-          <option value="copa-america">Copa America</option>
-          <option value="youth-football">Youth Football</option>
-          <option value="women-football">Women Football</option>
-        </select>
-        {/* Publisher Filter */}
-        <select
-          value={publisher}
-          className="py-2 px-3 border rounded focus:outline-none focus:border-gray-400 cursor-pointer focus:border-[1px]"
-          onChange={(e) => setPublisher(e.target.value)}
-        >
-          <option value="">All Publishers</option>
-          {publishers?.map((publisher, idx) => (
-            <option value={publisher?.publisher_name} key={idx}>
-              {publisher?.publisher_name}
+          <option value="">All Sources</option>
+          {publishers?.map((item, idx) => (
+            <option value={item?.publisher_name} key={idx}>
+              {item?.publisher_name}
             </option>
           ))}
         </select>
@@ -192,8 +119,7 @@ const ManageNews = () => {
         <Button
           onClick={() => {
             setSearch("");
-            setCategory("");
-            setPublisher("");
+            setSource("");
             setSortBy("published_date");
             setSortOrder("desc");
             setPage(1);
@@ -209,8 +135,7 @@ const ManageNews = () => {
           <thead className="bg-gray-100">
             <tr className="text-left">
               <th className="px-4 py-2 border text-gray-700 w-fit">Title</th>
-              <th className="px-4 py-2 border text-gray-700">Category</th>
-              <th className="px-4 py-2 border text-gray-700">Publisher</th>
+              <th className="px-4 py-2 border text-gray-700">Source</th>
               <th className="px-4 py-2 border text-gray-700">Published Date</th>
               <th className="px-4 py-2 border text-gray-700">Views</th>
               <th className="px-4 py-2 border text-gray-700">Likes</th>
@@ -249,16 +174,15 @@ const ManageNews = () => {
                   </td>
                 </tr>
               ))
-            ) : data.news.length > 0 ? (
-              data.news.map((item) => (
+            ) : data.transfers.length > 0 ? (
+              data.transfers.map((item) => (
                 <tr key={item._id} className="border hover:bg-gray-50">
                   <td className="px-4 py-2 w-fit">
-                    {item.title.length > 40
-                      ? item.title.slice(0, 40) + "..."
+                    {item.title.length > 60
+                      ? item.title.slice(0, 60) + "..."
                       : item.title}
                   </td>
-                  <td className="px-4 py-2">{item.category}</td>
-                  <td className="px-4 py-2">{item.publisher}</td>
+                  <td className="px-4 py-2">{item.source}</td>
                   <td className="px-4 py-2">
                     {new Date(item.published_date).toLocaleDateString()}
                   </td>
@@ -266,13 +190,13 @@ const ManageNews = () => {
                   <td className="px-4 py-2">{item.likes}</td>
                   <td className="px-4 py-2 ">
                     <div className="flex items-center gap-4">
-                      {/* News Details Dialog */}
+                      {/* Transfer Details Dialog */}
                       <NewsDetailsDialog news={item} />
                       <button className="flex items-center gap-1 text-gray-700 bg-gray-100 border rounded cursor-pointer hover:bg-gray-300 duration-300 p-2">
                         <MdOutlineEdit size={20} />
                       </button>
                       <button
-                        onClick={() => deleteNews(item._id)}
+                        // onClick={() => deleteNews(item._id)}
                         className="flex items-center gap-1 text-gray-700 bg-gray-100 border cursor-pointer hover:bg-gray-300 duration-300 p-2 rounded"
                       >
                         <MdDeleteOutline size={20} />
@@ -284,7 +208,7 @@ const ManageNews = () => {
             ) : (
               <tr>
                 <td colSpan="7" className="text-center px-4 py-2 text-gray-500">
-                  No News Found!
+                  No Transfers Found!
                 </td>
               </tr>
             )}
@@ -295,7 +219,7 @@ const ManageNews = () => {
       {/* Pagination */}
       <div className="mt-4 flex justify-center gap-2">
         {isLoading ? (
-          // Skeleton Loader for Pagination
+          // Skeleton for Pagination
           <>
             {[...Array(5)].map((_, i) => (
               <div
@@ -309,8 +233,8 @@ const ManageNews = () => {
             {/* Previous Button */}
             <button
               className="px-4 py-2 border rounded flex items-center gap-1 
-                  bg-gray-100 text-gray-600 hover:bg-gray-200 
-                  disabled:opacity-50 disabled:cursor-not-allowed"
+              bg-gray-100 text-gray-600 hover:bg-gray-200 
+              disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
               disabled={page === 1}
             >
@@ -323,11 +247,11 @@ const ManageNews = () => {
                 <button
                   key={pageNumber}
                   className={`px-4 py-2 border rounded transition duration-200
-                      ${
-                        page === pageNumber
-                          ? "bg-gray-600 text-white font-semibold"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                      }`}
+                  ${
+                    page === pageNumber
+                      ? "bg-gray-600 text-white font-semibold"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
                   onClick={() => setPage(pageNumber)}
                 >
                   {pageNumber}
@@ -338,8 +262,8 @@ const ManageNews = () => {
             {/* Next Button */}
             <button
               className="px-4 py-2 border rounded flex items-center gap-1 
-                  bg-gray-100 text-gray-600 hover:bg-gray-200 
-                  disabled:opacity-50 disabled:cursor-not-allowed"
+              bg-gray-100 text-gray-600 hover:bg-gray-200 
+              disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() =>
                 setPage((prev) => Math.min(prev + 1, data.totalPages))
               }
@@ -354,4 +278,4 @@ const ManageNews = () => {
   );
 };
 
-export default ManageNews;
+export default ManageTransferNews;
