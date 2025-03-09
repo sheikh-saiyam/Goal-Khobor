@@ -9,3 +9,33 @@ export const GET = async (req, { params }) => {
   const result = await transfersCollection.findOne({ _id: new ObjectId(_id) });
   return NextResponse.json(result);
 };
+
+export const DELETE = async (req, { params }) => {
+  const { _id } = await params;
+  try {
+    const transfersCollection = await dbConnect(collections.transfersCollection);
+
+    if (!_id) {
+      return NextResponse.json(
+        { error: "Transfer News ID is required" },
+        { status: 400 }
+      );
+    }
+
+    const result = await transfersCollection.deleteOne({ _id: new ObjectId(_id) });
+
+    if (result.deletedCount === 0) {
+      return NextResponse.json(
+        { error: "Transfer news not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(result);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to delete news", details: error.message },
+      { status: 500 }
+    );
+  }
+};

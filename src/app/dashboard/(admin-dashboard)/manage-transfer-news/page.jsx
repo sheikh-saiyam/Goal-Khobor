@@ -9,6 +9,7 @@ import NewsDetailsDialog from "../manage-news/NewsDetailsDialog";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BiTransfer } from "react-icons/bi";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 // Fetch Function For Get Transfers
@@ -62,6 +63,50 @@ const ManageTransferNews = () => {
 
   if (isError)
     return <div className="w-full h-full bg-[#e5eaf2] animate-pulse rounded" />;
+
+   // Function for delete transfer news
+   const deleteNews = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This action will permanently delete the transfer news!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it",
+      cancelButtonText: "No, cancel",
+      background: "#ffffff",
+      color: "#000000",
+      confirmButtonColor: "#000000",
+      cancelButtonColor: "#808080",
+    });
+    if (result.isConfirmed) {
+      try {
+        const { data } = await axios.delete(`/api/transfers/${String(id)}`);
+        if (data.deletedCount) {
+          refetch();
+          router.refresh();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Transfer News has been deleted successfully.",
+            icon: "success",
+            background: "#ffffff",
+            color: "#000000",
+            confirmButtonColor: "#000000",
+            confirmButtonText: "Great, ok!",
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          title: "Error!",
+          text:
+            error.message || "Something went wrong while deleting the transfer news.",
+          icon: "error",
+          background: "#ffffff",
+          color: "#000000",
+          confirmButtonColor: "#000000",
+        });
+      }
+    }
+  };
 
   return (
     <div className="w-full mx-auto">
@@ -163,9 +208,9 @@ const ManageTransferNews = () => {
                   <td className="px-4 py-2">
                     <div className="h-5 w-16 bg-[#e5eaf2] animate-pulse rounded"></div>
                   </td>
-                  <td className="px-4 py-2">
+                  {/* <td className="px-4 py-2">
                     <div className="h-5 w-16 bg-[#e5eaf2] animate-pulse rounded"></div>
-                  </td>
+                  </td> */}
                   <td className="px-4 py-2 flex items-center gap-4">
                     <div className="h-10 w-10 bg-[#e5eaf2] animate-pulse rounded"></div>
                     <div className="h-10 w-10 bg-[#e5eaf2] animate-pulse rounded"></div>
@@ -195,7 +240,7 @@ const ManageTransferNews = () => {
                         <MdOutlineEdit size={20} />
                       </button>
                       <button
-                        // onClick={() => deleteNews(item._id)}
+                        onClick={() => deleteNews(item._id)}
                         className="flex items-center gap-1 text-gray-700 bg-gray-100 border cursor-pointer hover:bg-gray-300 duration-300 p-2 rounded"
                       >
                         <MdDeleteOutline size={20} />
