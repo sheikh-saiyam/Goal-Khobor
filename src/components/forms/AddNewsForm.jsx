@@ -7,6 +7,7 @@ import { fetchNews } from "@/app/dashboard/(admin-dashboard)/manage-news/page";
 import { IoCheckmark } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import { Tags } from "@/lib/tags";
 import Swal from "sweetalert2";
 
 const AddNewsForm = () => {
@@ -58,179 +59,6 @@ const AddNewsForm = () => {
     "copa-america",
     "youth-football",
     "women-football",
-  ];
-
-  const Tags = [
-    // Clubs
-    "Real Madrid",
-    "Barcelona",
-    "Manchester United",
-    "Manchester City",
-    "Liverpool",
-    "Chelsea",
-    "Arsenal",
-    "Bayern Munich",
-    "PSG",
-    "Juventus",
-    "AC Milan",
-    "Inter Milan",
-    "Atletico Madrid",
-    "Borussia Dortmund",
-    "Tottenham",
-    "Napoli",
-    "AS Roma",
-    "Sevilla",
-    "Newcastle United",
-    "Ajax",
-    "RB Leipzig",
-    "Marseille",
-    "Porto",
-    "Benfica",
-
-    // Tournaments
-    "UEFA Champions League",
-    "UEFA Europa League",
-    "Premier League",
-    "La Liga",
-    "Bundesliga",
-    "Serie A",
-    "Ligue 1",
-    "Eredivisie",
-    "Copa del Rey",
-    "FA Cup",
-    "Carabao Cup",
-    "Copa Italia",
-    "DFB Pokal",
-    "Community Shield",
-    "Supercopa de España",
-    "Copa Libertadores",
-    "FIFA Club World Cup",
-    "AFC Champions League",
-    "CONCACAF Champions Cup",
-    "Europa Conference League",
-    "Euro 2024",
-    "Copa America",
-    "AFCON",
-    "Asian Cup",
-    "Gold Cup",
-    "World Cup",
-    "Nations League",
-    "U20 World Cup",
-    "U17 World Cup",
-
-    // Countries
-    "Argentina",
-    "Brazil",
-    "Spain",
-    "France",
-    "Germany",
-    "England",
-    "Portugal",
-    "Italy",
-    "Netherlands",
-    "Belgium",
-    "Croatia",
-    "Uruguay",
-    "Mexico",
-    "USA",
-    "Japan",
-    "South Korea",
-    "Senegal",
-    "Morocco",
-    "Nigeria",
-    "Colombia",
-    "Chile",
-    "Ecuador",
-    "Australia",
-    "Switzerland",
-    "Denmark",
-    "Poland",
-    "Sweden",
-
-    // Players
-    "Cristiano Ronaldo",
-    "Lionel Messi",
-    "Kylian Mbappe",
-    "Erling Haaland",
-    "Kevin De Bruyne",
-    "Neymar",
-    "Jude Bellingham",
-    "Vinicius Jr",
-    "Rodrygo",
-    "Harry Kane",
-    "Robert Lewandowski",
-    "Luka Modric",
-    "Toni Kroos",
-    "Karim Benzema",
-    "Mohamed Salah",
-    "Bruno Fernandes",
-    "Marcus Rashford",
-    "Bukayo Saka",
-    "Martin Ødegaard",
-    "Joshua Kimmich",
-    "Pedri",
-    "Gavi",
-    "Antoine Griezmann",
-    "Rafael Leão",
-    "Lautaro Martinez",
-    "Declan Rice",
-
-    // Coaches
-    "Carlo Ancelotti",
-    "Pep Guardiola",
-    "Jurgen Klopp",
-    "Jose Mourinho",
-    "Zinedine Zidane",
-    "Xavi",
-    "Mikel Arteta",
-    "Thomas Tuchel",
-    "Diego Simeone",
-    "Luis Enrique",
-    "Gareth Southgate",
-    "Didier Deschamps",
-    "Fernando Santos",
-    "Hansi Flick",
-    "Erik ten Hag",
-    "Unai Emery",
-    "Roberto Martinez",
-    "Simone Inzaghi",
-    "Julian Nagelsmann",
-
-    // Other Football Terms
-    "VAR",
-    "Offside",
-    "Penalty",
-    "Free Kick",
-    "Corner Kick",
-    "Yellow Card",
-    "Red Card",
-    "Hat-trick",
-    "Goalkeeper",
-    "Defender",
-    "Midfielder",
-    "Striker",
-    "Assist",
-    "Clean Sheet",
-    "Formation",
-    "Tactics",
-    "Counter Attack",
-    "Pressing",
-    "Possession",
-    "Injury Time",
-    "Stoppage Time",
-    "Extra Time",
-    "Penalty Shootout",
-    "Transfer Window",
-    "Loan Move",
-    "Buyout Clause",
-    "Salary Cap",
-    "Golden Boot",
-    "Ballon d'Or",
-    "The Treble",
-    "El Clasico",
-    "Derby",
-    "Top Scorer",
-    "Best XI",
   ];
 
   const filteredItems = Tags.filter((item) =>
@@ -506,7 +334,7 @@ const AddNewsForm = () => {
           {/* Dropdown menu */}
           {isOpenDropdown && (
             <div className="w-full mt-1 border border-gray-200 rounded-md bg-white shadow-lg z-20">
-              <div className="w-full overflow-auto flex gap-4 items-center flex-wrap">
+              <div className="w-full overflow-auto flex gap-4 items-center justify-center flex-wrap">
                 {filteredItems.map((item, index) => (
                   <p
                     key={index}
@@ -555,11 +383,10 @@ const AddNewsForm = () => {
       </div>
       {/* Submit Button */}
       <div>
-        <button type="submit" className="w-full mt-2">
+        <button disabled={loading} type="submit" className="w-full mt-2">
           <Button
-            className="w-2/3 mx-auto font-semibold text-[16px] flex items-center justify-center gap-2 disabled:opacity-50"
-            onClick={handleSubmit}
             disabled={loading}
+            className="w-2/3 mx-auto font-semibold text-[16px] flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {loading ? (
               <>
