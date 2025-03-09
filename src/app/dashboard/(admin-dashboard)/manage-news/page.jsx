@@ -1,5 +1,4 @@
 "use client";
-import { FaRegEye } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
@@ -8,9 +7,10 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import useFetchPublishers from "@/hooks/useFetchPublishers";
 import { IoNewspaperSharp } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
+import NewsDetailsDialog from "./NewsDetailsDialog";
+import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 
 // Fetch Function For Get News
 export const fetchNews = async ({ queryKey }) => {
@@ -95,7 +95,7 @@ const ManageNews = () => {
             background: "#ffffff",
             color: "#000000",
             confirmButtonColor: "#000000",
-            confirmButtonText: "Great, ok!"
+            confirmButtonText: "Great, ok!",
           });
         }
       } catch (error) {
@@ -265,9 +265,8 @@ const ManageNews = () => {
                   <td className="px-4 py-2">{item.likes}</td>
                   <td className="px-4 py-2 ">
                     <div className="flex items-center gap-4">
-                      <button className="flex items-center gap-1 text-gray-700 bg-gray-100 border cursor-pointer hover:bg-gray-300 duration-300 p-2 rounded">
-                        <FaRegEye size={20} />
-                      </button>
+                      {/* News Details Dialog */}
+                      <NewsDetailsDialog news={item} />
                       <button className="flex items-center gap-1 text-gray-700 bg-gray-100 border rounded cursor-pointer hover:bg-gray-300 duration-300 p-2">
                         <MdOutlineEdit size={20} />
                       </button>
