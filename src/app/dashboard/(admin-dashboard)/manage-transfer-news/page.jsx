@@ -5,11 +5,11 @@ import useFetchPublishers from "@/hooks/useFetchPublishers";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import DashboardPageHeader from "../../components/Dashboards/Header/DashboardPageHeader";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import NewsDetailsDialog from "../manage-news/NewsDetailsDialog";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BiTransfer } from "react-icons/bi";
 import axios from "axios";
-import NewsDetailsDialog from "../manage-news/NewsDetailsDialog";
 
 // Fetch Function For Get Transfers
 export const fetchTransfers = async ({ queryKey }) => {
