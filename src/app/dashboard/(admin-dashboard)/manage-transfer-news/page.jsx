@@ -70,18 +70,17 @@ const ManageTransferNews = () => {
         subtitle="Easily view, edit, delete, and organize transfers news articles for your platform."
         icon={BiTransfer}
       />
-      
 
       {/* Filters */}
-      <div className="flex flex-wrap lg:flex-nowrap gap-4 items-center mb-5">      
+      <div className="flex flex-wrap lg:flex-nowrap gap-4 items-center mb-5">
         {/* Search Input */}
-      <input
-        type="text"
-        placeholder="Search By News Title..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="w-full py-[6px] px-2 border rounded focus:outline-none focus:border-gray-400 cursor-pointer focus:border-[1px]"
-      />
+        <input
+          type="text"
+          placeholder="Search By News Title..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full py-[6px] px-2 border rounded focus:outline-none focus:border-gray-400 cursor-pointer focus:border-[1px]"
+        />
 
         {/* Source Filter */}
         <select

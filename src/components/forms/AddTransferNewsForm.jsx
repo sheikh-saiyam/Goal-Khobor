@@ -3,14 +3,18 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
+import { fetchTransfers } from 
+  "@/app/dashboard/(admin-dashboard)/manage-transfer-news/page";
 import { IoCheckmark } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import { Tags } from "@/lib/tags";
 import Swal from "sweetalert2";
 import axios from "axios";
 
 const AddTransferNewsForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [publisher, setPublisher] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
@@ -38,179 +42,6 @@ const AddTransferNewsForm = () => {
       .then((res) => res.json())
       .then((data) => setPublisher(data));
   }, []);
-
-  const Tags = [
-    // Clubs
-    "Real Madrid",
-    "Barcelona",
-    "Manchester United",
-    "Manchester City",
-    "Liverpool",
-    "Chelsea",
-    "Arsenal",
-    "Bayern Munich",
-    "PSG",
-    "Juventus",
-    "AC Milan",
-    "Inter Milan",
-    "Atletico Madrid",
-    "Borussia Dortmund",
-    "Tottenham",
-    "Napoli",
-    "AS Roma",
-    "Sevilla",
-    "Newcastle United",
-    "Ajax",
-    "RB Leipzig",
-    "Marseille",
-    "Porto",
-    "Benfica",
-
-    // Tournaments
-    "UEFA Champions League",
-    "UEFA Europa League",
-    "Premier League",
-    "La Liga",
-    "Bundesliga",
-    "Serie A",
-    "Ligue 1",
-    "Eredivisie",
-    "Copa del Rey",
-    "FA Cup",
-    "Carabao Cup",
-    "Copa Italia",
-    "DFB Pokal",
-    "Community Shield",
-    "Supercopa de España",
-    "Copa Libertadores",
-    "FIFA Club World Cup",
-    "AFC Champions League",
-    "CONCACAF Champions Cup",
-    "Europa Conference League",
-    "Euro 2024",
-    "Copa America",
-    "AFCON",
-    "Asian Cup",
-    "Gold Cup",
-    "World Cup",
-    "Nations League",
-    "U20 World Cup",
-    "U17 World Cup",
-
-    // Countries
-    "Argentina",
-    "Brazil",
-    "Spain",
-    "France",
-    "Germany",
-    "England",
-    "Portugal",
-    "Italy",
-    "Netherlands",
-    "Belgium",
-    "Croatia",
-    "Uruguay",
-    "Mexico",
-    "USA",
-    "Japan",
-    "South Korea",
-    "Senegal",
-    "Morocco",
-    "Nigeria",
-    "Colombia",
-    "Chile",
-    "Ecuador",
-    "Australia",
-    "Switzerland",
-    "Denmark",
-    "Poland",
-    "Sweden",
-
-    // Players
-    "Cristiano Ronaldo",
-    "Lionel Messi",
-    "Kylian Mbappe",
-    "Erling Haaland",
-    "Kevin De Bruyne",
-    "Neymar",
-    "Jude Bellingham",
-    "Vinicius Jr",
-    "Rodrygo",
-    "Harry Kane",
-    "Robert Lewandowski",
-    "Luka Modric",
-    "Toni Kroos",
-    "Karim Benzema",
-    "Mohamed Salah",
-    "Bruno Fernandes",
-    "Marcus Rashford",
-    "Bukayo Saka",
-    "Martin Ødegaard",
-    "Joshua Kimmich",
-    "Pedri",
-    "Gavi",
-    "Antoine Griezmann",
-    "Rafael Leão",
-    "Lautaro Martinez",
-    "Declan Rice",
-
-    // Coaches
-    "Carlo Ancelotti",
-    "Pep Guardiola",
-    "Jurgen Klopp",
-    "Jose Mourinho",
-    "Zinedine Zidane",
-    "Xavi",
-    "Mikel Arteta",
-    "Thomas Tuchel",
-    "Diego Simeone",
-    "Luis Enrique",
-    "Gareth Southgate",
-    "Didier Deschamps",
-    "Fernando Santos",
-    "Hansi Flick",
-    "Erik ten Hag",
-    "Unai Emery",
-    "Roberto Martinez",
-    "Simone Inzaghi",
-    "Julian Nagelsmann",
-
-    // Other Football Terms
-    "VAR",
-    "Offside",
-    "Penalty",
-    "Free Kick",
-    "Corner Kick",
-    "Yellow Card",
-    "Red Card",
-    "Hat-trick",
-    "Goalkeeper",
-    "Defender",
-    "Midfielder",
-    "Striker",
-    "Assist",
-    "Clean Sheet",
-    "Formation",
-    "Tactics",
-    "Counter Attack",
-    "Pressing",
-    "Possession",
-    "Injury Time",
-    "Stoppage Time",
-    "Extra Time",
-    "Penalty Shootout",
-    "Transfer Window",
-    "Loan Move",
-    "Buyout Clause",
-    "Salary Cap",
-    "Golden Boot",
-    "Ballon d'Or",
-    "The Treble",
-    "El Clasico",
-    "Derby",
-    "Top Scorer",
-    "Best XI",
-  ];
 
   const filteredItems = Tags.filter((item) =>
     item.toLowerCase().includes((searchValue || "").toLowerCase())
@@ -244,6 +75,7 @@ const AddTransferNewsForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const form = e.target;
     const title = form.title.value;
@@ -255,18 +87,21 @@ const AddTransferNewsForm = () => {
 
     // Form Validation -->
     if (!source || !source_image) {
+      setLoading(false);
       return Swal.fire({
         icon: "error",
         title: "Source Is Required!",
       });
     }
     if (selectedTags.length === 0) {
+      setLoading(false);
       return Swal.fire({
         icon: "error",
         title: "Tags Are Required!",
       });
     }
     if (selectedTags.length < 5) {
+      setLoading(false);
       return Swal.fire({
         icon: "error",
         title: "Tags Must Be Atleast 5",
@@ -305,7 +140,8 @@ const AddTransferNewsForm = () => {
       if (data.data?.insertedId) {
         form.reset();
         router.refresh();
-        router.push("/");
+        fetchTransfers();
+        router.push("/dashboard/manage-transfer-news");
         Swal.fire({
           icon: "success",
           title: data.message,
@@ -321,6 +157,8 @@ const AddTransferNewsForm = () => {
         confirmButtonColor: "#d33",
         confirmButtonText: "Try Again!",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -505,12 +343,21 @@ const AddTransferNewsForm = () => {
       </div>
       {/* Submit Button */}
       <div className="w-full mt-2 mx-auto flex justify-center">
-        <Button
-          type="submit"
-          className="w-2/3 mx-auto font-semibold text-[16px]"
-        >
-          Post Transfer News
-        </Button>
+        <button disabled={loading} type="submit" className="w-full mt-2">
+          <Button
+            disabled={loading}
+            className="w-2/3 mx-auto font-semibold text-[16px] flex items-center justify-center gap-2 disabled:opacity-50"
+          >
+            {loading ? (
+              <>
+                <span className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
+                <span className="mt-[2.5px]">Posting...</span>
+              </>
+            ) : (
+              "Post Transfer News"
+            )}
+          </Button>
+        </button>
       </div>
     </form>
   );

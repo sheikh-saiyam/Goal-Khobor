@@ -169,7 +169,7 @@ const AddNewsForm = () => {
         });
       })
       .finally(() => {
-        setLoading(false); // Stop loading
+        setLoading(false); 
       });
   };
 
