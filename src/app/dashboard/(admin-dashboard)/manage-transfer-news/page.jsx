@@ -64,8 +64,8 @@ const ManageTransferNews = () => {
   if (isError)
     return <div className="w-full h-full bg-[#e5eaf2] animate-pulse rounded" />;
 
-   // Function for delete transfer news
-   const deleteNews = async (id) => {
+  // Function for delete transfer news
+  const deleteNews = async (id) => {
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "This action will permanently delete the transfer news!",
@@ -98,7 +98,8 @@ const ManageTransferNews = () => {
         Swal.fire({
           title: "Error!",
           text:
-            error.message || "Something went wrong while deleting the transfer news.",
+            error.message ||
+            "Something went wrong while deleting the transfer news.",
           icon: "error",
           background: "#ffffff",
           color: "#000000",

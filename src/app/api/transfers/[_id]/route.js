@@ -13,7 +13,9 @@ export const GET = async (req, { params }) => {
 export const DELETE = async (req, { params }) => {
   const { _id } = await params;
   try {
-    const transfersCollection = await dbConnect(collections.transfersCollection);
+    const transfersCollection = await dbConnect(
+      collections.transfersCollection
+    );
 
     if (!_id) {
       return NextResponse.json(
@@ -22,7 +24,9 @@ export const DELETE = async (req, { params }) => {
       );
     }
 
-    const result = await transfersCollection.deleteOne({ _id: new ObjectId(_id) });
+    const result = await transfersCollection.deleteOne({
+      _id: new ObjectId(_id),
+    });
 
     if (result.deletedCount === 0) {
       return NextResponse.json(
