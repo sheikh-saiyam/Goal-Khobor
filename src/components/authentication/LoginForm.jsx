@@ -33,7 +33,7 @@ const LoginForm = () => {
       }
       // Success modal
       if (result?.ok) {
-        router.push("/profile");
+        router.push("/dashboard");
         Swal.fire({
           icon: "success",
           title: "Login Successful",

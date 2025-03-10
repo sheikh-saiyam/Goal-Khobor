@@ -71,7 +71,7 @@ const Sidebar = () => {
             <div
               key={index}
               className={`h-11 bg-[#e5eaf2] animate-pulse 
-        ${isCollapse1 ? "w-full px-[164px]" : "w-10 px-4"}`}
+                ${isCollapse1 ? "w-full px-[164px]" : "w-10 px-4"}`}
             />
           ))}
         </div>

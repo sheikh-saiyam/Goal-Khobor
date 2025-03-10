@@ -20,7 +20,7 @@ const DashboardLayout = ({ children }) => {
       {/* Overlay for mobile when sidebar is open */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black opacity-50 lg:hidden cursor-pointer"
+          className="fixed inset-0 bg-black opacity-10 lg:hidden cursor-pointer"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
