@@ -3,6 +3,7 @@ import Image from "next/image";
 import useFetchPublishers from "@/hooks/useFetchPublishers";
 import { imgUpload } from "@/app/actions/imgUpload";
 import { IoChevronDown } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
@@ -11,6 +12,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const AddPowerRankingForm = () => {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState("");
@@ -105,7 +107,7 @@ const AddPowerRankingForm = () => {
       description: description,
       publisher: selectedPublisher.publisher_name,
       publisher_image: selectedPublisher.publisher_image,
-      publishedDate: new Date(),
+      published_date: new Date(),
       rankings: [...rankings].reverse(),
     };
 
@@ -124,9 +126,8 @@ const AddPowerRankingForm = () => {
       }
       // Show Confirmation Toast --->
       if (data.data?.insertedId) {
-        form.reset();
         router.refresh();
-        // fetchTransfers();
+        // fetchRankings();
         router.push("/");
         Swal.fire({
           icon: "success",
@@ -335,7 +336,7 @@ const AddPowerRankingForm = () => {
                   Image URL
                 </label>
                 <input
-                  type="text"
+                  type="url"
                   required
                   name={`rankingImage-${index}`}
                   value={ranking.image}

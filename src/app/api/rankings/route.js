@@ -12,7 +12,7 @@ export const GET = async (req) => {
 export const POST = async (req) => {
   try {
     const session = await auth();
-    if (!sessios || session?.user?.role !== "admin") {
+    if (!session || session?.user?.role !== "admin") {
       return NextResponse.json({
         status: 403,
         error: "Forbidden Access",
