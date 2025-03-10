@@ -20,7 +20,7 @@ const FeaturesNewsCard = ({ news }) => {
         <div className="w-full p-2">
           <div>
             <h3 className="text-lg font-medium text-[#444]">
-              {published_date}
+              {published_date.split("T")[0]}
             </h3>
             <h1 className="mt-2 text-xl font-semibold tracking-wider">
               {title}

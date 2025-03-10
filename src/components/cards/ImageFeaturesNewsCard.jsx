@@ -18,7 +18,7 @@ const ImageFeaturesNewsCard = ({ news }) => {
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
             <h2 className="text-white text-xl font-semibold">{title}</h2>
             <div className="flex justify-between items-center mt-2 text-sm text-gray-300">
-              <span>{published_date}</span>
+              <span>{published_date.split("T")[0]}</span>
             </div>
           </div>
         </div>

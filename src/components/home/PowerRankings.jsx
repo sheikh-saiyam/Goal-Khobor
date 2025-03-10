@@ -6,7 +6,10 @@ import dbConnect, { collections } from "@/lib/dbConnect";
 const PowerRankings = async () => {
   // Get power_rankings from db --->
   const rankingsCollection = await dbConnect(collections.rankingsCollection);
-  const rankings = await rankingsCollection.find().sort({ published_date: -1 }).toArray();
+  const rankings = await rankingsCollection
+    .find()
+    .sort({ published_date: -1 })
+    .toArray();
 
   return (
     <div>
@@ -27,13 +30,13 @@ const PowerRankings = async () => {
                   alt={ranking.title}
                   width={600}
                   height={200}
-                  className="min-h-[170px] w-full"
+                  className="min-h-[170px] w-full object-cover"
                 />
               </div>
               {/* Text Container */}
               <div className="p-4">
                 <h3 className="text-lg font-medium text-[#444]">
-                  {ranking.published_date}
+                  {ranking.published_date.split("T")[0]}
                 </h3>
                 <h1 className="mt-1 text-xl font-semibold tracking-wider">
                   {ranking.title}
