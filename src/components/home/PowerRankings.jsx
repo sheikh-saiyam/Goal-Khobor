@@ -6,7 +6,7 @@ import dbConnect, { collections } from "@/lib/dbConnect";
 const PowerRankings = async () => {
   // Get power_rankings from db --->
   const rankingsCollection = await dbConnect(collections.rankingsCollection);
-  const rankings = await rankingsCollection.find().toArray();
+  const rankings = await rankingsCollection.find().sort({ published_date: -1 }).toArray();
 
   return (
     <div>

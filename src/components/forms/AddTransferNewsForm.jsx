@@ -3,8 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
-import { fetchTransfers } from 
-  "@/app/dashboard/(admin-dashboard)/manage-transfer-news/page";
+import { fetchTransfers } from "@/app/dashboard/(admin-dashboard)/manage-transfer-news/page";
 import { IoCheckmark } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";

@@ -8,6 +8,7 @@ import { FiUpload } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import { Button } from "../ui/button";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const AddPowerRankingForm = () => {
   const [title, setTitle] = useState("");
@@ -87,26 +88,61 @@ const AddPowerRankingForm = () => {
       });
     }
 
+    // Upload Image To imgBB
+    const imageUrl = await imgUpload(image);
+    if (!imageUrl) {
+      setLoading(false);
+      return Swal.fire({
+        icon: "error",
+        title: "Image Upload Failed!",
+      });
+    }
+
+    // Ranking Data
+    const ranking_data = {
+      title: title,
+      image: imageUrl,
+      description: description,
+      publisher: selectedPublisher.publisher_name,
+      publisher_image: selectedPublisher.publisher_image,
+      publishedDate: new Date(),
+      rankings: [...rankings].reverse(),
+    };
+
+    // Post data in db --->
     try {
-      // Upload Image To imgBB
-      const imageUrl = await imgUpload(image);
-
-      // Ranking Data
-      const ranking_data = {
-        title: title,
-        image: imageUrl,
-        description: description,
-        publisher: selectedPublisher.publisher_name,
-        publisher_image: selectedPublisher.publisher_image,
-        publishedDate: new Date(),
-        rankings: [...rankings].reverse(),
-      };
-
-      console.log("Submitted Data:", ranking_data);
-
-      // Proceed with form submission logic (e.g., send to backend)
+      const { data } = await axios.post(`/api/rankings`, ranking_data);
+      // Show Unauthorized or 500 status --->
+      if (data?.status === 403 || data?.status === 500) {
+        Swal.fire({
+          icon: "error",
+          title: `${data?.status} ${data?.error}`,
+          text: data?.message,
+          confirmButtonColor: "#d33",
+          confirmButtonText: "Ok, Understood!",
+        });
+      }
+      // Show Confirmation Toast --->
+      if (data.data?.insertedId) {
+        form.reset();
+        router.refresh();
+        // fetchTransfers();
+        router.push("/");
+        Swal.fire({
+          icon: "success",
+          title: data.message,
+          confirmButtonColor: "#000",
+          confirmButtonText: "Ok, Great!",
+        });
+      }
     } catch (error) {
-      console.error("Image upload failed:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message || "Something went wrong!",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Try Again!",
+      });
     } finally {
       setLoading(false);
     }

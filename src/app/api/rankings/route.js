@@ -1,4 +1,5 @@
 "use server";
+import { auth } from "@/auth";
 import dbConnect, { collections } from "@/lib/dbConnect";
 import { NextResponse } from "next/server";
 
@@ -11,7 +12,7 @@ export const GET = async (req) => {
 export const POST = async (req) => {
   try {
     const session = await auth();
-    if (!session || session?.user?.role !== "admin") {
+    if (!sessios || session?.user?.role !== "admin") {
       return NextResponse.json({
         status: 403,
         error: "Forbidden Access",
@@ -24,7 +25,7 @@ export const POST = async (req) => {
     const result = await rankingsCollection.insertOne(ranking_data);
 
     return NextResponse.json(
-      { message: "Transfer news added successfully", data: result },
+      { message: "Power Ranking Added Successfully", data: result },
       { status: 201 }
     );
   } catch (error) {
