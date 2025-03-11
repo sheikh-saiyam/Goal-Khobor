@@ -60,7 +60,7 @@ const AdminLinks = ({ isCollapse1 }) => {
                 isCollapse1 ? "inline" : "hidden"
               } text-lg tracking-wider font-semibold ml-[5px]`}
             >
-              Add News
+              Add A News
             </p>
           </Link>
         </div>
