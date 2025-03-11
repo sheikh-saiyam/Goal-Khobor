@@ -35,7 +35,7 @@ const ManagePowerRankings = () => {
   const [sortBy, setSortBy] = useState("published_date");
   const [sortOrder, setSortOrder] = useState("desc");
   const [page, setPage] = useState(1);
-  const limit = 10;
+  const limit = 5;
 
   // Use TanStack Query to fetch rankings
   const {
@@ -192,6 +192,7 @@ const ManagePowerRankings = () => {
                     <td className="px-4 py-2">{item.likes}</td>
                     <td className="px-4 py-2">
                       <div className="flex items-center gap-4">
+                        {/* RankingDetailsDialog */}
                         <RankingDetailsDialog ranking={item} />
                         <button className="flex items-center gap-1 text-gray-700 bg-gray-100 border rounded cursor-pointer hover:bg-gray-300 duration-300 p-2">
                           <MdOutlineEdit size={20} />
@@ -211,7 +212,12 @@ const ManagePowerRankings = () => {
       </div>
 
       {/* Pagination */}
-      <ManagePagePagination isLoading={isLoading} data={data} page={page} />
+      <ManagePagePagination
+        isLoading={isLoading}
+        data={data}
+        page={page}
+        setPage={setPage}
+      />
     </div>
   );
 };

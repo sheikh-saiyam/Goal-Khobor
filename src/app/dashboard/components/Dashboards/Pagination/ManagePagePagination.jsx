@@ -1,6 +1,6 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-const ManagePagePagination = ({ isLoading, data, page }) => {
+const ManagePagePagination = ({ isLoading, data, page, setPage }) => {
   return (
     <div className="mt-4 flex justify-center gap-2">
       {isLoading ? (
