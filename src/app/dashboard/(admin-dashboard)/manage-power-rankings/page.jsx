@@ -149,15 +149,25 @@ const ManagePowerRankings = () => {
                     className="border-t border-gray-200 hover:bg-gray-50"
                   >
                     <td className="px-4 py-2">
-                      <div className="h-5 w-8 bg-[#e5eaf2] animate-pulse rounded"></div>
-                    </td>
-                    <td className="px-4 py-2">
-                      <div className="h-5 w-32 bg-[#e5eaf2] animate-pulse rounded"></div>
-                    </td>
-                    <td className="px-4 py-2">
                       <div className="h-5 w-64 bg-[#e5eaf2] animate-pulse rounded"></div>
                     </td>
+                    <td className="px-4 py-2">
+                      <div className="h-5 w-16 bg-[#e5eaf2] animate-pulse rounded"></div>
+                    </td>
+                    <td className="px-4 py-2">
+                      <div className="h-5 w-16 bg-[#e5eaf2] animate-pulse rounded"></div>
+                    </td>
+                    <td className="px-4 py-2">
+                      <div className="h-5 w-16 bg-[#e5eaf2] animate-pulse rounded"></div>
+                    </td>
+                    <td className="px-4 py-2">
+                      <div className="h-5 w-16 bg-[#e5eaf2] animate-pulse rounded"></div>
+                    </td>
+                    <td className="px-4 py-2">
+                      <div className="h-5 w-16 bg-[#e5eaf2] animate-pulse rounded"></div>
+                    </td>
                     <td className="px-4 py-2 flex items-center gap-4">
+                      <div className="h-10 w-10 bg-[#e5eaf2] animate-pulse rounded"></div>
                       <div className="h-10 w-10 bg-[#e5eaf2] animate-pulse rounded"></div>
                       <div className="h-10 w-10 bg-[#e5eaf2] animate-pulse rounded"></div>
                     </td>
