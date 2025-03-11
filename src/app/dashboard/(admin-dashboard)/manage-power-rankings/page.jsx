@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { PiRankingFill } from "react-icons/pi";
 import Swal from "sweetalert2";
 import axios from "axios";
+import RankingDetailsDialog from "./RankingDetailsDialog";
 
 // Fetch Function For Get Rankings
 export const fetchRankings = async ({ queryKey }) => {
@@ -116,7 +117,7 @@ const ManagePowerRankings = () => {
         <Button
           onClick={() => {
             setSearch("");
-            setSource("");
+            setPublisher("");
             setSortBy("published_date");
             setSortOrder("desc");
             setPage(1);
@@ -131,9 +132,12 @@ const ManagePowerRankings = () => {
         <table className="w-full table-auto border-collapse border border-gray-300">
           <thead className="bg-gray-100">
             <tr className="text-left">
-              <th className="px-4 py-2 border text-gray-700">Rank</th>
-              <th className="px-4 py-2 border text-gray-700">Team</th>
-              <th className="px-4 py-2 border text-gray-700">Description</th>
+              <th className="px-4 py-2 border text-gray-700">Title</th>
+              <th className="px-4 py-2 border text-gray-700">Rankings</th>
+              <th className="px-4 py-2 border text-gray-700">Publisher</th>
+              <th className="px-4 py-2 border text-gray-700">Published Date</th>
+              <th className="px-4 py-2 border text-gray-700">Views</th>
+              <th className="px-4 py-2 border text-gray-700">Likes</th>
               <th className="px-4 py-2 border text-gray-700">Actions</th>
             </tr>
           </thead>
@@ -161,18 +165,30 @@ const ManagePowerRankings = () => {
                 ))
               : data?.rankings?.map((item) => (
                   <tr key={item.rank} className="border hover:bg-gray-50">
-                    <td className="px-4 py-2 font-semibold">{item.title}</td>
-                    <td className="px-4 py-2">
-                      {item.description.length > 80
-                        ? item.description.slice(0, 80) + "..."
-                        : item.description}
+                    <td className="px-4 py-2 w-fit">
+                      {item.title.length > 60
+                        ? item.title.slice(0, 60) + "..."
+                        : item.title}
                     </td>
                     <td className="px-4 py-2">
+                      {item.rankings.length} <sub>(Total)</sub>
+                    </td>
+                    <td className="px-4 py-2">{item.publisher}</td>
+                    <td className="px-4 py-2">
+                      {new Date(item.published_date).toLocaleDateString()}
+                    </td>
+                    <td className="px-4 py-2">{item.views}</td>
+                    <td className="px-4 py-2">{item.likes}</td>
+                    <td className="px-4 py-2">
                       <div className="flex items-center gap-4">
+                        <RankingDetailsDialog ranking={item} />
                         <button className="flex items-center gap-1 text-gray-700 bg-gray-100 border rounded cursor-pointer hover:bg-gray-300 duration-300 p-2">
                           <MdOutlineEdit size={20} />
                         </button>
-                        <button className="flex items-center gap-1 text-red-600 bg-gray-100 border rounded cursor-pointer hover:bg-gray-300 duration-300 p-2">
+                        <button
+                          // onClick={() => deleteNews(item._id)}
+                          className="flex items-center gap-1 text-gray-700 bg-gray-100 border cursor-pointer hover:bg-gray-300 duration-300 p-2 rounded"
+                        >
                           <MdDeleteOutline size={20} />
                         </button>
                       </div>

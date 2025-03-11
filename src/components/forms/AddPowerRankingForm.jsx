@@ -109,6 +109,8 @@ const AddPowerRankingForm = () => {
       publisher_image: selectedPublisher.publisher_image,
       published_date: new Date(),
       rankings: [...rankings].reverse(),
+      views: 0,
+      likes: 0
     };
 
     // Post data in db --->
