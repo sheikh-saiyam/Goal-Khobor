@@ -22,9 +22,12 @@ const RankingDetailsDialog = ({ ranking }) => {
       <DialogContent className="w-[80%] max-w-4xl max-h-[80vh] overflow-y-auto p-6">
         <DialogHeader>
           <p className="text-gray-700 text-base mt-2">
-            Published on: {new Date(ranking.published_date).toLocaleDateString()}
+            Published on:{" "}
+            {new Date(ranking.published_date).toLocaleDateString()}
           </p>
-          <DialogTitle className="text-lg font-bold">{ranking.title}</DialogTitle>
+          <DialogTitle className="text-lg font-bold">
+            {ranking.title}
+          </DialogTitle>
         </DialogHeader>
         <div className="mt-4">
           <Image
@@ -53,41 +56,39 @@ const RankingDetailsDialog = ({ ranking }) => {
           </p>
         </div>
         <div className="mt-6">
-               {ranking.rankings.map((item, idx) => (
-                 <div key={idx} className="pb-6">
-                   <h1 className="text-2xl font-semibold tracking-wide text-[#3a3a3a]">
-                     <span className="font-extrabold text-black">
-                       {item.rank}.
-                     </span>
-                     {item.title}
-                   </h1>
-                   <div className="mt-4">
-                     <Image
-                       src={item.image}
-                       alt={item.title}
-                       width={1000}
-                       height={400}
-                       className="max-h-[300px] w-full lg:w-2/3"
-                     />
-                   </div>
-                   <div className="w-full lg:w-2/3">
-                     <h3 className="mt-4 text-[#444] tracking-wider text-xl whitespace-pre-line">
-                     {expanded
-              ? item.description
-              : item.description.slice(0, 100) + "..."}
-            {!expanded && item.description.length > 100 && (
-              <button
-                onClick={() => setExpanded(true)}
-                className="text-gray-900 ml-1 underline"
-              >
-                Read More
-              </button>
-            )}
-                     </h3>
-                   </div>
-                 </div>
-               ))}
-             </div>
+          {ranking.rankings.map((item, idx) => (
+            <div key={idx} className="pb-6">
+              <h1 className="text-2xl font-semibold tracking-wide text-[#3a3a3a]">
+                <span className="font-extrabold text-black">{item.rank}.</span>
+                {item.title}
+              </h1>
+              <div className="mt-4">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={1000}
+                  height={400}
+                  className="max-h-[300px] w-full lg:w-2/3"
+                />
+              </div>
+              <div className="w-full lg:w-2/3">
+                <h3 className="mt-4 text-[#444] tracking-wider text-xl whitespace-pre-line">
+                  {expanded
+                    ? item.description
+                    : item.description.slice(0, 100) + "..."}
+                  {!expanded && item.description.length > 100 && (
+                    <button
+                      onClick={() => setExpanded(true)}
+                      className="text-gray-900 ml-1 underline"
+                    >
+                      Read More
+                    </button>
+                  )}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
       </DialogContent>
     </Dialog>
   );
