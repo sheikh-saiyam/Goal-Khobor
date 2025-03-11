@@ -189,8 +189,8 @@ const PublishersCountChart = () => {
         maxWidth: "800px",
         height: "400px",
         margin: "0 auto",
-        backgroundColor: "#F3F4F6", // gray-100
-        border: "1px solid #E5E7EB", // gray-200
+        backgroundColor: "#F3F4F6",
+        border: "1px solid #E5E7EB",
         borderRadius: "8px",
         padding: "10px",
       }}
