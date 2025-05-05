@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import SocialLogin from "./SocialLogin";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -16,6 +16,14 @@ const LoginForm = () => {
   const userLogin = async (formData) => {
     setError(null);
     setLoading(true);
+    const loadingToast = toast.loading("Logging in...", {
+      description: "Please wait while we authenticate you",
+      position: "top-right",
+      style: {
+        marginTop: "20px",
+      },
+    });
+
     try {
       const email = formData.get("email")?.trim();
       const password = formData.get("password")?.trim();
@@ -33,14 +41,20 @@ const LoginForm = () => {
       }
       // Success modal
       if (result?.ok) {
+        toast.dismiss(loadingToast);
         router.push("/dashboard");
-        Swal.fire({
-          icon: "success",
-          title: "Login Successful",
-          confirmButtonColor: "#000",
+        toast.success(<b>Login Successful!</b>, {
+          description:
+            "Welcome back! You have successfully logged into your account",
+          duration: 1000,
+          position: "top-right",
+          style: {
+            marginTop: "20px",
+          },
         });
       }
     } catch (err) {
+      toast.dismiss(loadingToast);
       setError(err.message || "Something went wrong while logging in!");
     } finally {
       setLoading(false);
