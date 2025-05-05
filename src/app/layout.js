@@ -4,6 +4,7 @@ import Navbar from "@/components/Shared/Navbar/Navbar";
 import Footer from "@/components/Shared/Footer/Footer";
 import SessionProvider from "@/providers/NextAuthSessionProvider";
 import QueryProvider from "@/providers/QueryProvider";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
       >
         <SessionProvider>
           <QueryProvider>
+            <Toaster />
             <Navbar />
             {children}
             <Footer />
