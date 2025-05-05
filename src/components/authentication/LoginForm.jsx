@@ -41,12 +41,12 @@ const LoginForm = () => {
       }
       // Success modal
       if (result?.ok) {
-        toast.dismiss(loadingToast);
         router.push("/dashboard");
+        toast.dismiss(loadingToast);
         toast.success(<b>Login Successful!</b>, {
           description:
             "Welcome back! You have successfully logged into your account",
-          duration: 1000,
+          duration: 3000,
           position: "top-right",
           style: {
             marginTop: "20px",
