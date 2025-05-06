@@ -15,7 +15,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-const MobileNavbar = ({ user, navLinks, path }) => {
+const MobileNavbar = ({ user, navLinks, path, getInitials, handleSignOut }) => {
   return (
     <div className="flex xl:hidden">
       <Sheet>
@@ -53,7 +53,7 @@ const MobileNavbar = ({ user, navLinks, path }) => {
               </div>
             )}
 
-            <Separator className="my-4" />
+            <Separator className="border my-4" />
 
             <div className="flex flex-col space-y-1">
               {navLinks.map((link) => (
@@ -101,7 +101,7 @@ const MobileNavbar = ({ user, navLinks, path }) => {
               )}
             </div>
 
-            <Separator className="my-4" />
+            <Separator className="border my-4" />
 
             <div className="flex justify-center gap-4 mt-4">
               <Button

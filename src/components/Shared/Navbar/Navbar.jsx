@@ -178,7 +178,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu */}
-        <MobileNavbar user={user} navLinks={navLinks} path={path}/>
+        <MobileNavbar user={user} navLinks={navLinks} path={path} getInitials={getInitials} handleSignOut={handleSignOut} />
         {/* <div className="flex xl:hidden">
           <Sheet>
             <SheetTrigger asChild>
