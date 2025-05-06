@@ -1,12 +1,14 @@
 "use client";
 import Link from "next/link";
 import { IoIosLogIn } from "react-icons/io";
-import { Button } from "@/components/ui/button";
-import SocialLogin from "./SocialLogin";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { signIn } from "next-auth/react";
+import SocialLogin from "./SocialLogin";
+import { useState } from "react";
 import { toast } from "sonner";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -19,9 +21,9 @@ const LoginForm = () => {
     const loadingToast = toast.loading("Logging in...", {
       description: "Please wait while we authenticate you",
       position: "top-right",
-      style: {
-        marginTop: "20px",
-      },
+      // style: {
+      //   marginTop: "-20px",
+      // },
     });
 
     try {
@@ -35,22 +37,22 @@ const LoginForm = () => {
       });
       // Error message
       if (result?.error) {
-        // setError(result.error || "Invalid email or password!");
         setError("Invalid email or password!");
+        toast.dismiss(loadingToast);
         return;
       }
       // Success modal
       if (result?.ok) {
-        router.push("/dashboard");
+        router.push("/");
         toast.dismiss(loadingToast);
         toast.success(<b>Login Successful!</b>, {
           description:
             "Welcome back! You have successfully logged into your account",
           duration: 3000,
           position: "top-right",
-          style: {
-            marginTop: "20px",
-          },
+          // style: {
+          //   marginTop: "-20px",
+          // },
         });
       }
     } catch (err) {
@@ -83,52 +85,48 @@ const LoginForm = () => {
         >
           {/* Email */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="email" className="font-semibold text-black text-sm">
-              Email
-            </label>
-            <input
+            <Label htmlFor="email">Email</Label>
+            <Input
               id="email"
               name="email"
               type="email"
               required
               placeholder="Enter Email"
-              className="border rounded-lg border-gray-300 outline-none py-2 px-3 placeholder-gray-500 text-gray-500 focus:ring-1 focus:ring-[#848484]"
             />
           </div>
 
           {/* Password */}
           <div className="flex flex-col gap-2">
-            <label
-              htmlFor="password"
-              className="font-semibold text-black text-sm"
-            >
-              Password
-            </label>
-            <input
+            <Label htmlFor="password">Password</Label>
+            <Input
               id="password"
               name="password"
               type="password"
               required
               placeholder="Enter Password"
-              className="border rounded-lg border-gray-300 outline-none py-2 px-3 placeholder-gray-500 text-gray-500 focus:ring-1 focus:ring-[#848484]"
             />
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="text-red-500 text-sm py-[6px] bg-red-100 rounded-lg font-semibold text-center">
+            <div className="text-red-500 mt-1 text-sm py-[6px] bg-red-100 rounded-lg font-semibold text-center">
               {error}
             </div>
           )}
 
           {/* Login Button */}
-          <Button type="submit" disabled={loading} className="mt-1">
+          <Button
+            size="md"
+            type="submit"
+            disabled={loading}
+            className="py-2 mt-1"
+          >
             {loading ? "Logging in..." : "Login"}
           </Button>
         </form>
 
         {/* Social Login */}
-        <SocialLogin />
+        {/* <SocialLogin /> */}
 
         {/* Navigate to Register */}
         <div className="mt-4 text-center text-sm text-gray-900">

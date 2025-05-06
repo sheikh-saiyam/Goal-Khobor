@@ -58,7 +58,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="w-11/12 md:w-10/12 mx-auto max-w-screen-2xl py-6 md:py-9">
+    <footer className="w-11/12 md:w-10/12 mx-auto max-w-screen-2xl pt-6 md:pt-9 pb-6">
       <div className="border-t border-gray-200 pt-8 flex justify-between gap-[20px] flex-wrap w-full">
         {/* Top Viewed News */}
         <div className="w-fit">
@@ -176,7 +176,7 @@ const Footer = () => {
           <Image
             src={"https://i.ibb.co.com/fV684RGm/goal-khobor.png"}
             alt="Goal Khobor"
-            className="w-44 h-20"
+            className="w-30 h-12"
             width={100}
             height={100}
           />
