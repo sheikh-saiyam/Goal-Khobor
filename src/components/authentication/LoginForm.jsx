@@ -20,7 +20,7 @@ const LoginForm = () => {
       description: "Please wait while we authenticate you",
       position: "top-right",
       style: {
-        marginTop: "20px",
+        marginTop: "-10px",
       },
     });
 
@@ -41,7 +41,7 @@ const LoginForm = () => {
       }
       // Success modal
       if (result?.ok) {
-        router.push("/dashboard");
+        router.push("/");
         toast.dismiss(loadingToast);
         toast.success(<b>Login Successful!</b>, {
           description:
@@ -49,7 +49,7 @@ const LoginForm = () => {
           duration: 3000,
           position: "top-right",
           style: {
-            marginTop: "20px",
+            marginTop: "-10px",
           },
         });
       }
