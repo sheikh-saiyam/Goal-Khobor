@@ -1,12 +1,14 @@
 "use client";
 import Link from "next/link";
 import { IoIosLogIn } from "react-icons/io";
-import { Button } from "@/components/ui/button";
-import SocialLogin from "./SocialLogin";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { signIn } from "next-auth/react";
+import SocialLogin from "./SocialLogin";
+import { useState } from "react";
 import { toast } from "sonner";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -35,7 +37,7 @@ const LoginForm = () => {
       });
       // Error message
       if (result?.error) {
-        // setError(result.error || "Invalid email or password!");
+        toast.dismiss(loadingToast);
         setError("Invalid email or password!");
         return;
       }
@@ -83,40 +85,31 @@ const LoginForm = () => {
         >
           {/* Email */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="email" className="font-semibold text-black text-sm">
-              Email
-            </label>
-            <input
+            <Label htmlFor="email">Email</Label>
+            <Input
               id="email"
               name="email"
               type="email"
               required
               placeholder="Enter Email"
-              className="border rounded-lg border-gray-300 outline-none py-2 px-3 placeholder-gray-500 text-gray-500 focus:ring-1 focus:ring-[#848484]"
             />
           </div>
 
           {/* Password */}
           <div className="flex flex-col gap-2">
-            <label
-              htmlFor="password"
-              className="font-semibold text-black text-sm"
-            >
-              Password
-            </label>
-            <input
+            <Label htmlFor="password">Password</Label>
+            <Input
               id="password"
               name="password"
               type="password"
               required
               placeholder="Enter Password"
-              className="border rounded-lg border-gray-300 outline-none py-2 px-3 placeholder-gray-500 text-gray-500 focus:ring-1 focus:ring-[#848484]"
             />
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="text-red-500 text-sm py-[6px] bg-red-100 rounded-lg font-semibold text-center">
+            <div className="text-red-500 mt-1 text-sm py-[6px] bg-red-100 rounded-lg font-semibold text-center">
               {error}
             </div>
           )}

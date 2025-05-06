@@ -1,21 +1,6 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import {
-  LogIn,
-  LogOut,
-  Menu,
-  User,
-  Home,
-  Newspaper,
-  ArrowRightLeft,
-  BarChart3,
-} from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
-import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,11 +8,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Separator } from "@/components/ui/separator";
-import { Facebook, Instagram, Linkedin } from "lucide-react";
-import TopNavbar from "./TopNavbar";
+import {
+  ArrowRightLeft,
+  BarChart3,
+  Home,
+  LogIn,
+  LogOut,
+  Newspaper,
+  User,
+} from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { toast } from "sonner";
 import MobileNavbar from "./MobileNavbar";
+import TopNavbar from "./TopNavbar";
 
 const Navbar = () => {
   const path = usePathname();
@@ -73,8 +69,8 @@ const Navbar = () => {
       position: "top-right",
       duration: 5000,
       style: {
-        marginTop: "-10px"
-      }
+        marginTop: "-10px",
+      },
     });
   };
 
