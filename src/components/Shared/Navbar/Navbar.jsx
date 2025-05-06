@@ -72,6 +72,9 @@ const Navbar = () => {
       error: "Logout failed. Please try again.",
       position: "top-right",
       duration: 5000,
+      style: {
+        marginTop: "-10px"
+      }
     });
   };
 

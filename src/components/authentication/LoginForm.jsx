@@ -19,9 +19,9 @@ const LoginForm = () => {
     const loadingToast = toast.loading("Logging in...", {
       description: "Please wait while we authenticate you",
       position: "top-right",
-      style: {
-        marginTop: "-10px",
-      },
+      // style: {
+      //   marginTop: "-20px",
+      // },
     });
 
     try {
@@ -48,9 +48,9 @@ const LoginForm = () => {
             "Welcome back! You have successfully logged into your account",
           duration: 3000,
           position: "top-right",
-          style: {
-            marginTop: "-10px",
-          },
+          // style: {
+          //   marginTop: "-20px",
+          // },
         });
       }
     } catch (err) {
@@ -128,7 +128,7 @@ const LoginForm = () => {
         </form>
 
         {/* Social Login */}
-        <SocialLogin />
+        {/* <SocialLogin /> */}
 
         {/* Navigate to Register */}
         <div className="mt-4 text-center text-sm text-gray-900">
