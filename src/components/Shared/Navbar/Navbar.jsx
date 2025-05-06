@@ -27,6 +27,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 import TopNavbar from "./TopNavbar";
+import MobileNavbar from "./MobileNavbar";
 
 const Navbar = () => {
   const path = usePathname();
@@ -177,10 +178,11 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu */}
-        <div className="flex xl:hidden">
+        <MobileNavbar user={user} navLinks={navLinks} path={path}/>
+        {/* <div className="flex xl:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Menu">
+              <Button variant="outline" size="icon" aria-label="Menu">
                 <Menu className="w-5 h-5" />
               </Button>
             </SheetTrigger>
@@ -293,7 +295,7 @@ const Navbar = () => {
               </div>
             </SheetContent>
           </Sheet>
-        </div>
+        </div> */}
       </div>
     </nav>
   );

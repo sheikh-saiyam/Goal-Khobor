@@ -1,84 +1,135 @@
 "use client";
-
-import React, { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
-import { IoMdMenu } from "react-icons/io";
+  Facebook,
+  Instagram,
+  Linkedin,
+  LogIn,
+  LogOut,
+  Menu,
+  User,
+} from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../../ui/button";
 
-const MobileNavbar = () => {
-  const [showStatusBar, setShowStatusBar] = useState(true);
-  const [showActivityBar, setShowActivityBar] = useState(false);
-  const [showPanel, setShowPanel] = useState(false);
-
+const MobileNavbar = ({ user, navLinks, path }) => {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="text-3xl">
-          <IoMdMenu size={40} />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent side="bottom" align="start" className="w-56 mr-9">
-        <DropdownMenuLabel>Navigation Links</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem
-          checked={showStatusBar}
-          onCheckedChange={setShowStatusBar}
-        >
-          <Link
-            href={"/"}
-            prefetch={true}
-            className="hover:underline underline-offset-2"
-          >
-            Home
-          </Link>
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          checked={showPanel}
-          onCheckedChange={setShowPanel}
-        >
-          <Link
-            href={"/news"}
-            prefetch={true}
-            className="hover:underline underline-offset-2"
-          >
-            All News
-          </Link>
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          checked={showPanel}
-          onCheckedChange={setShowPanel}
-        >
-          <Link
-            href={"/"}
-            prefetch={true}
-            className="hover:underline underline-offset-2"
-          >
-            Transfer News
-          </Link>
-        </DropdownMenuCheckboxItem>
-        <Link
-          href={"/"}
-          prefetch={true}
-          className="hover:underline underline-offset-2 cursor-pointer"
-        >
-          {" "}
-          <DropdownMenuCheckboxItem
-            checked={showPanel}
-            onCheckedChange={setShowPanel}
-          >
-            Power Rankings
-          </DropdownMenuCheckboxItem>
-        </Link>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="flex xl:hidden">
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="outline" size="icon" aria-label="Menu">
+            <Menu className="w-5 h-5" />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="w-[300px] sm:w-[350px]">
+          <div className="py-4">
+            <div className="flex justify-center mb-6">
+              <Image
+                src={"https://i.ibb.co.com/fV684RGm/goal-khobor.png"}
+                alt="Goal Khobor"
+                className="w-32 h-16"
+                width={100}
+                height={50}
+              />
+            </div>
+
+            {user && (
+              <div className="flex items-center space-x-4 mb-6 px-2">
+                <Avatar>
+                  <AvatarImage
+                    src={user.image || "/placeholder.svg?height=40&width=40"}
+                  />
+                  <AvatarFallback>{getInitials()}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-sm font-medium">{user.name}</p>
+                  <p className="text-xs text-muted-foreground truncate max-w-[240px]">
+                    {user.email}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            <Separator className="my-4" />
+
+            <div className="flex flex-col space-y-1">
+              {navLinks.map((link) => (
+                <Link key={link.href} href={link.href}>
+                  <Button
+                    variant={path === link.href ? "secondary" : "ghost"}
+                    className="w-full justify-start"
+                  >
+                    {link.icon}
+                    {link.label}
+                  </Button>
+                </Link>
+              ))}
+
+              {user ? (
+                <>
+                  <Link href="/dashboard">
+                    <Button
+                      variant={path === "/dashboard" ? "secondary" : "ghost"}
+                      className="w-full justify-start"
+                    >
+                      <User className="w-4 h-4 mr-2" />
+                      Dashboard
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-destructive hover:text-destructive"
+                    onClick={handleSignOut}
+                  >
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <Link href="/login">
+                  <Button
+                    variant="default"
+                    className="w-full justify-start mt-4"
+                  >
+                    <LogIn className="w-4 h-4 mr-2" />
+                    Login
+                  </Button>
+                </Link>
+              )}
+            </div>
+
+            <Separator className="my-4" />
+
+            <div className="flex justify-center gap-4 mt-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full text-muted-foreground hover:text-foreground"
+              >
+                <Facebook className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full text-muted-foreground hover:text-foreground"
+              >
+                <Instagram className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full text-muted-foreground hover:text-foreground"
+              >
+                <Linkedin className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+    </div>
   );
 };
 
