@@ -37,8 +37,8 @@ const LoginForm = () => {
       });
       // Error message
       if (result?.error) {
-        toast.dismiss(loadingToast);
         setError("Invalid email or password!");
+        toast.dismiss(loadingToast);
         return;
       }
       // Success modal
@@ -115,7 +115,12 @@ const LoginForm = () => {
           )}
 
           {/* Login Button */}
-          <Button type="submit" disabled={loading} className="mt-1">
+          <Button
+            size="md"
+            type="submit"
+            disabled={loading}
+            className="py-2 mt-1"
+          >
             {loading ? "Logging in..." : "Login"}
           </Button>
         </form>

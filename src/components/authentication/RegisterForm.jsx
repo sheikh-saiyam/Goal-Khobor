@@ -7,6 +7,8 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/app/actions/registerUser";
 import { useState } from "react";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -35,6 +37,7 @@ const RegisterForm = () => {
       });
     }
   };
+
   return (
     <div className="w-full h-screen flex items-center justify-center bg-base-200 fixed top-0 left-0 z-50">
       <div className="max-w-md mx-auto p-6 bg-white border-2 shadow rounded-lg">
@@ -47,53 +50,46 @@ const RegisterForm = () => {
           For Real-Time News.
         </p>
         <form action={handleSubmit} className="flex flex-col gap-4">
-          {/* Name input */}
+          {/* Name Input */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="name" className="font-semibold text-black text-sm">
-              Name
-            </label>
-            <input
+            <Label htmlFor="name">Name</Label>
+            <Input
               id="name"
               name="name"
               type="text"
               required
               placeholder="Enter Name"
-              className="border rounded-lg border-gray-300 outline-none py-2 px-3 placeholder-gray-500 text-gray-500 focus:ring-1 focus:ring-[#848484]"
             />
           </div>
-          {/* Email input */}
+          {/* Email Input */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="email" className="font-semibold text-black text-sm">
-              Email
-            </label>
-            <input
+            <Label htmlFor="email">Email</Label>
+            <Input
               id="email"
               name="email"
               type="email"
               required
               placeholder="Enter Email"
-              className="border rounded-lg border-gray-300 outline-none py-2 px-3 placeholder-gray-500 text-gray-500 focus:ring-1 focus:ring-[#848484]"
             />
           </div>
-          {/* Password input */}
+          {/* Password Input */}
           <div className="flex flex-col gap-2">
-            <label
-              htmlFor="password"
-              className="font-semibold text-black text-sm"
-            >
-              Password
-            </label>
-            <input
+            <Label htmlFor="password">Password</Label>
+            <Input
               id="password"
               name="password"
               type="password"
               required
               placeholder="Enter Password"
-              className="border rounded-lg border-gray-300 outline-none py-2 px-3 placeholder-gray-500 text-gray-500 focus:ring-1 focus:ring-[#848484]"
             />
           </div>
           {/* Register Button */}
-          <Button disabled={loading} type="submit" className="mt-1">
+          <Button
+            size="md"
+            type="submit"
+            disabled={loading}
+            className="py-2 mt-1"
+          >
             {loading ? "Registering..." : "Register"}
           </Button>
         </form>
