@@ -1,22 +1,24 @@
-"use client"
-import moment from "moment"
-import { Typewriter } from "react-simple-typewriter"
-import { Facebook, Instagram, Linkedin, AlertCircle } from "lucide-react"
+"use client";
+import moment from "moment";
+import { Typewriter } from "react-simple-typewriter";
+import { Facebook, Instagram, Linkedin, AlertCircle } from "lucide-react";
 
 const TopNavbar = () => {
   return (
     <div className="py-3 flex items-center flex-wrap gap-4 border-b border-border">
       {/* Date Time Div */}
-      <div className="hidden lg:flex text-sm text-muted-foreground">{moment().format("LLLL")}</div>
+      <div className="hidden lg:flex text-sm md:text-base">
+        {moment().format("LLLL")}
+      </div>
 
       {/* Breaking News Div */}
       <div className="flex items-center flex-grow gap-2">
-        <div className="bg-destructive text-sm md:text-base p-1 md:p-2 w-fit text-destructive-foreground font-semibold tracking-widest flex items-center gap-1.5">
-          <AlertCircle className="w-4 h-4" />
-          Breaking News
+        <div className="bg-destructive text-sm p-2 w-fit text-destructive-foreground font-semibold tracking-widest flex items-center gap-1">
+          <AlertCircle className="w-4 h-4 -mt-0.5" />
+          Breaking <span className="hidden lg:flex">News</span>
         </div>
         <div className="flex w-full md:w-fit flex-grow">
-          <span className="wavey-typewriter text-sm md:text-base">
+          <span className="wavey-typewriter text-xs md:text-sm text-muted-foreground">
             <Typewriter
               words={[
                 "Transfers LIVE: Neymar eyes Barca return despite Santos reunion",
@@ -54,7 +56,7 @@ const TopNavbar = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TopNavbar
+export default TopNavbar;
