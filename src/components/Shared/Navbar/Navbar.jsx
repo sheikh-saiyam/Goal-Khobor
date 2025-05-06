@@ -43,21 +43,25 @@ const Navbar = () => {
   }
 
   const navLinks = [
-    { href: "/", label: "Home", icon: <Home className="w-4 h-4 mr-2" /> },
+    {
+      href: "/",
+      label: "Home",
+      icon: <Home className="w-4 h-4 mr-0.5 -mt-[1.8px]" />,
+    },
     {
       href: "/news",
       label: "All News",
-      icon: <Newspaper className="w-4 h-4 mr-2" />,
+      icon: <Newspaper className="w-4 h-4 mr-0.5 -mt-[1.8px]" />,
     },
     {
       href: "/transfers",
       label: "Transfer News",
-      icon: <ArrowRightLeft className="w-4 h-4 mr-2" />,
+      icon: <ArrowRightLeft className="w-4 h-4 mr-0.5 -mt-[1.8px]" />,
     },
     {
       href: "/rankings",
       label: "Power Rankings",
-      icon: <BarChart3 className="w-4 h-4 mr-2" />,
+      icon: <BarChart3 className="w-4 h-4 mr-0.5 -mt-[1.8px]" />,
     },
   ];
 
@@ -92,25 +96,25 @@ const Navbar = () => {
           <Image
             src={"https://i.ibb.co.com/fV684RGm/goal-khobor.png"}
             alt="Goal Khobor"
-            className="w-32 h-14"
+            className="w-30 h-12"
             width={100}
             height={100}
           />
         </Link>
 
         {/* Desktop Nav Links */}
-        <div className="hidden xl:flex items-center gap-6 font-medium text-foreground">
+        <div className="hidden xl:flex items-center gap-4 font-medium text-foreground">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`px-1 py-2 transition-colors ${
+              className={`px-1.5 py-0.5 transition-colors flex items-center gap-1 ${
                 path === link.href
                   ? "text-foreground font-semibold border-b-2 border-primary"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              {link.label}
+              {link.icon} {link.label}
             </Link>
           ))}
 
@@ -132,8 +136,8 @@ const Navbar = () => {
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <div className="flex items-center justify-start gap-2 p-2">
+              <DropdownMenuContent align="end" className="w-full">
+                <div className="flex items-center justify-start gap-2 py-2 px-2">
                   <Avatar className="h-8 w-8">
                     <AvatarImage
                       src={user.image || "/placeholder.svg?height=32&width=32"}
@@ -142,27 +146,27 @@ const Navbar = () => {
                   </Avatar>
                   <div className="flex flex-col space-y-0.5">
                     <p className="text-sm font-medium">{user.name}</p>
-                    <p className="text-xs text-muted-foreground truncate">
+                    <p className="text-xs text-muted-foreground w-40 truncate">
                       {user.email}
                     </p>
                   </div>
                 </div>
-                <DropdownMenuSeparator />
+                <DropdownMenuSeparator className="border" />
                 <DropdownMenuItem asChild>
                   <Link
                     href="/dashboard"
                     className="cursor-pointer flex items-center"
                   >
-                    <User className="mr-2 h-4 w-4" />
-                    <span>Dashboard</span>
+                    <User className="h-4 w-4" />
+                    <span className="mt-0.5">Dashboard</span>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator />
+                <DropdownMenuSeparator className="border" />
                 <DropdownMenuItem
                   onClick={handleSignOut}
                   className="cursor-pointer text-destructive focus:text-destructive"
                 >
-                  <LogOut className="mr-2 h-4 w-4" />
+                  <LogOut className="h-4 w-4" />
                   <span>Logout</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -178,124 +182,13 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu */}
-        <MobileNavbar user={user} navLinks={navLinks} path={path} getInitials={getInitials} handleSignOut={handleSignOut} />
-        {/* <div className="flex xl:hidden">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon" aria-label="Menu">
-                <Menu className="w-5 h-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[350px]">
-              <div className="py-4">
-                <div className="flex justify-center mb-6">
-                  <Image
-                    src={"https://i.ibb.co.com/fV684RGm/goal-khobor.png"}
-                    alt="Goal Khobor"
-                    className="w-32 h-16"
-                    width={100}
-                    height={50}
-                  />
-                </div>
-
-                {user && (
-                  <div className="flex items-center space-x-4 mb-6 px-2">
-                    <Avatar>
-                      <AvatarImage
-                        src={
-                          user.image || "/placeholder.svg?height=40&width=40"
-                        }
-                      />
-                      <AvatarFallback>{getInitials()}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="text-sm font-medium">{user.name}</p>
-                      <p className="text-xs text-muted-foreground truncate max-w-[240px]">
-                        {user.email}
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                <Separator className="my-4" />
-
-                <div className="flex flex-col space-y-1">
-                  {navLinks.map((link) => (
-                    <Link key={link.href} href={link.href}>
-                      <Button
-                        variant={path === link.href ? "secondary" : "ghost"}
-                        className="w-full justify-start"
-                      >
-                        {link.icon}
-                        {link.label}
-                      </Button>
-                    </Link>
-                  ))}
-
-                  {user ? (
-                    <>
-                      <Link href="/dashboard">
-                        <Button
-                          variant={
-                            path === "/dashboard" ? "secondary" : "ghost"
-                          }
-                          className="w-full justify-start"
-                        >
-                          <User className="w-4 h-4 mr-2" />
-                          Dashboard
-                        </Button>
-                      </Link>
-                      <Button
-                        variant="ghost"
-                        className="w-full justify-start text-destructive hover:text-destructive"
-                        onClick={handleSignOut}
-                      >
-                        <LogOut className="w-4 h-4 mr-2" />
-                        Logout
-                      </Button>
-                    </>
-                  ) : (
-                    <Link href="/login">
-                      <Button
-                        variant="default"
-                        className="w-full justify-start mt-4"
-                      >
-                        <LogIn className="w-4 h-4 mr-2" />
-                        Login
-                      </Button>
-                    </Link>
-                  )}
-                </div>
-
-                <Separator className="my-4" />
-
-                <div className="flex justify-center gap-4 mt-4">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="rounded-full text-muted-foreground hover:text-foreground"
-                  >
-                    <Facebook className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="rounded-full text-muted-foreground hover:text-foreground"
-                  >
-                    <Instagram className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="rounded-full text-muted-foreground hover:text-foreground"
-                  >
-                    <Linkedin className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div> */}
+        <MobileNavbar
+          user={user}
+          navLinks={navLinks}
+          path={path}
+          getInitials={getInitials}
+          handleSignOut={handleSignOut}
+        />
       </div>
     </nav>
   );
