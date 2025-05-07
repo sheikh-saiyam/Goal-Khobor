@@ -5,7 +5,7 @@ import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, X
 
 
 
-export default function DateNewsCountChart({ data =[] }) {
+export default function DateNewsCountChart({ data = [] }) {
   const chartData = useMemo(() => {
     return [...data]
       .map((item) => ({
