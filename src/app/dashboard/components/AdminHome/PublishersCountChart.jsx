@@ -2,8 +2,7 @@
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 
-export function PublishersCountChart({ data }) {
-  // Normalize and aggregate data (e.g., combine "90min" and "90Min")
+export default function PublishersCountChart({ data = [] }) {
   const normalizedData = data.reduce((acc, item) => {
     const name = item.name.trim().toLowerCase()
     const existing = acc.find((entry) => entry.name.toLowerCase() === name)
@@ -26,7 +25,7 @@ export function PublishersCountChart({ data }) {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 70 }}>
+      <BarChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 25 }}>
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <XAxis dataKey="name" angle={-45} textAnchor="end" height={70} tick={{ fontSize: 12 }} />
         <YAxis label={{ value: "Articles", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
