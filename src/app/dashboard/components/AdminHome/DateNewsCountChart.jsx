@@ -1,11 +1,8 @@
 "use client";
 import Chart from "chart.js/auto";
 import { useEffect, useRef } from "react";
-import useFetchAdminStatistics from "@/hooks/useFetchAdminStatistics";
 
-const DateNewsCountChart = () => {
-  const [data, loading] = useFetchAdminStatistics();
-  const dateCount = data?.date_counts;
+const DateNewsCountChart = ({dateCount = {}, loading}) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 

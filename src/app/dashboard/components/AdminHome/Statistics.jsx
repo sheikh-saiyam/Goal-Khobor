@@ -1,17 +1,30 @@
-"use client";
-import { FaAd, FaChartBar } from "react-icons/fa";
-import { FaNewspaper } from "react-icons/fa";
-import { FaTrophy } from "react-icons/fa";
-import { FaExchangeAlt } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa";
-import { FaPenToSquare } from "react-icons/fa6";
-import { IoPricetags } from "react-icons/io5";
-import useFetchAdminStatistics from "@/hooks/useFetchAdminStatistics";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Activity,
+  BarChart3,
+  FileText,
+  Package,
+  Tag,
+  Trophy,
+  Users,
+} from "lucide-react";
 
-const Statistics = () => {
-  // Get all statistics --->
-  const [data, isLoading] = useFetchAdminStatistics();
-  const statistics = data?.statistics || {};
+function StatsCard({ title, value, description, icon }) {
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium">{title}</CardTitle>
+        {icon}
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">{value?.toLocaleString()}</div>
+        <p className="text-xs text-muted-foreground">{description}</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default function Statistics({ statistics, isLoading }) {
   const {
     adsCount,
     newsCount,
@@ -19,163 +32,58 @@ const Statistics = () => {
     rankingsCount,
     transfersCount,
     publishersCount,
-  } = statistics;
+  } = statistics || {};
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-4">
-      {/* Ads Count */}
-      {isLoading ? (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
-          <div className="w-16 h-16 bg-gray-300 rounded"></div>
-          <div className="flex flex-col gap-2">
-            <div className="w-20 h-4 bg-gray-300 rounded"></div>
-            <div className="w-14 h-6 bg-gray-400 rounded"></div>
-          </div>
-        </div>
-      ) : (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
-          <FaAd className="text-7xl text-gray-700 mr-2" />
-          <div>
-            <p className="text-sm font-medium text-gray-500">Ads</p>
-            <p className="text-xl font-bold text-gray-700">{adsCount}</p>
-          </div>
-        </div>
-      )}
-
-      {/* News Count */}
-      {isLoading ? (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
-          <div className="w-16 h-16 bg-gray-300 rounded"></div>
-          <div className="flex flex-col gap-2">
-            <div className="w-20 h-4 bg-gray-300 rounded"></div>
-            <div className="w-14 h-6 bg-gray-400 rounded"></div>
-          </div>
-        </div>
-      ) : (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
-          <FaNewspaper className="text-7xl text-gray-700 mr-2" />
-          <div>
-            <p className="text-sm font-medium text-gray-500">News</p>
-            <p className="text-xl font-bold text-gray-700">{newsCount}</p>
-          </div>
-        </div>
-      )}
-
-      {/* Rankings Count */}
-      {isLoading ? (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
-          <div className="w-16 h-16 bg-gray-300 rounded"></div>
-          <div className="flex flex-col gap-2">
-            <div className="w-20 h-4 bg-gray-300 rounded"></div>
-            <div className="w-14 h-6 bg-gray-400 rounded"></div>
-          </div>
-        </div>
-      ) : (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
-          <FaTrophy className="text-6xl text-gray-700 mr-2" />
-          <div>
-            <p className="text-sm font-medium text-gray-500">Rankings</p>
-            <p className="text-xl font-bold text-gray-700">{rankingsCount}</p>
-          </div>
-        </div>
-      )}
-
-      {/* Transfers Count */}
-      {isLoading ? (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
-          <div className="w-16 h-16 bg-gray-300 rounded"></div>
-          <div className="flex flex-col gap-2">
-            <div className="w-20 h-4 bg-gray-300 rounded"></div>
-            <div className="w-14 h-6 bg-gray-400 rounded"></div>
-          </div>
-        </div>
-      ) : (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
-          <FaExchangeAlt className="text-7xl text-gray-700 mr-2" />
-          <div>
-            <p className="text-sm font-medium text-gray-500">Transfers</p>
-            <p className="text-xl font-bold text-gray-700">{transfersCount}</p>
-          </div>
-        </div>
-      )}
-
-      {/* Publishers Count */}
-      {isLoading ? (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
-          <div className="w-16 h-16 bg-gray-300 rounded"></div>
-          <div className="flex flex-col gap-2">
-            <div className="w-20 h-4 bg-gray-300 rounded"></div>
-            <div className="w-14 h-6 bg-gray-400 rounded"></div>
-          </div>
-        </div>
-      ) : (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
-          <FaPenToSquare className="text-6xl text-gray-700 mr-2" />
-          <div>
-            <p className="text-sm font-medium text-gray-500">Publishers</p>
-            <p className="text-xl font-bold text-gray-700">{publishersCount}</p>
-          </div>
-        </div>
-      )}
-
-      {/* Tags Count */}
-      {isLoading ? (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
-          <div className="w-16 h-16 bg-gray-300 rounded"></div>
-          <div className="flex flex-col gap-2">
-            <div className="w-20 h-4 bg-gray-300 rounded"></div>
-            <div className="w-14 h-6 bg-gray-400 rounded"></div>
-          </div>
-        </div>
-      ) : (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
-          <IoPricetags className="text-6xl text-gray-700 mr-2" />
-          <div>
-            <p className="text-sm font-medium text-gray-500">Tags</p>
-            <p className="text-xl font-bold text-gray-700">{389}</p>
-          </div>
-        </div>
-      )}
-
-      {/* Charts */}
-      {isLoading ? (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
-          <div className="w-16 h-16 bg-gray-300 rounded"></div>
-          <div className="flex flex-col gap-2">
-            <div className="w-20 h-4 bg-gray-300 rounded"></div>
-            <div className="w-14 h-6 bg-gray-400 rounded"></div>
-          </div>
-        </div>
-      ) : (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
-          <FaChartBar className="text-6xl text-gray-700 mr-2" />
-          <div>
-            <p className="text-sm font-medium text-gray-500">Charts</p>
-            <p className="text-xl font-bold text-gray-700">{3}</p>
-          </div>
-        </div>
-      )}
-
-      {/* Users Count */}
-      {isLoading ? (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-gray-200 p-4 rounded-lg border border-gray-300 shadow animate-pulse">
-          <div className="w-16 h-16 bg-gray-300 rounded"></div>
-          <div className="flex flex-col gap-2">
-            <div className="w-20 h-4 bg-gray-300 rounded"></div>
-            <div className="w-14 h-6 bg-gray-400 rounded"></div>
-          </div>
-        </div>
-      ) : (
-        <div className="flex items-center w-full min-h-[120px] justify-between bg-white p-4 rounded-lg border border-gray-300 shadow">
-          <FaUsers className="text-6xl text-gray-700 mr-2" />
-          <div>
-            <p className="text-sm font-medium text-gray-500">Users</p>
-            <p className="text-xl font-bold text-gray-700">{usersCount}</p>
-          </div>
-        </div>
-      )}
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <StatsCard
+        title="News Articles"
+        value={newsCount}
+        description="Total published articles"
+        icon={<FileText className="h-5 w-5 text-primary" />}
+      />
+      <StatsCard
+        title="Publishers"
+        value={publishersCount}
+        description="Active news sources"
+        icon={<Package className="h-5 w-5 text-primary" />}
+      />
+      <StatsCard
+        title="Advertisements"
+        value={adsCount}
+        description="Active ad campaigns"
+        icon={<Activity className="h-5 w-5 text-primary" />}
+      />
+      <StatsCard
+        title="Users"
+        value={usersCount}
+        description="Registered accounts"
+        icon={<Users className="h-5 w-5 text-primary" />}
+      />
+      <StatsCard
+        title="Rankings"
+        value={rankingsCount}
+        description="League tables"
+        icon={<Trophy className="h-5 w-5 text-primary" />}
+      />
+      <StatsCard
+        title="Transfers"
+        value={transfersCount}
+        description="Player movements"
+        icon={<Activity className="h-5 w-5 text-primary" />}
+      />
+      <StatsCard
+        title="Tags"
+        value={389}
+        description="Content categories"
+        icon={<Tag className="h-5 w-5 text-primary" />}
+      />
+      <StatsCard
+        title="Charts"
+        value={3}
+        description="Data visualizations"
+        icon={<BarChart3 className="h-5 w-5 text-primary" />}
+      />
     </div>
   );
-};
-
-export default Statistics;
+}
