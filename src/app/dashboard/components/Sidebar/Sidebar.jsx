@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { GoSidebarCollapse } from "react-icons/go";
 import AdminLinks from "./AdminLinks";
 import UserLinks from "./UserLinks";
+import { Separator } from "@/components/ui/separator";
 
 const Sidebar = () => {
   // Load collapse state from localStorage
@@ -44,7 +45,7 @@ const Sidebar = () => {
                 height={80}
                 src="https://i.ibb.co.com/fV684RGm/goal-khobor.png"
                 alt="goal khobor logo"
-                className="w-[140px] h-[80px] cursor-pointer"
+                className="w-[100px] h-[60px] cursor-pointer"
               />
             </Link>
             <GoSidebarCollapse
@@ -63,6 +64,8 @@ const Sidebar = () => {
           />
         )}
       </div>
+
+      <Separator className="border mt-4 w-11/12 mx-auto" />
 
       {/* Loading Skeleton */}
       {status === "loading" ? (

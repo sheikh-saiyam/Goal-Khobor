@@ -10,7 +10,7 @@ const DashboardLayout = ({ children }) => {
     <div className="flex min-h-screen">
       {/* Sidebar - Visible on large screens & Toggle on small screens */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-fit border-2 bg-white shadow-xl transform duration-300 ${
+        className={`fixed inset-y-0 left-0 z-50 w-fit border-r bg-white shadow-xl transform duration-300 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform lg:translate-x-0 lg:static`}
       >
@@ -33,7 +33,7 @@ const DashboardLayout = ({ children }) => {
           isSidebarOpen={isSidebarOpen}
         />
         {/* Dashboard Pages */}
-        <div className="p-10">{children}</div>
+        <div className="py-10 px-3 md:px-5">{children}</div>
       </div>
     </div>
   );
