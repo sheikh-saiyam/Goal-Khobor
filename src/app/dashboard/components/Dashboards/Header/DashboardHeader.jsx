@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Bell, LogOut, Moon, Sun, User } from "lucide-react";
+import { Bell, LogOut, Moon, Sun, User, Menu } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { IoMdMenu } from "react-icons/io";
@@ -44,13 +44,11 @@ const DashboardHeader = ({ setIsSidebarOpen, isSidebarOpen }) => {
   return (
     <div className="bg-background shadow py-6 border-b flex justify-between items-center">
       {/* Toggle Button for Mobile */}
-      <div className="w-fit h-fit lg:hidden">
-        <button
-          className="lg:hidden mt-3 px-4 w-fit text-black"
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        >
-          <IoMdMenu size={30} />
-        </button>
+      <div className="pl-4 w-fit h-fit lg:hidden">
+        <Button className="lg:hidden" onClick={() => setIsSidebarOpen(!isSidebarOpen)} variant="outline" size="icon" aria-label="Menu">
+          <Menu className="w-5 h-5" />
+        </Button>
+
       </div>
       {/* Welcome Div */}
       <div className="hidden lg:flex ml-10">
@@ -94,7 +92,7 @@ const DashboardHeader = ({ setIsSidebarOpen, isSidebarOpen }) => {
                   <AvatarImage
                     src={user.image || "/placeholder.svg?height=40&width=40"}
                   />
-                  <AvatarFallback>{getInitials()}</AvatarFallback>
+                  <AvatarFallback className="border">{getInitials()}</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
