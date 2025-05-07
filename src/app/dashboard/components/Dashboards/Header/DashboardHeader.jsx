@@ -1,13 +1,48 @@
-import { useSession } from "next-auth/react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+import { Bell, LogOut, Moon, Sun, User } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
 import { IoMdMenu } from "react-icons/io";
-import { IoNotifications } from "react-icons/io5";
 import { Typewriter } from "react-simple-typewriter";
+import { toast } from "sonner";
 
 const DashboardHeader = ({ setIsSidebarOpen, isSidebarOpen }) => {
   const { data: session, status } = useSession();
   const username = session?.user?.name || "";
+  const user = session?.user || {};
+
+  const handleSignOut = async () => {
+    toast.promise(signOut(), {
+      loading: "Logging out...",
+      success: "Logged out successfully!",
+      error: "Logout failed. Please try again.",
+      position: "top-right",
+      duration: 5000,
+      style: {
+        marginTop: "-5px",
+      },
+    });
+  };
+
+  const getInitials = () => {
+    if (!user?.name) return "GK";
+    const nameParts = user.name.split(" ");
+    if (nameParts.length > 1) {
+      return `${nameParts[0][0]}${nameParts[1][0]}`.toUpperCase();
+    }
+    return nameParts[0].substring(0, 2).toUpperCase();
+  };
+
   return (
-    <div className="bg-white shadow py-6 border-b border-t-2 border-r-2 flex justify-between items-center">
+    <div className="bg-background shadow py-6 border-b flex justify-between items-center">
       {/* Toggle Button for Mobile */}
       <div className="w-fit h-fit lg:hidden">
         <button
@@ -23,7 +58,7 @@ const DashboardHeader = ({ setIsSidebarOpen, isSidebarOpen }) => {
           <div className="w-[250px] h-8 bg-[#e5eaf2] animate-pulse"></div>
         ) : (
           <h1 className="text-2xl font-semibold tracking-wide text-gray-700">
-            Welcome Back!{" "}
+            Welcome!{" "}
             <Typewriter
               words={[username]}
               loop={false}
@@ -37,33 +72,68 @@ const DashboardHeader = ({ setIsSidebarOpen, isSidebarOpen }) => {
       {/* Main container */}
       <div className="flex justify-end items-center gap-4 pr-4 md:pr-8">
         {/* ThemeController */}
-        <div>
-          <label className="flex items-center cursor-pointer p-1 rounded-full bg-gray-200 dark:bg-gray-800 transition-colors">
-            {/* Hidden checkbox to toggle theme */}
-            <input type="checkbox" className="hidden peer" />
-
-            {/* Sun Icon */}
-            <svg
-              className="h-6 w-6 fill-current text-gray-800 peer-checked:hidden dark:text-gray-200"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
-            </svg>
-
-            {/* Moon Icon */}
-            <svg
-              className="h-6 w-6 fill-current text-blue-400 hidden peer-checked:block"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
-            </svg>
-          </label>
-        </div>
-        <div className="flex items-center cursor-pointer p-1 rounded-full bg-gray-200 dark:bg-gray-800 transition-colors">
-          <IoNotifications size={25} />
-        </div>
+        <Button variant="outline" size="icon" className="rounded-full">
+          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+        <Button variant="outline" size="icon" className="rounded-full">
+          <Bell className="h-[1.2rem] w-[1.2rem]" />
+          <span className="sr-only">Notifications</span>
+        </Button>
+        {status === "loading" ? (
+          <div className="w-8 h-8 animate-spin rounded-full border-dashed border-4 border-primary" />
+        ) :
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="relative rounded-full h-10 w-10 p-0"
+              >
+                <Avatar>
+                  <AvatarImage
+                    src={user.image || "/placeholder.svg?height=40&width=40"}
+                  />
+                  <AvatarFallback>{getInitials()}</AvatarFallback>
+                </Avatar>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-full">
+              <div className="flex items-center justify-start gap-2 py-2 px-2">
+                <Avatar className="h-8 w-8">
+                  <AvatarImage
+                    src={user.image || "/placeholder.svg?height=32&width=32"}
+                  />
+                  <AvatarFallback>{getInitials()}</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col space-y-0.5">
+                  <p className="text-sm font-medium">{user.name}</p>
+                  <p className="text-xs text-muted-foreground w-40 truncate">
+                    {user.email}
+                  </p>
+                </div>
+              </div>
+              <DropdownMenuSeparator className="border" />
+              <DropdownMenuItem asChild>
+                <Link
+                  href="/dashboard/profile"
+                  className="cursor-pointer flex items-center"
+                >
+                  <User className="h-4 w-4" />
+                  <span className="mt-0.5">View Profile</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator className="border" />
+              <DropdownMenuItem
+                onClick={handleSignOut}
+                className="cursor-pointer text-destructive focus:text-destructive"
+              >
+                <LogOut className="h-4 w-4" />
+                <span>Logout</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        }
       </div>
     </div>
   );
