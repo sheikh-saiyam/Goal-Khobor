@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { NavUser } from "@/components/nav-user";
 
 const adminItems = [
   { title: "Dashboard", url: "/dashboard", icon: Home },
@@ -31,7 +32,7 @@ const adminItems = [
   { title: "Manage Users", url: "/dashboard/manage-users", icon: Users },
 ];
 
-export function  AppSidebar  ()  {
+export function AppSidebar() {
   const { state } = useSidebar();
   const { data: session, status } = useSession();
   const role = session?.user?.role;
@@ -40,39 +41,21 @@ export function  AppSidebar  ()  {
   return (
     <ShadcnSidebar
       collapsible="icon"
-      className={cn("bg-white rounded-md shadow-lg", state && "w-[60px]")}
+      className={cn("bg-white rounded-md shadow-lg")}
     >
       <SidebarHeader className="py-4 px-4">
         <div className="flex items-center justify-between">
-          {state ? (
-            <Image
-              width={50}
-              height={50}
-              src="https://i.ibb.co.com/fV684RGm/goal-khobor.png"
-              alt="Goal Khobor logo"
-              className="w-[50px] cursor-pointer mx-auto"
-              onClick={() => setCollapsed(false)}
-            />
-          ) : (
-            <>
-              <Link href="/" prefetch={true}>
-                <Image
-                  width={100}
-                  height={60}
-                  src="https://i.ibb.co.com/fV684RGm/goal-khobor.png"
-                  alt="Goal Khobor logo"
-                  className="w-[100px] h-[60px] cursor-pointer"
-                />
-              </Link>
-              <SidebarMenuButton
-                size="sm"
-                className="text-black"
-                onClick={() => setCollapsed(true)}
-              >
-                <ChevronLeft className="h-6 w-6" />
-              </SidebarMenuButton>
-            </>
-          )}
+          <Image
+            src="https://i.ibb.co/fV684RGm/goal-khobor.png"
+            alt="Goal Khobor logo"
+            width={50}
+            height={50}
+            sizes="100vw"
+            className={`mx-auto cursor-pointer transition-all duration-300 ${state ? 'h-10 w-full' : 'h-12 w-10/12'
+              }`}
+            priority // Preload for faster rendering
+          />
+
         </div>
         <Separator className="mt-4" />
       </SidebarHeader>
@@ -104,9 +87,9 @@ export function  AppSidebar  ()  {
                           pathname === item.url && "bg-slate-100 underline underline-offset-2"
                         )}
                       >
-                        <Link href={item.url}>
+                        <Link href={item.url} prefetch={true}>
                           <item.icon className="h-5 w-5" />
-                          <span className={cn(state && "hidden")}>{item.title}</span>
+                          <span className={cn(!state && "hidden")}>{item.title}</span>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -119,15 +102,7 @@ export function  AppSidebar  ()  {
       </SidebarContent>
 
       <SidebarFooter>
-        {state && (
-          <SidebarMenuButton
-            size="sm"
-            className="text-black mx-auto"
-            onClick={() => setCollapsed(false)}
-          >
-            <ChevronRight className="h-6 w-6" />
-          </SidebarMenuButton>
-        )}
+        <NavUser/>
       </SidebarFooter>
     </ShadcnSidebar>
   );
