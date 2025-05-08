@@ -3,7 +3,8 @@
 import {
   ChevronsUpDown,
   LogOut,
-  User
+  User,
+  Sparkles
 } from "lucide-react";
 
 import {
@@ -31,6 +32,7 @@ import {
 
 import { signOut, useSession } from "next-auth/react";
 import { toast } from "sonner";
+import Link from "next/link"
 
 export function NavUser() {
   const { isMobile } = useSidebar()
@@ -103,10 +105,18 @@ export function NavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
+              <Link href="/dashboard/profile" prefetch={true}>
               <DropdownMenuItem>
                 <User />
                 View Profile
               </DropdownMenuItem>
+              </Link>
+              <Link href="/dashboard/profile" prefetch={true}>
+              <DropdownMenuItem>
+                <Sparkles />
+                Upgrade To Pro
+              </DropdownMenuItem>
+              </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleSignOut}>

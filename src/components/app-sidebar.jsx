@@ -71,7 +71,7 @@ const mainItems = [
 
 export function AppSidebar() {
   const { state } = useSidebar();
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const role = session?.user?.role;
   const pathname = usePathname();
 
@@ -95,13 +95,13 @@ export function AppSidebar() {
             <></>
           )}
         </div>
-        <Separator className="mt-2" />
+        <Separator className="mt-2 w-11/12 mx-auto" />
       </SidebarHeader>
 
       <SidebarContent>
         {role === "admin" && (
           <SidebarGroup>
-            <SidebarGroupContent>
+            <SidebarGroupContent className="-mt-4">
               <SidebarMenu>
                 <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
                 {adminItems.map((item) => (
@@ -124,7 +124,7 @@ export function AppSidebar() {
                 ))}
               </SidebarMenu>
             </SidebarGroupContent>
-            <SidebarSeparator className="mt-6" />
+            <SidebarSeparator className="mt-4" />
             <SidebarGroupContent className="mt-2">
               <SidebarMenu>
                 <SidebarGroupLabel>Main Pages</SidebarGroupLabel>
