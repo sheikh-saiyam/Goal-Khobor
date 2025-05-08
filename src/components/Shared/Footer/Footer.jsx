@@ -106,7 +106,7 @@ const Footer = () => {
           <div className="flex flex-wrap text-black md:justify-center gap-[4px]">
             {tags.map((tag, idx) => {
               return (
-                <Button key={idx} variant="outline">
+                <Button size="md" key={idx} variant="outline">
                   {tag}
                 </Button>
               );

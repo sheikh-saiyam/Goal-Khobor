@@ -135,6 +135,7 @@ const Navbar = () => {
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch={true}
                 className={`px-1.5 py-0.5 transition-colors flex items-center gap-1 ${path === link.href
                   ? "text-foreground font-semibold border-b-2 border-primary"
                   : "text-muted-foreground hover:text-foreground"
@@ -181,6 +182,7 @@ const Navbar = () => {
                   <DropdownMenuItem asChild>
                     <Link
                       href="/dashboard"
+                      prefetch={true}
                       className="cursor-pointer flex items-center"
                     >
                       <User className="h-4 w-4" />
