@@ -52,11 +52,11 @@ export function NavUser() {
 
   const getInitials = () => {
     if (!user?.name) return "GK";
-    const nameParts = user.name.split(" ");
+    const nameParts = user?.name.split(" ");
     if (nameParts.length > 1) {
       return `${nameParts[0][0]}${nameParts[1][0]}`.toUpperCase();
     }
-    return nameParts[0].substring(0, 2).toUpperCase();
+    return nameParts[0].substring(0,).toUpperCase();
   };
 
   return (
@@ -70,13 +70,13 @@ export function NavUser() {
             >
               <Avatar className="h-8 w-8">
                 <AvatarImage
-                  src={user.image || "/placeholder.svg?height=32&width=32"}
+                  src={user?.image || "/placeholder.svg?height=32&width=32"}
                 />
                 <AvatarFallback>{getInitials()}</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate font-semibold">{user?.name}</span>
+                <span className="truncate text-xs">{user?.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -91,13 +91,13 @@ export function NavUser() {
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8">
                   <AvatarImage
-                    src={user.image || "/placeholder.svg?height=32&width=32"}
+                    src={user?.image || "/placeholder.svg?height=32&width=32"}
                   />
                   <AvatarFallback>{getInitials()}</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate font-semibold">{user?.name}</span>
+                  <span className="truncate text-xs">{user?.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>

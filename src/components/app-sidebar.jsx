@@ -1,9 +1,6 @@
 "use client";
-import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, Home, Users, Newspaper, Search, Clock, ArrowLeftRight, Trophy } from "lucide-react";
+import { NavUser } from "@/components/nav-user";
+import { Separator } from "@/components/ui/separator";
 import {
   Sidebar as ShadcnSidebar,
   SidebarContent,
@@ -16,9 +13,12 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { NavUser } from "@/components/nav-user";
+import { ArrowLeftRight, Clock, Home, Newspaper, Search, Trophy, Users } from "lucide-react";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const adminItems = [
   { title: "Dashboard", url: "/dashboard", icon: Home },
@@ -45,17 +45,14 @@ export function AppSidebar() {
     >
       <SidebarHeader className="py-4 px-4">
         <div className="flex items-center justify-between">
-          <Image
+          {!state && <Image
             src="https://i.ibb.co/fV684RGm/goal-khobor.png"
             alt="Goal Khobor logo"
-            width={50}
-            height={50}
-            sizes="100vw"
-            className={`mx-auto cursor-pointer transition-all duration-300 ${state ? 'h-10 w-full' : 'h-12 w-10/12'
-              }`}
-            priority // Preload for faster rendering
-          />
-
+            width={100}
+            height={100}
+            className={`mx-auto cursor-pointer transition-all duration-300`}
+            priority
+          />}
         </div>
         <Separator className="mt-4" />
       </SidebarHeader>
@@ -102,7 +99,7 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter>
-        <NavUser/>
+        <NavUser />
       </SidebarFooter>
     </ShadcnSidebar>
   );
