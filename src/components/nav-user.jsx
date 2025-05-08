@@ -1,19 +1,17 @@
 "use client"
 
 import {
-  BadgeCheck,
-  Bell,
   ChevronsUpDown,
-  CreditCard,
   LogOut,
-  Sparkles,
-} from "lucide-react"
+  User
+} from "lucide-react";
 
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/ui/avatar"
+} from "@/components/ui/avatar";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,32 +20,21 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
+
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
-import { Bell, LogOut, Moon, Sun, User, Menu } from "lucide-react";
-import { useSession, signOut } from "next-auth/react";
-import Link from "next/link";
-import { IoMdMenu } from "react-icons/io";
-import { Typewriter } from "react-simple-typewriter";
+} from "@/components/ui/sidebar";
+
+import { signOut, useSession } from "next-auth/react";
 import { toast } from "sonner";
 
 export function NavUser() {
   const { isMobile } = useSidebar()
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const user = session?.user || {};
 
   const handleSignOut = async () => {
@@ -81,12 +68,12 @@ export function NavUser() {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-                       <Avatar className="h-8 w-8">
-                  <AvatarImage
-                    src={user.image || "/placeholder.svg?height=32&width=32"}
-                  />
-                  <AvatarFallback>{getInitials()}</AvatarFallback>
-                </Avatar>
+              <Avatar className="h-8 w-8">
+                <AvatarImage
+                  src={user.image || "/placeholder.svg?height=32&width=32"}
+                />
+                <AvatarFallback>{getInitials()}</AvatarFallback>
+              </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
                 <span className="truncate text-xs">{user.email}</span>
@@ -102,7 +89,7 @@ export function NavUser() {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-              <Avatar className="h-8 w-8">
+                <Avatar className="h-8 w-8">
                   <AvatarImage
                     src={user.image || "/placeholder.svg?height=32&width=32"}
                   />
@@ -117,27 +104,12 @@ export function NavUser() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
+                <User />
+                View Profile
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem         onClick={handleSignOut}>
+            <DropdownMenuItem onClick={handleSignOut}>
               <LogOut />
               Log out
             </DropdownMenuItem>
