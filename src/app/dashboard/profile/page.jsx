@@ -13,14 +13,31 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { User } from "lucide-react";
 import DashboardPageHeader from "./../components/Dashboards/Header/DashboardPageHeader";
+import dbConnect from "@/lib/dbConnect";
+import { ProfileForm } from "./ProfileForm";
 
 const Profile = async () => {
+  let createdAt = null;
   const session = await auth();
   const { email, name, id, role } = session?.user || {};
 
- const getInitials = () => {
-    if (!user?.name) return "GK";
-    const nameParts = user.name.split(" ");
+  if (email) {
+    const usersCollection = await dbConnect("users");
+    const result = await usersCollection.findOne(
+      { email },
+      {
+        projection: {
+          _id: 0,
+          createdAt: 1,
+        },
+      }
+    );
+    createdAt = result?.createdAt || null;
+  }
+
+  const getInitials = () => {
+    if (!name) return "GK";
+    const nameParts = name.split(" ");
     if (nameParts.length > 1) {
       return `${nameParts[0][0]}${nameParts[1][0]}`.toUpperCase();
     }
@@ -34,14 +51,14 @@ const Profile = async () => {
         subtitle={"Manage your personal information and account settings"}
         icon={User}
       />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Profile Summary Card */}
         <Card className="md:col-span-1">
           <CardHeader className="pb-3">
             <CardTitle>Profile Summary</CardTitle>
             <CardDescription>Your account information</CardDescription>
           </CardHeader>
-          <CardContent className="flex flex-col items-center text-center gap-4">
+          <CardContent className="mt-8 flex flex-col items-center text-center gap-4">
             <Avatar className="h-24 w-24">
               <AvatarImage
                 src="/placeholder.svg?height=96&width=96"
@@ -70,18 +87,30 @@ const Profile = async () => {
               <Separator />
               <div className="flex justify-between text-sm py-2">
                 <span className="text-muted-foreground">Joined</span>
-                {/* <span>{joinedDate}</span> */}
+                <span>  {createdAt ? new Date(createdAt).toLocaleString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }) : "N/A"}</span>
               </div>
               <Separator />
               <div className="flex justify-between text-sm py-2">
                 <span className="text-muted-foreground">Last active</span>
-                {/* <span>{lastActive}</span> */}
+                <span>{new Date().toLocaleString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }) || "N/A"}</span>
               </div>
             </div>
           </CardContent>
           <CardFooter>
             <Button variant="outline" className="w-full">
-             Reset Password
+              Reset Password
             </Button>
           </CardFooter>
         </Card>
@@ -96,7 +125,15 @@ const Profile = async () => {
                 Update your profile information and preferences
               </CardDescription>
             </CardHeader>
-            <CardContent>{/* <ProfileForm user={user} /> */}</CardContent>
+            <CardContent>
+              <ProfileForm user={{
+                name, 
+                email,
+                id,
+                role, 
+                createdAt
+              }} />
+              </CardContent>
           </Card>
 
           {/* Role Upgrade Request */}
