@@ -1,5 +1,5 @@
 "use server";
-import dbConnect, { collections } from "@/lib/dbConnect";
+import dbConnect from "@/lib/dbConnect";
 import { NextResponse } from "next/server";
 
 export const GET = async (req, { params }) => {
@@ -13,7 +13,18 @@ export const GET = async (req, { params }) => {
   }
 
   const usersCollection = await dbConnect("users");
-  const user = await usersCollection.findOne({ email });
+  const user = await usersCollection.findOne(
+    { email },
+    {
+      projection: {
+        _id: 1,
+        role: 1,
+        name: 1,
+        email: 1,
+        createdAt: 1,
+      },
+    }
+  );
 
   if (!user) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });

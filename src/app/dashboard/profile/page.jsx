@@ -1,42 +1,119 @@
 import { auth } from "@/auth";
-import MainContainer from "@/components/container/MainContainer";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { User } from "lucide-react";
+import DashboardPageHeader from "./../components/Dashboards/Header/DashboardPageHeader";
 
 const Profile = async () => {
   const session = await auth();
   const { email, name, id, role } = session?.user || {};
 
+ const getInitials = () => {
+    if (!user?.name) return "GK";
+    const nameParts = user.name.split(" ");
+    if (nameParts.length > 1) {
+      return `${nameParts[0][0]}${nameParts[1][0]}`.toUpperCase();
+    }
+    return nameParts[0].substring(0, 2).toUpperCase();
+  };
+
   return (
-    <MainContainer>
-      <div className="py-12">
-        <div className="pb-10">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl mt-3 tracking-widest font-semibold">
-            Welcome{" "}
-            <span className="border-b-4 border-black my-0 py-0">To Your</span>{" "}
-            Profile
-          </h1>
-        </div>
-        {/* profile container */}
-        <div className="px-6 py-10 shadow rounded border lg:w-2/3 flex flex-wrap gap-6">
-          <div className="space-y-2">
-            <h1 className="text-xl font-semibold tracking-wider">
-              Role: <span className="font-medium">{role}</span>
-            </h1>
-            <h1 className="text-xl font-semibold tracking-wider">
-              Username: <span className="font-medium">{name}</span>
-            </h1>
-            <h1 className="text-xl font-semibold tracking-wider pb-1">
-              Email:{" "}
-              <span className="text-sm sm:text-xl font-medium">{email}</span>
-            </h1>
-            <h1 className="text-xl font-semibold tracking-wider pb-1">
-              UID: <span className="text-sm sm:text-xl font-medium">{id}</span>
-            </h1>
-            <Button type="submit">Edit Profile</Button>
-          </div>
+    <div>
+      <DashboardPageHeader
+        title={"Profile"}
+        subtitle={"Manage your personal information and account settings"}
+        icon={User}
+      />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Profile Summary Card */}
+        <Card className="md:col-span-1">
+          <CardHeader className="pb-3">
+            <CardTitle>Profile Summary</CardTitle>
+            <CardDescription>Your account information</CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col items-center text-center gap-4">
+            <Avatar className="h-24 w-24">
+              <AvatarImage
+                src="/placeholder.svg?height=96&width=96"
+                alt={name}
+              />
+              <AvatarFallback className="text-xl">
+                {getInitials(name)}
+              </AvatarFallback>
+            </Avatar>
+            <div>
+              <h3 className="text-xl font-semibold">{name}</h3>
+              <p className="text-sm text-muted-foreground">{email}</p>
+              <div className="flex justify-center mt-2">
+                <Badge variant="secondary" className="capitalize">
+                  {role}
+                </Badge>
+              </div>
+            </div>
+            <div className="w-full pt-4">
+              <div className="flex justify-between text-sm py-2">
+                <span className="text-muted-foreground">User ID</span>
+                <span className="font-mono text-xs bg-muted px-2 py-1 rounded">
+                  {id}
+                </span>
+              </div>
+              <Separator />
+              <div className="flex justify-between text-sm py-2">
+                <span className="text-muted-foreground">Joined</span>
+                {/* <span>{joinedDate}</span> */}
+              </div>
+              <Separator />
+              <div className="flex justify-between text-sm py-2">
+                <span className="text-muted-foreground">Last active</span>
+                {/* <span>{lastActive}</span> */}
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button variant="outline" className="w-full">
+             Reset Password
+            </Button>
+          </CardFooter>
+        </Card>
+
+        {/* Main Content Area */}
+        <div className="md:col-span-2 space-y-6">
+          {/* Profile Update Form */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Profile Information</CardTitle>
+              <CardDescription>
+                Update your profile information and preferences
+              </CardDescription>
+            </CardHeader>
+            <CardContent>{/* <ProfileForm user={user} /> */}</CardContent>
+          </Card>
+
+          {/* Role Upgrade Request */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Role Upgrade</CardTitle>
+              <CardDescription>
+                Request an upgrade to Pro account for additional features
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {/* <RoleUpgradeRequest currentRole={role} /> */}
+            </CardContent>
+          </Card>
         </div>
       </div>
-    </MainContainer>
+    </div>
   );
 };
 
