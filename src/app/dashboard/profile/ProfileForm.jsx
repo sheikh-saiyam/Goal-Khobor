@@ -14,8 +14,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Camera, Loader2 } from "lucide-react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { toast } from "sonner";
 import * as z from "zod";
 
@@ -95,7 +95,7 @@ export function ProfileForm({ user }) {
           </Avatar>
           <label
             htmlFor="avatar-upload"
-            className="absolute -bottom-1 -right-1 bg-primary text-primary-foreground p-1 rounded-full cursor-pointer hover:bg-primary/90 transition-colors"
+            className="absolute bottom-1 -right-1 bg-primary text-primary-foreground p-1 rounded-full cursor-pointer hover:bg-primary/90 transition-colors"
           >
             <Camera className="h-4 w-4" />
             <span className="sr-only">Upload avatar</span>

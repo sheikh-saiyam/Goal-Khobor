@@ -54,7 +54,7 @@ const Profile = async () => {
         {/* Profile Summary Card */}
         <Card className="md:col-span-1 h-fit">
           <CardHeader className="pb-3">
-            <CardTitle>Profile Summary</CardTitle>
+            <CardTitle>Profile</CardTitle>
             <CardDescription>Your account information</CardDescription>
           </CardHeader>
           <CardContent className="mt-8 flex flex-col items-center text-center gap-4">
@@ -86,8 +86,7 @@ const Profile = async () => {
               <Separator />
               <div className="flex justify-between text-sm py-2">
                 <span className="text-muted-foreground">Joined</span>
-                <span>
-               
+                   <span className="font-mono text-xs bg-muted px-2 py-1 rounded">
                   {createdAt
                     ? new Date(createdAt).toLocaleString("en-US", {
                         year: "numeric",
@@ -102,7 +101,7 @@ const Profile = async () => {
               <Separator />
               <div className="flex justify-between text-sm py-2">
                 <span className="text-muted-foreground">Last active</span>
-                <span>
+                   <span className="font-mono text-xs bg-muted px-2 py-1 rounded">
                   {new Date().toLocaleString("en-US", {
                     year: "numeric",
                     month: "long",

@@ -1,17 +1,8 @@
-"use client"
+"use client";
 
-import {
-  ChevronsUpDown,
-  LogOut,
-  User,
-  Sparkles
-} from "lucide-react";
+import { ChevronsUpDown, LogOut, User, Sparkles } from "lucide-react";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
   DropdownMenu,
@@ -32,12 +23,13 @@ import {
 
 import { signOut, useSession } from "next-auth/react";
 import { toast } from "sonner";
-import Link from "next/link"
+import Link from "next/link";
 
 export function NavUser() {
-  const { isMobile } = useSidebar()
+  const { isMobile } = useSidebar();
   const { data: session } = useSession();
   const user = session?.user || {};
+  const role = session?.user?.role|| "";
 
   const handleSignOut = async () => {
     toast.promise(signOut(), {
@@ -58,7 +50,7 @@ export function NavUser() {
     if (nameParts.length > 1) {
       return `${nameParts[0][0]}${nameParts[1][0]}`.toUpperCase();
     }
-    return nameParts[0].substring(0,).toUpperCase();
+    return nameParts[0].substring(0).toUpperCase();
   };
 
   return (
@@ -106,17 +98,19 @@ export function NavUser() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <Link href="/dashboard/profile" prefetch={true}>
-              <DropdownMenuItem>
-                <User />
-                View Profile
-              </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <User />
+                  View Profile
+                </DropdownMenuItem>
               </Link>
-              <Link href="/dashboard/profile" prefetch={true}>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade To Pro
-              </DropdownMenuItem>
-              </Link>
+              {role === "user" && (
+                <Link href="/dashboard/upgrade-request" prefetch={true}>
+                  <DropdownMenuItem>
+                    <Sparkles />
+                    Upgrade To Pro
+                  </DropdownMenuItem>
+                </Link>
+              )}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleSignOut}>
@@ -127,5 +121,5 @@ export function NavUser() {
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }
