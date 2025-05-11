@@ -36,13 +36,12 @@ const Profile = async () => {
   }
 
   const getInitials = () => {
-    if (!name) return "GK";
-    const nameParts = name.split(" ");
-    if (nameParts.length > 1) {
-      return `${nameParts[0][0]}${nameParts[1][0]}`.toUpperCase();
-    }
-    return nameParts[0].substring(0, 2).toUpperCase();
-  };
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+  }
 
   return (
     <div>
@@ -53,7 +52,7 @@ const Profile = async () => {
       />
       <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Profile Summary Card */}
-        <Card className="md:col-span-1">
+        <Card className="md:col-span-1 h-fit">
           <CardHeader className="pb-3">
             <CardTitle>Profile Summary</CardTitle>
             <CardDescription>Your account information</CardDescription>
@@ -87,24 +86,31 @@ const Profile = async () => {
               <Separator />
               <div className="flex justify-between text-sm py-2">
                 <span className="text-muted-foreground">Joined</span>
-                <span>  {createdAt ? new Date(createdAt).toLocaleString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  }) : "N/A"}</span>
+                <span>
+               
+                  {createdAt
+                    ? new Date(createdAt).toLocaleString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })
+                    : "N/A"}
+                </span>
               </div>
               <Separator />
               <div className="flex justify-between text-sm py-2">
                 <span className="text-muted-foreground">Last active</span>
-                <span>{new Date().toLocaleString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  }) || "N/A"}</span>
+                <span>
+                  {new Date().toLocaleString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  }) || "N/A"}
+                </span>
               </div>
             </div>
           </CardContent>
@@ -126,14 +132,16 @@ const Profile = async () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ProfileForm user={{
-                name, 
-                email,
-                id,
-                role, 
-                createdAt
-              }} />
-              </CardContent>
+              <ProfileForm
+                user={{
+                  name,
+                  email,
+                  id,
+                  role,
+                  createdAt,
+                }}
+              />
+            </CardContent>
           </Card>
 
           {/* Role Upgrade Request */}
