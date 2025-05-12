@@ -1,6 +1,8 @@
 "use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+
 import {
   Form,
   FormControl,
@@ -10,6 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,7 +26,6 @@ const profileFormSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
-  bio: z.string().max(160).optional(),
 });
 
 export function ProfileForm({ user }) {
@@ -41,9 +43,6 @@ export function ProfileForm({ user }) {
 
   const defaultValues = {
     username: user.name,
-    email: user.email,
-    bio: "Goal Khobor admin managing the platform content and users.",
-    displayName: user.name.split(" ")[1],
   };
 
   const form = useForm({
@@ -57,8 +56,8 @@ export function ProfileForm({ user }) {
 
     setTimeout(() => {
       setIsLoading(false);
-      toast({
-        title: "Profile updated",
+      toast("Profile updated",{
+       
         description: "Your profile has been updated successfully.",
       });
     }, 1500);
@@ -151,26 +150,7 @@ export function ProfileForm({ user }) {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="bio"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Bio</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Tell us a little bit about yourself"
-                    className="resize-none"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>
-                  Brief description for your profile. Maximum 160 characters.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      
           <Button type="submit" disabled={isLoading}>
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {isLoading ? "Updating..." : "Update profile"}

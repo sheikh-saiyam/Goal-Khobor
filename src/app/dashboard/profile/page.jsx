@@ -1,6 +1,5 @@
 import { auth } from "@/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,9 +10,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { User } from "lucide-react";
-import DashboardPageHeader from "./../components/Dashboards/Header/DashboardPageHeader";
 import dbConnect from "@/lib/dbConnect";
+import { ShieldCheck, User, User2 } from "lucide-react";
+import DashboardPageHeader from "./../components/Dashboards/Header/DashboardPageHeader";
 import { ProfileForm } from "./ProfileForm";
 
 const Profile = async () => {
@@ -40,8 +39,8 @@ const Profile = async () => {
       .split(" ")
       .map((n) => n[0])
       .join("")
-      .toUpperCase()
-  }
+      .toUpperCase();
+  };
 
   return (
     <div>
@@ -57,7 +56,7 @@ const Profile = async () => {
             <CardTitle>Profile</CardTitle>
             <CardDescription>Your account information</CardDescription>
           </CardHeader>
-          <CardContent className="mt-8 flex flex-col items-center text-center gap-4">
+          <CardContent className="mt-6 flex flex-col items-center text-center gap-4">
             <Avatar className="h-24 w-24">
               <AvatarImage
                 src="/placeholder.svg?height=96&width=96"
@@ -70,13 +69,30 @@ const Profile = async () => {
             <div>
               <h3 className="text-xl font-semibold">{name}</h3>
               <p className="text-sm text-muted-foreground">{email}</p>
-              <div className="flex justify-center mt-2">
-                <Badge variant="secondary" className="capitalize">
-                  {role}
-                </Badge>
-              </div>
+              {/* // <div className="flex justify-center mt-2">
+              //   <Badge variant="secondary" className="capitalize">
+              //     {role}
+              //   </Badge>
+              // </div> */}
             </div>
             <div className="w-full pt-4">
+              <div className="flex justify-between text-sm py-2 items-center">
+                <span className="text-muted-foreground">Role</span>
+                <span className="flex items-center gap-1 font-mono text-xs bg-muted px-2 py-1 rounded">
+                  {role === "admin" ? (
+                    <>
+                      <ShieldCheck className="w-4 h-4 text-red-500" />
+                      Admin
+                    </>
+                  ) : (
+                    <>
+                      <User2 className="w-4 h-4 text-blue-500" />
+                      User
+                    </>
+                  )}
+                </span>
+              </div>
+              <Separator />
               <div className="flex justify-between text-sm py-2">
                 <span className="text-muted-foreground">User ID</span>
                 <span className="font-mono text-xs bg-muted px-2 py-1 rounded">
@@ -85,8 +101,8 @@ const Profile = async () => {
               </div>
               <Separator />
               <div className="flex justify-between text-sm py-2">
-                <span className="text-muted-foreground">Joined</span>
-                   <span className="font-mono text-xs bg-muted px-2 py-1 rounded">
+                <span className="text-muted-foreground">Joined At</span>
+                <span className="font-mono text-xs bg-muted px-2 py-1 rounded">
                   {createdAt
                     ? new Date(createdAt).toLocaleString("en-US", {
                         year: "numeric",
@@ -101,7 +117,7 @@ const Profile = async () => {
               <Separator />
               <div className="flex justify-between text-sm py-2">
                 <span className="text-muted-foreground">Last active</span>
-                   <span className="font-mono text-xs bg-muted px-2 py-1 rounded">
+                <span className="font-mono text-xs bg-muted px-2 py-1 rounded">
                   {new Date().toLocaleString("en-US", {
                     year: "numeric",
                     month: "long",
@@ -140,19 +156,6 @@ const Profile = async () => {
                   createdAt,
                 }}
               />
-            </CardContent>
-          </Card>
-
-          {/* Role Upgrade Request */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Role Upgrade</CardTitle>
-              <CardDescription>
-                Request an upgrade to Pro account for additional features
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              {/* <RoleUpgradeRequest currentRole={role} /> */}
             </CardContent>
           </Card>
         </div>
