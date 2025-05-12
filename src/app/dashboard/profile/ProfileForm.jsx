@@ -21,6 +21,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "sonner";
 import * as z from "zod";
+import { imgUpload } from "@/app/actions/imgUpload";
 
 const profileFormSchema = z.object({
   username: z.string().min(2, {
@@ -56,8 +57,7 @@ export function ProfileForm({ user }) {
 
     setTimeout(() => {
       setIsLoading(false);
-      toast("Profile updated",{
-       
+      toast("Profile updated", {
         description: "Your profile has been updated successfully.",
       });
     }, 1500);
@@ -77,6 +77,42 @@ export function ProfileForm({ user }) {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const uploadPhoto = async () => {
+    if (!avatarFile) {
+      toast.error("Please select an image first.");
+      return;
+    }
+
+    await toast.promise(
+      (async () => {
+        // Step 1: Upload to ImgBB
+        const imageUrl = await imgUpload(avatarFile);
+
+        // Step 2: Send URL to your backend
+        const res = await fetch(`/api/profile/update-photo/${user?.email}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ photo: imageUrl }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Failed to update photo");
+        }
+
+        return data;
+      })(),
+      {
+        loading: "Uploading image & updating profile...",
+        success: "Profile photo updated successfully!",
+        error: (err) => err.message || "Something went wrong!",
+      }
+    );
   };
 
   return (
@@ -112,6 +148,14 @@ export function ProfileForm({ user }) {
           <p className="text-sm text-muted-foreground">
             Click the camera icon to upload a new profile picture
           </p>
+          <Button
+            className="mt-1"
+            size="md"
+            variant="outline"
+            onClick={uploadPhoto}
+          >
+            Update Photo
+          </Button>
         </div>
       </div>
 
@@ -150,7 +194,7 @@ export function ProfileForm({ user }) {
               </FormItem>
             )}
           />
-      
+
           <Button type="submit" disabled={isLoading}>
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {isLoading ? "Updating..." : "Update profile"}

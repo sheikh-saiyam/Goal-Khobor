@@ -10,13 +10,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import dbConnect from "@/lib/dbConnect";
 import { ShieldCheck, User, User2 } from "lucide-react";
 import DashboardPageHeader from "./../components/Dashboards/Header/DashboardPageHeader";
 import { ProfileForm } from "./ProfileForm";
+import dbConnect from "@/lib/dbConnect";
 
 const Profile = async () => {
+  let photo = null;
   let createdAt = null;
+
   const session = await auth();
   const { email, name, id, role } = session?.user || {};
 
@@ -28,9 +30,11 @@ const Profile = async () => {
         projection: {
           _id: 0,
           createdAt: 1,
+          photo: 1
         },
       }
     );
+    photo = result?.photo || null;
     createdAt = result?.createdAt || null;
   }
 
@@ -59,7 +63,7 @@ const Profile = async () => {
           <CardContent className="mt-6 flex flex-col items-center text-center gap-4">
             <Avatar className="h-24 w-24">
               <AvatarImage
-                src="/placeholder.svg?height=96&width=96"
+                src={photo}
                 alt={name}
               />
               <AvatarFallback className="text-xl">
@@ -81,12 +85,12 @@ const Profile = async () => {
                 <span className="flex items-center gap-1 font-mono text-xs bg-muted px-2 py-1 rounded">
                   {role === "admin" ? (
                     <>
-                      <ShieldCheck className="w-4 h-4 text-red-500" />
+                      <ShieldCheck className="w-4 h-4" />
                       Admin
                     </>
                   ) : (
                     <>
-                      <User2 className="w-4 h-4 text-blue-500" />
+                      <User2 className="w-4 h-4" />
                       User
                     </>
                   )}
@@ -153,6 +157,7 @@ const Profile = async () => {
                   email,
                   id,
                   role,
+                  photo,
                   createdAt,
                 }}
               />
