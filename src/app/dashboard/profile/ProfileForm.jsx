@@ -55,7 +55,6 @@ export function ProfileForm({ user }) {
 
   async function onSubmit(data) {
     setIsLoading(true);
-    const newName = data?.username;
 
     await toast.promise(
       (async () => {
@@ -64,7 +63,7 @@ export function ProfileForm({ user }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name: newName }),
+          body: JSON.stringify({ name: data?.username }),
         });
 
         const data = await res.json();
