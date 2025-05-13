@@ -44,7 +44,7 @@ export function ProfileForm({ user }) {
 
   const defaultValues = {
     username: user?.name,
-    email: user.email
+    email: user.email,
   };
 
   const form = useForm({
@@ -53,18 +53,36 @@ export function ProfileForm({ user }) {
     mode: "onChange",
   });
 
-  function onSubmit(data) {
+  async function onSubmit(data) {
     setIsLoading(true);
+    const newName = data?.username;
 
-    setTimeout(() => {
-      setIsLoading(false);
-      toast("Profile updated", {
-        description: "Your profile has been updated successfully.",
-      });
-    }, 1500);
+    await toast.promise(
+      (async () => {
+        const res = await fetch(`/api/profile/update-name/${user.email}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: newName }),
+        });
 
-    console.log(data);
-    console.log(avatarFile);
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Failed to update Username!");
+        }
+
+        return data;
+      })(),
+      {
+        loading: "Updating username...",
+        success: "Username updated successfully!",
+        error: (err) => err.message || "Something went wrong!",
+      }
+    );
+
+    setIsLoading(false);
   }
 
   const handleAvatarChange = (e) => {
@@ -195,7 +213,7 @@ export function ProfileForm({ user }) {
           />
 
           <Button type="submit" disabled={isLoading}>
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {isLoading && <Loader2 className="-mt-0.5 h-4 w-4 animate-spin" />}
             {isLoading ? "Updating..." : "Update profile"}
           </Button>
         </form>
