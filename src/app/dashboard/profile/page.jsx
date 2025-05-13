@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import { auth } from "@/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";

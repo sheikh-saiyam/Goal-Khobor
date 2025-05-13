@@ -32,7 +32,7 @@ const profileFormSchema = z.object({
 export function ProfileForm({ user }) {
   const [isLoading, setIsLoading] = useState(false);
   const [avatarFile, setAvatarFile] = useState(null);
-  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(user?.photo || null);
 
   const getInitials = (name) => {
     return name
