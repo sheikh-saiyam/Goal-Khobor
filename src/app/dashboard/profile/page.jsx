@@ -32,7 +32,7 @@ const Profile = async () => {
         projection: {
           _id: 0,
           createdAt: 1,
-          photo: 1
+          photo: 1,
         },
       }
     );
@@ -64,10 +64,7 @@ const Profile = async () => {
           </CardHeader>
           <CardContent className="mt-6 flex flex-col items-center text-center gap-4">
             <Avatar className="h-24 w-24">
-              <AvatarImage
-                src={photo}
-                alt={name}
-              />
+              <AvatarImage src={photo} alt={name} />
               <AvatarFallback className="text-xl">
                 {getInitials(name)}
               </AvatarFallback>

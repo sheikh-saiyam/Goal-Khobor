@@ -43,7 +43,8 @@ export function ProfileForm({ user }) {
   };
 
   const defaultValues = {
-    username: user.name,
+    username: user?.name,
+    email: user.email
   };
 
   const form = useForm({
@@ -81,16 +82,14 @@ export function ProfileForm({ user }) {
 
   const uploadPhoto = async () => {
     if (!avatarFile) {
-      toast.error("Please select an image first.");
+      toast.error("Please select an image first!");
       return;
     }
 
     await toast.promise(
       (async () => {
-        // Step 1: Upload to ImgBB
         const imageUrl = await imgUpload(avatarFile);
 
-        // Step 2: Send URL to your backend
         const res = await fetch(`/api/profile/update-photo/${user?.email}`, {
           method: "PATCH",
           headers: {

@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
       >
         <SessionProvider>
           <QueryProvider>
-            <Toaster />
+            <Toaster position="top-right" />
             <Navbar />
             {children}
             <Footer />
