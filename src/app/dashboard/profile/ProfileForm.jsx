@@ -18,7 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Camera, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import * as z from "zod";
 import { imgUpload } from "@/app/actions/imgUpload";
@@ -34,14 +34,6 @@ export function ProfileForm({ user }) {
   const [avatarFile, setAvatarFile] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(user?.photo || null);
 
-  const getInitials = (name) => {
-    return name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase();
-  };
-
   const defaultValues = {
     username: user?.name,
     email: user.email,
@@ -53,35 +45,55 @@ export function ProfileForm({ user }) {
     mode: "onChange",
   });
 
+  useEffect(() => {
+    if (user?.name && user?.email) {
+      form.reset({
+        username: user.name,
+        email: user.email,
+      });
+      3;
+    }
+  }, [user, form]);
+
+  const getInitials = (name) => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase();
+  };
+
   async function onSubmit(data) {
     setIsLoading(true);
 
-    await toast.promise(
-      (async () => {
-        const res = await fetch(`/api/profile/update-name/${user.email}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name: data?.username }),
-        });
+    try {
+      await toast.promise(
+        (async () => {
+          const res = await fetch(`/api/profile/update-name/${user.email}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name: data?.username }),
+          });
 
-        const data = await res.json();
+          const result = await res.json();
 
-        if (!res.ok) {
-          throw new Error(data.error || "Failed to update Username!");
+          if (!res.ok) {
+            throw new Error(result.error || "Failed to update Username!");
+          }
+
+          return result;
+        })(),
+        {
+          loading: "Updating username...",
+          success: "Username updated successfully!",
+          error: (err) => err.message || "Something went wrong!",
         }
-
-        return data;
-      })(),
-      {
-        loading: "Updating username...",
-        success: "Username updated successfully!",
-        error: (err) => err.message || "Something went wrong!",
-      }
-    );
-
-    setIsLoading(false);
+      );
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   const handleAvatarChange = (e) => {
