@@ -13,15 +13,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import { imgUpload } from "@/app/actions/imgUpload";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Camera, Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import * as z from "zod";
-import { imgUpload } from "@/app/actions/imgUpload";
 
 const profileFormSchema = z.object({
   username: z.string().min(2, {
