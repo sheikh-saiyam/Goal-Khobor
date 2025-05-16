@@ -1,6 +1,5 @@
-import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Shared/Section/Header";
-import dbConnect, { collections } from "@/lib/dbConnect";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -8,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import dbConnect, { collections } from "@/lib/dbConnect";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -31,7 +31,7 @@ const TransferNews = async () => {
             key={news?._id}
             prefetch={true}
           >
-            <Card className="flex flex-col lg:flex-row items-center gap-x-4 hover:border-gray-500 duration-500 overflow-hidden">
+            <Card className="flex flex-col lg:flex-row items-center gap-x-2 hover:border-gray-500 duration-500 overflow-hidden">
               {/* Image Container */}
               <CardHeader className="p-0 relative lg:w-6/12">
                 <Image
@@ -39,12 +39,15 @@ const TransferNews = async () => {
                   alt={news?.title}
                   width={600}
                   height={200}
-                  className="min-h-[180px] max-h-[180px] object-cover max-h-full w-full"
+                  className="min-h-[200px] max-h-[200px] object-cover w-full"
                 />
                 <div className="absolute top-0 left-2">
-                  <Badge variant="secondary">
-                    {news?.tags[Math.floor(Math.random() * tags.length)]}
-                  </Badge>
+                {news?.tags?.length ? (
+  <Badge variant="secondary">
+    {news?.tags[Math.floor(Math.random() * news?.tags?.length)]}
+  </Badge>
+) : null}
+
                 </div>
               </CardHeader>
               {/* Text Container */}
