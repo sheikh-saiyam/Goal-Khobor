@@ -4,6 +4,7 @@ import Navbar from "@/components/Shared/Navbar/Navbar";
 import Footer from "@/components/Shared/Footer/Footer";
 import SessionProvider from "@/providers/NextAuthSessionProvider";
 import QueryProvider from "@/providers/QueryProvider";
+import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from "sonner";
 
 const geistSans = Geist({
@@ -33,6 +34,13 @@ export default function RootLayout({ children }) {
       >
         <SessionProvider>
           <QueryProvider>
+            <NextTopLoader color="linear-gradient(to right, rgb(229, 231, 235), rgb(156, 163, 175), rgb(75, 85, 99))"
+              height={4}
+  crawlSpeed={200}
+  showSpinner={false}
+  easing="ease"
+  speed={300}
+             />
             <Toaster position="top-right" />
             <Navbar />
             {children}

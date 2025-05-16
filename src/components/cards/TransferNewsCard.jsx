@@ -49,8 +49,8 @@ const TransferNewsCard = ({ news }) => {
               {title}
             </CardTitle>
             <CardDescription className="mt-2 text-sm">
-              {description.length > 200
-                ? description.replace(/●/g, " ").slice(0, 200) + "..."
+              {description.length > 300
+                ? description.replace(/●/g, " ").slice(0, 300) + "..."
                 : description.replace(/●/g, " ")}
             </CardDescription>{" "}
             <div className="mt-3">
