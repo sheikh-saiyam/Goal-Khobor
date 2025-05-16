@@ -1,13 +1,22 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const ListNewsCard = ({ news }) => {
-  const { _id, image, title, published_date } = news || {};
+  const { _id, image, title, published_date, tags } = news || {};
   return (
-    <div className="flex flex-col lg:flex-row items-center gap-x-4 border-2 hover:border-black duration-300">
+    <Card className="flex flex-col lg:flex-row items-center gap-x-2 hover:border-gray-500 duration-500 overflow-hidden">
       {/* Image Container */}
-      <div className="w-full lg:w-7/12 h-full">
+      <CardHeader className="p-0 relative w-full lg:w-6/12 h-full">
         <Image
           src={image}
           alt={title}
@@ -15,24 +24,27 @@ const ListNewsCard = ({ news }) => {
           height={200}
           className="min-h-[240px] object-cover h-full w-full"
         />
-      </div>
+                <div className="absolute top-0 left-2">
+            <Badge variant="secondary">{tags[Math.floor(Math.random() * tags.length)]}</Badge>
+          </div>
+      </CardHeader>
       {/* Text Container */}
-      <div className="w-full lg:w-5/12 p-3">
+      <CardContent className="w-full lg:w-6/12 p-3">
         <div>
-          <h3 className="text-base font-medium text-[#444]">
+          <CardDescription>
             {published_date}
-          </h3>
-          <h1 className="mt-1 text-xl lg:text-lg font-semibold tracking-wider">
+          </CardDescription>
+          <CardTitle className="mt-1 text-lg line-clamp-2">
             {title}
-          </h1>
+          </CardTitle>
           <Link href={`/news/${_id}`} prefetch={true}>
-            <Button className="mt-3" variant="outline">
+            <Button className="mt-3" size="md" variant="outline">
               Read More
             </Button>
           </Link>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

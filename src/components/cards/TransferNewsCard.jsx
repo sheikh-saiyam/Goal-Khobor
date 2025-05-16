@@ -1,14 +1,13 @@
-import Image from "next/image";
-import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Image from "next/image";
+import Link from "next/link";
 
 const TransferNewsCard = ({ news }) => {
   const {
@@ -24,18 +23,20 @@ const TransferNewsCard = ({ news }) => {
 
   return (
     <Link href={`/transfers/${_id}`} key={_id} prefetch={true}>
-      <Card className="mb-6 flex flex-col lg:flex-row items-center gap-x-4 hover:border-gray-300 duration-500 rounded-xl">
+      <Card className="mb-6 flex flex-col lg:flex-row items-center gap-x-4 hover:border-gray-500 duration-500 rounded-xl overflow-hidden">
         {/* Image Container */}
-        <CardHeader className="relative p-0 w-full lg:w-6/12 h-full rounded-t-lg lg:rounded-t-none lg:rounded-l-lg">
+        <CardHeader className="relative p-0 w-full lg:w-6/12 h-full">
           <Image
             src={image}
             alt={title}
             width={600}
             height={200}
-            className="object-cover w-full h-full max-h-[300px] lg:min-h-[250px] rounded-t-lg lg:rounded-t-none lg:rounded-l-lg"
+            className="object-cover w-full h-full max-h-[300px] lg:min-h-[250px]"
           />
-                    <div className="absolute top-0 left-2">
-            <Badge variant="secondary">{ tags[Math.floor(Math.random() * tags.length)]}</Badge>
+          <div className="absolute top-0 left-2">
+            <Badge variant="secondary">
+              {tags[Math.floor(Math.random() * tags.length)]}
+            </Badge>
           </div>
         </CardHeader>
         {/* Text Container */}
@@ -44,7 +45,7 @@ const TransferNewsCard = ({ news }) => {
             <CardDescription className="text-lg">
               {published_date.split("T")[0]}
             </CardDescription>
-            <CardTitle className="mt-2 text-2xl font-semibold tracking-wider">
+            <CardTitle className="mt-2 text-2xl line-clamp-2 font-semibold tracking-wider">
               {title}
             </CardTitle>
             <CardDescription className="mt-2 text-sm">

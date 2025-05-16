@@ -20,14 +20,14 @@ const NewsCard = ({ news }) => {
       <Link href={`/news/${_id}`} prefetch={true}>
         <CardHeader className="p-0 relative rounded-t-lg">
           <Image
-            className="w-full h-[200px] rounded-t-lg"
+            className="w-full h-[200px] rounded-t-lg object-cover"
             src={image}
             alt={title}
             width={1000}
             height={150}
           />
           <div className="absolute top-0 left-2">
-            <Badge variant="secondary">{tags[0]}</Badge>
+            <Badge variant="secondary">{tags[Math.floor(Math.random() * tags.length)]}</Badge>
           </div>
         </CardHeader>
         <CardContent className="p-4">
