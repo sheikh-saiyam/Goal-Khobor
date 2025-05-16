@@ -49,16 +49,19 @@ const PowerRankings = async () => {
               </CardHeader>
               {/* Text Container */}
               <CardContent className="p-4">
-                  <div className="flex gap-1 items-center flex-wrap">
-  {ranking?.rankings.map((rank) => (
-    <Badge key={rank.rank} variant="secondary" className={`${rank.title.length > 10 && "truncate"}`}>{rank.title}</Badge>
-  ))}
-</div><CardDescription>
+                <CardDescription>
                   {ranking.published_date.split("T")[0]}
                 </CardDescription>
-                <CardTitle className="text-xl">{ranking.title}</CardTitle>
-             
-
+                <div className="mt-1.5 flex gap-1 items-center flex-wrap">
+                  {ranking?.rankings.map((rank) => (
+                    <Badge key={rank?.rank} variant="secondary">
+                      {rank.title.split(" ")[0]}
+                    </Badge>
+                  ))}
+                </div>
+                <CardTitle className="mt-0.5 text-xl">
+                  {ranking.title}
+                </CardTitle>
               </CardContent>
             </Card>
           </Link>
