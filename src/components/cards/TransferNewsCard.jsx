@@ -1,5 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const TransferNewsCard = ({ news }) => {
   const {
@@ -10,34 +19,39 @@ const TransferNewsCard = ({ news }) => {
     published_date,
     source_image,
     source,
+    tags,
   } = news || {};
+
   return (
     <Link href={`/transfers/${_id}`} key={_id} prefetch={true}>
-      <div className="mb-6 flex flex-col lg:flex-row items-center gap-x-4 border-2 hover:border-black duration-300">
+      <Card className="mb-6 flex flex-col lg:flex-row items-center gap-x-4 hover:border-gray-300 duration-500 rounded-xl">
         {/* Image Container */}
-        <div className="w-full lg:w-6/12 h-full">
+        <CardHeader className="relative p-0 w-full lg:w-6/12 h-full rounded-t-lg lg:rounded-t-none lg:rounded-l-lg">
           <Image
             src={image}
             alt={title}
             width={600}
             height={200}
-            className="object-cover w-full h-full max-h-[300px] lg:min-h-[250px]"
+            className="object-cover w-full h-full max-h-[300px] lg:min-h-[250px] rounded-t-lg lg:rounded-t-none lg:rounded-l-lg"
           />
-        </div>
+                    <div className="absolute top-0 left-2">
+            <Badge variant="secondary">{ tags[Math.floor(Math.random() * tags.length)]}</Badge>
+          </div>
+        </CardHeader>
         {/* Text Container */}
-        <div className="w-full p-4 flex flex-col justify-between">
+        <CardContent className="w-full p-4 flex flex-col justify-between">
           <div>
-            <h3 className="text-lg font-medium text-[#444]">
+            <CardDescription className="text-lg">
               {published_date.split("T")[0]}
-            </h3>
-            <h1 className="mt-2 text-2xl md:text-2xl font-semibold tracking-wider">
+            </CardDescription>
+            <CardTitle className="mt-2 text-2xl font-semibold tracking-wider">
               {title}
-            </h1>
-            <p className="mt-2 text-sm text-gray-600">
+            </CardTitle>
+            <CardDescription className="mt-2 text-sm">
               {description.length > 200
-                ? description.replace(/●/g, ".").slice(0, 200) + "..."
-                : description.replace(/●/g, ".")}
-            </p>{" "}
+                ? description.replace(/●/g, " ").slice(0, 200) + "..."
+                : description.replace(/●/g, " ")}
+            </CardDescription>{" "}
             <div className="mt-3">
               <Image
                 src={source_image}
@@ -48,8 +62,8 @@ const TransferNewsCard = ({ news }) => {
               />
             </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </Link>
   );
 };

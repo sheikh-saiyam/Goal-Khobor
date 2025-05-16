@@ -14,6 +14,7 @@ import Link from "next/link";
 const NewsCard = ({ news }) => {
   const { _id, image, title, published_date, tags, publisher, views } =
     news || {};
+    
   return (
     <Card className="pt-0 rounded-lg hover:scale-105 cursor-pointer duration-300">
       <Link href={`/news/${_id}`} prefetch={true}>
@@ -35,7 +36,7 @@ const NewsCard = ({ news }) => {
         </CardContent>
         <CardFooter className="flex items-center gap-4 px-4 pb-4 justify-between">
           <CardDescription>{publisher}</CardDescription>
-          <CardDescription className="flex items-center gap-2 font-medium">
+          <CardDescription className="flex items-center gap-1 font-medium">
             <Eye size={16} />
             {views}
           </CardDescription>
