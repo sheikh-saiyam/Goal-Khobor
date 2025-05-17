@@ -1,10 +1,9 @@
+import { AppSidebar } from "@/components/app-sidebar";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
-import { Separator } from "@/components/ui/separator";
 
 export default function Layout({ children }) {
   return (
@@ -16,7 +15,7 @@ export default function Layout({ children }) {
             <SidebarTrigger className="-ml-[12px] bg-[#e2ebee] mb-0" />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 lg:px-6 pt-16 pb-12 w-full">
+        <div className="flex flex-1 flex-col gap-4 px-3 lg:px-6 pt-16 pb-12 w-full">
           {children}
         </div>
       </SidebarInset>

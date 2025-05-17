@@ -24,7 +24,7 @@ const ShortImageNewsCard = ({ news }) => {
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all"></div>
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-            <h2 className="text-white text-xl sm:text-lg lg:text-xl font-semibold">
+            <h2 className="text-white text-xl sm:text-lg lg:text-xl font-semibold line-clamp-2">
               {title}
             </h2>
             <div className="flex justify-between items-center mt-2 text-sm text-gray-300">

@@ -2,6 +2,14 @@ import Link from "next/link";
 import Header from "@/components/Shared/Section/Header";
 import Image from "next/image";
 import dbConnect, { collections } from "@/lib/dbConnect";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const PowerRankings = async () => {
   // Get power_rankings from db --->
@@ -22,27 +30,40 @@ const PowerRankings = async () => {
             key={ranking._id}
             prefetch={true}
           >
-            <div className="border-2 hover:border-black duration-300">
+            <Card className="hover:border-gray-500 duration-500 overflow-hidden">
               {/* Image Container */}
-              <div>
+              <CardHeader className="p-0 relative">
                 <Image
                   src={ranking.image}
                   alt={ranking.title}
                   width={600}
                   height={200}
-                  className="min-h-[170px] w-full object-cover"
+                  className="min-h-[170px] max-h-[170px] w-full object-cover"
                 />
-              </div>
+                <div className="absolute top-0 left-2">
+                  {" "}
+                  <Badge variant="secondary">
+                    {ranking?.rankings.length} Rankings
+                  </Badge>
+                </div>
+              </CardHeader>
               {/* Text Container */}
-              <div className="p-4">
-                <h3 className="text-lg font-medium text-[#444]">
+              <CardContent className="p-4">
+                <CardDescription>
                   {ranking.published_date.split("T")[0]}
-                </h3>
-                <h1 className="mt-1 text-xl font-semibold tracking-wider">
+                </CardDescription>
+                <div className="mt-1.5 flex gap-1 items-center flex-wrap">
+                  {ranking?.rankings.map((rank) => (
+                    <Badge key={rank?.rank} variant="secondary">
+                      {rank.title.split(" ")[0]}
+                    </Badge>
+                  ))}
+                </div>
+                <CardTitle className="mt-0.5 text-xl">
                   {ranking.title}
-                </h1>
-              </div>
-            </div>
+                </CardTitle>
+              </CardContent>
+            </Card>
           </Link>
         ))}
       </div>

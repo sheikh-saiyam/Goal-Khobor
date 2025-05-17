@@ -201,8 +201,8 @@ const Navbar = () => {
               </DropdownMenu>
             ) : (
               <Link href="/login">
-                <Button variant="default" className="flex items-center gap-1">
-                  <LogIn className="w-4 h-4" />
+                <Button size="md" variant="default" className="flex items-center gap-1">
+                  <LogIn className="w-4 h-4 -mt-0.5" />
                   Login
                 </Button>
               </Link>
