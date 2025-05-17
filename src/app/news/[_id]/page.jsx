@@ -8,108 +8,177 @@ import AdvertisementsCard from "@/components/cards/AdvertisementsCard";
 import dbConnect, { collections } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 import { NewsTitle } from "@/components/cards/TitleNews";
+import { Slash, Tag, Calendar, Eye } from "lucide-react";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { Badge } from "@/components/ui/badge";
+import { ThumbsUp } from "lucide-react";
+import { ThumbsDown } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 const NewsDetails = async ({ params }) => {
   const newsCollection = await dbConnect(collections.newsCollection);
+
   // Get latest-news from db --->
   const latest_news = await newsCollection
     .find()
     .sort({ published_date: -1 })
     .limit(6)
     .toArray();
+
   // Get news_details from db --->
   const { _id } = await params;
   const news_details = await newsCollection.findOne({ _id: new ObjectId(_id) });
+
+  // Format date
+  const formattedDate = new Date(
+    news_details?.published_date
+  ).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  // Format description
+  const formatedDescription = news_details?.description
+    .split(/\.\s+/)
+    .filter((p) => p.trim().length > 0);
 
   return (
     <MainContainer>
       <div className="flex flex-col md:flex-row gap-6">
         {/* News Details Container */}
-        <div className="w-full md:w-8/12 lg:w-9/12">
-          <div>
+        <div className="-mt-12 w-full md:w-8/12 lg:w-9/12">
+          {/* Breadcrumb */}
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator>
+                <Slash />
+              </BreadcrumbSeparator>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/news">News</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator>
+                <Slash />
+              </BreadcrumbSeparator>
+              <BreadcrumbItem>
+                <BreadcrumbPage>{news_details?._id}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+
+          {/* News Image */}
+          <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-xl overflow-hidden mt-4 mb-6">
             <Image
-              src={news_details.image}
+              src={news_details.image || "/placeholder.svg"}
               alt={news_details.title}
-              width={1000}
-              height={400}
-              className="max-h-[400px] w-full"
+              fill
+              priority
+              className="object-cover"
             />
           </div>
+
+          {/* News Details */}
           <div className="mt-6">
-            {/* Title & Description */}
-            <h1 className="text-black tracking-wider text-2xl md:text-2xl lg:text-4xl font-semibold">
-              {news_details.title}
-            </h1>
-            <h3 className="mt-4 text-[#444] tracking-wider text-xl whitespace-pre-line pr-4">
-              {news_details.description}
-            </h3>
-            {/* Tags */}
-            <div className="mt-4 flex flex-wrap items-center gap-4">
-              <h3 className="text-[#444] tracking-wider font-semibold text-xl">
-                Tags:
-              </h3>
-              {news_details.tags.map((tag, idx) => (
-                <Button
-                  key={idx}
-                  variant="outline"
-                  className="text-[#444] tracking-wider font-semibold"
-                >
-                  #{tag}
-                </Button>
-              ))}
-            </div>
-            {/* Publisher Info And Like & Dislike */}
-            <div className="mt-4">
-              {/* Like & Dislike */}
-              <div className="mb-4 pb-4 border-b flex items-center gap-6">
-                <div className="flex items-center gap-3">
-                  <button>
-                    <AiOutlineLike
-                      className="text-[#000]"
-                      size={35}
-                      color="#444"
-                    />
-                  </button>
-                  <h1 className="font-bold text-[#444] tracking-wide mt-1">
-                    {news_details.likes}
-                  </h1>
+            {/* Title & Date, Views, Publisher Info */}
+            <div className="mb-8">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-gray-900 mb-4">
+                {news_details.title}
+              </h1>
+
+              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-6">
+                <div className="flex items-center gap-1">
+                  <Calendar className="h-4 w-4" />
+                  <span>{formattedDate || "N/A"}</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <button>
-                    <AiOutlineDislike
-                      className="text-[#000]"
-                      size={35}
-                      color="#444"
-                    />
-                  </button>
-                  <h1 className="font-bold text-[#444] tracking-wide mt-1">
-                    28
-                  </h1>
+                <div className="flex items-center gap-1">
+                  <Eye className="h-4 w-4" />
+                  <span>{news_details.views || 0} views</span>
                 </div>
               </div>
+
               {/* Publisher Info */}
-              <div className="mt-4 flex items-center gap-2">
-                <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden border border-gray-200">
                   <Image
-                    src={news_details.publisher_image}
+                    src={news_details.publisher_image || "/placeholder.svg"}
                     alt={news_details.publisher}
-                    width={100}
-                    height={100}
-                    className="w-24 p-1 h-14 rounded border border-black"
+                    fill
+                    className="object-cover"
                   />
                 </div>
                 <div>
-                  <h1 className="font-bold text-[#444] tracking-wide">
+                  <p className="font-semibold text-gray-900">
                     {news_details.publisher}
-                  </h1>
-                  <h2 className="mt-[2px] text-sm font-medium tracking-wide text-[#444]">
-                    {news_details.published_date.split("T")[0]}
-                  </h2>
+                  </p>
+                  <p className="text-sm text-gray-500">Sports Journalist</p>
                 </div>
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="prose prose-lg max-w-none mb-8">
+              {formatedDescription.map((description, index) => (
+                <p key={index} className="text-gray-700 mb-4 leading-relaxed">
+                  {description}.
+                </p>
+              ))}
+            </div>
+
+            {/* Tags */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                <Tag className="h-5 w-5" />
+                Tags
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {news_details.tags.map((tag, idx) => (
+                  <Badge
+                    key={idx}
+                    variant="outline"
+                    className="px-3 py-1 text-sm hover:bg-gray-100 cursor-pointer"
+                  >
+                    # {tag}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            <Separator className="mt-8 mb-4" />
+
+            {/* Engagement */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-6">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <ThumbsUp className="h-5 w-5" />
+                  <span>{news_details?.likes || 0}</span>
+                </Button>
+                <Button variant="outline" className="flex items-center gap-2">
+                  <ThumbsDown className="h-5 w-5" />
+                  <span>0</span>
+                </Button>
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm">
+                  Share
+                </Button>
+                <Button variant="outline" size="sm">
+                  Save
+                </Button>
               </div>
             </div>
           </div>
         </div>
+        
         {/* Ads & Latest News Container */}
         <div className="w-full md:w-4/12 lg:w-3/12 h-fit">
           {/* Latest News */}
