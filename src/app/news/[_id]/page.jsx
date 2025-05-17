@@ -21,6 +21,13 @@ import { Badge } from "@/components/ui/badge";
 import { ThumbsUp } from "lucide-react";
 import { ThumbsDown } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Share2, Bookmark } from "lucide-react";
 
 const NewsDetails = async ({ params }) => {
   const newsCollection = await dbConnect(collections.newsCollection);
@@ -52,9 +59,9 @@ const NewsDetails = async ({ params }) => {
 
   return (
     <MainContainer>
-      <div className="flex flex-col md:flex-row gap-6">
+      <div className="flex flex-col md:flex-row gap-6 relative">
         {/* News Details Container */}
-        <div className="-mt-12 w-full md:w-8/12 lg:w-9/12">
+        <div className="-mt-9 w-full md:w-8/12 lg:w-9/12">
           {/* Breadcrumb */}
           <Breadcrumb>
             <BreadcrumbList>
@@ -91,7 +98,7 @@ const NewsDetails = async ({ params }) => {
           <div className="mt-6">
             {/* Title & Date, Views, Publisher Info */}
             <div className="mb-8">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-gray-900 mb-4">
+              <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold leading-tight text-gray-900 mb-4">
                 {news_details.title}
               </h1>
 
@@ -157,7 +164,7 @@ const NewsDetails = async ({ params }) => {
 
             {/* Engagement */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
                 <Button variant="outline" className="flex items-center gap-2">
                   <ThumbsUp className="h-5 w-5" />
                   <span>{news_details?.likes || 0}</span>
@@ -167,20 +174,39 @@ const NewsDetails = async ({ params }) => {
                   <span>0</span>
                 </Button>
               </div>
-              <div className="flex gap-2">
-                <Button variant="outline" size="sm">
-                  Share
-                </Button>
-                <Button variant="outline" size="sm">
-                  Save
-                </Button>
-              </div>
+              {/* share & bookmark */}
+              <TooltipProvider>
+                <div className="flex gap-4">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button size="sm">
+                        <Share2 className="w-5 h-5 mr-1" />
+                        <span className="mt-0.5"> Share </span>
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Share this news</p>
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button size="sm">
+                        <Bookmark className="w-5 h-5" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Bookmark for later</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
+              </TooltipProvider>
             </div>
           </div>
         </div>
-        
+
         {/* Ads & Latest News Container */}
-        <div className="w-full md:w-4/12 lg:w-3/12 h-fit">
+        <div className="w-full md:w-4/12 lg:w-3/12 md:sticky top-24 h-fit">
           {/* Latest News */}
           <NewsTitle heading={"LATEST NEWS"} item={latest_news} />
           {/* Ads */}
