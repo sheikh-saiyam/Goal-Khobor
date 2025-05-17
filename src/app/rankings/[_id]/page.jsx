@@ -47,7 +47,7 @@ const PowerRankingsDetails = async ({ params }) => {
 
   return (
     <MainContainer>
-      <div className="flex flex-col md:flex-row gap-6 relative">
+      <div className="mt-6 flex flex-col md:flex-row gap-6 relative">
         {/* Ranking_Details Container */}
         <div className="-mt-9 w-full md:w-8/12 lg:w-9/12">
           {/* Breadcrumb */}
