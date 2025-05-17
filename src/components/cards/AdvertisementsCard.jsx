@@ -9,7 +9,7 @@ const AdvertisementsCard = async () => {
     .toArray();
 
   return (
-    <div className="mt-4">
+    <div className="mt-6">
       <h1 className="text-black tracking-tighter text-2xl mt-3 font-bold">
         ADVERTISEMENTS
       </h1>
@@ -19,7 +19,7 @@ const AdvertisementsCard = async () => {
           alt={ads.link}
           width={600}
           height={250}
-          className="h-full w-full mt-4"
+          className="h-full w-full mt-2 rounded-lg"
         />
       </a>
     </div>

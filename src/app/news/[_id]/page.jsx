@@ -1,14 +1,14 @@
-import Image from "next/image";
-import Link from "next/link";
-import { AiOutlineDislike } from "react-icons/ai";
-import { AiOutlineLike } from "react-icons/ai";
-import MainContainer from "./../../../components/container/MainContainer";
-import { Button } from "../../../components/ui/button";
 import AdvertisementsCard from "@/components/cards/AdvertisementsCard";
-import dbConnect, { collections } from "@/lib/dbConnect";
-import { ObjectId } from "mongodb";
 import { NewsTitle } from "@/components/cards/TitleNews";
-import { Slash, Tag, Calendar, Eye } from "lucide-react";
+import dbConnect, { collections } from "@/lib/dbConnect";
+import { Calendar, Eye, Slash, Tag } from "lucide-react";
+import { ObjectId } from "mongodb";
+
+import Image from "next/image";
+import { Button } from "../../../components/ui/button";
+import MainContainer from "./../../../components/container/MainContainer";
+
+import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,17 +17,16 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Badge } from "@/components/ui/badge";
-import { ThumbsUp } from "lucide-react";
-import { ThumbsDown } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { ThumbsDown, ThumbsUp } from "lucide-react";
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Share2, Bookmark } from "lucide-react";
+import { Bookmark, Share2 } from "lucide-react";
 
 const NewsDetails = async ({ params }) => {
   const newsCollection = await dbConnect(collections.newsCollection);
